@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Landing Page</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <style>
 
 
 body {
    margin: 0;
    height: 100vh;
-   font-family: sans-serif;
+   font-family: Montserrat, sans-serif;
    background-color: #f3f4f6;
    background-image: url("fonslandingpage.png");
    background-size: cover;
@@ -32,11 +33,13 @@ body {
    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
    margin-bottom: 60px;
    width: fit-content;
+   border-radius: 10px;
 }
 
 
 .header-container h1{
    margin: 0;
+   font-family: 'Montserrat', sans-serif;
    font-size: 3rem;
    font-weight: bold;
    color: #333;
@@ -49,13 +52,14 @@ body {
    grid-template-columns: 1fr 1fr;
    gap: 20px;
    width: 90%;
-   max-width: 900px;
+   max-width: 1300px;
    justify-items: center;
 }
 
 
 .button{
    font-size: 2.5rem;
+   font-family: 'Montserrat', sans-serif;
    font-weight: bold;
    border: none;
    color: white;
@@ -104,6 +108,8 @@ body {
 </style>
 </head>
 <body>
+
+
   <img src="logo.png" alt="Logo" class="logo">
 
 
@@ -114,9 +120,9 @@ body {
 
 
 <div class="buttons-grid">
-   <button class="button button1" href="#article1">USUARI</button>
-   <button class="button button2" href="#hola">TÈCNIC</button>
-   <button class="button button3" onclick="location.href='#article3'">ADMINISTRADOR</button>
+   <a href="usuari.php" class="button button1 text-decoration-none text-center">USUARI</a>
+   <a href="tecnic.php" class="button button2 text-decoration-none text-center">TÈCNIC</a>
+   <a href="administrador.php" class="button button3 text-decoration-none text-center">ADMINISTRADOR</a>
 </div>
 
 
