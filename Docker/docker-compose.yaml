@@ -8,7 +8,6 @@ services:
       - "8080:80"
     volumes:
       - ./php:/var/www/html
-    
     depends_on:
       - db
 
@@ -21,7 +20,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_HOST: '%'
       LANG: C.UTF-8
-      
     volumes:
       - ./db_data:/var/lib/mysql
       - ./db_init:/docker-entrypoint-initdb.d
