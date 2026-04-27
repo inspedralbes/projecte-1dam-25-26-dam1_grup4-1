@@ -59,7 +59,7 @@
  <h2 style="text-align: center;">CREAR INCIDÈNCIA</h2>
 
 
- <form action="https://daw.inspedralbes.cat/form/action.php">
+ <form action="registrar.php" method="POST">
 
 
    <fieldset style="background-color: #f1ed19; border: 1px solid #555555;">
@@ -75,24 +75,19 @@
         <option value="direccio">Llengues</option>
       </select>
 
-
-
    </fieldset>
+
      <br>
    <br>
    <fieldset style="background-color: #ffe7e7; border: 1px solid #555;">
-     <legend>Descripció de la incidència</legend>
-     <label for="obs">Observacions</label><br>
-      <textarea id="obs" name="obs" rows="6" cols="100" style="resize: none;" placeholder="Pots escriure aquí la teva observació."></textarea><br><br>
-   
-   </fieldset>
-    
- 
-   </fieldset>
+      <legend>Descripció de la incidència</legend>
+      <label for="obs">Observacions</label><br>
+      <textarea id="obs" name="obs" rows="6" style="resize: none;"
+        placeholder="Pots escriure aquí la teva observació." required></textarea>
+    </fieldset>
 
+    <button type="submit">Registrar incidència</button>
 
-
-
- </form>
+  </form>
 </body>
 </html>
