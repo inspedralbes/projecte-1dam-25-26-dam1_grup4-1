@@ -1,3 +1,12 @@
+<?php
+$host = "db";
+$usuario = "usuari";
+$contrasenia = "1234";
+$base_de_datos = "projecte_gip3";
+
+    $pdo = new PDO("mysql:host=$host;dbname=$base_de_datos;charset=utf8mb4", $usuario, $contrasenia);
+    $departaments = $pdo->query("SELECT NOM FROM DEPARTAMENT ORDER BY NOM")->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -58,31 +67,32 @@
   <h2 style="text-align: center;">FORMULARI</h2>
  <h2 style="text-align: center;">CREAR INCIDÈNCIA</h2>
 
+  <?php if (isset($_GET['ok'])): ?>     
+    <div class="missatge-ok"> Incidència registrada correctament!</div>   
+  <?php endif; ?>
+
 
  <form action="registrar.php" method="POST">
 
 
    <fieldset style="background-color: #f1ed19; border: 1px solid #555555;">
      <legend>Departament</legend>
-        <label for="departament">Selecciona el departament</label>
-      <select id="departament" name="departament" required>
+        <select id = "departament" name="departament" required> Selecciona el departament </label>
         <option value="">-- Tria un departament --</option>
-        <option value="informatica">Informàtica</option>
-        <option value="administracio">Matemàtiques</option>
-        <option value="manteniment">Història</option>
-        <option value="direccio">Biologia</option>
-        <option value="direccio">Física i Química</option>
-        <option value="direccio">Llengues</option>
+        <?php foreach ($departaments as $dep): ?>
+          <option value="<?= htmlspecialchars($dep['NOM']) ?>">
+            <?= htmlspecialchars($dep['NOM']) ?>
+          </option>
+        <?php endforeach; ?>
       </select>
-
    </fieldset>
 
      <br>
    <br>
    <fieldset style="background-color: #ffe7e7; border: 1px solid #555;">
       <legend>Descripció de la incidència</legend>
-      <label for="obs">Observacions</label><br>
-      <textarea id="obs" name="obs" rows="6" style="resize: none;"
+      <label for="observacions">Observacions</label><br>
+      <textarea id="descripcio" name="descripcio" rows="6" style="resize: none;"
         placeholder="Pots escriure aquí la teva observació." required></textarea>
     </fieldset>
 

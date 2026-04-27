@@ -1,7 +1,7 @@
 <?php
 $host = "db";
 $usuario = "usuari";
-$contrasenia = "1234#";
+$contrasenia = "1234";
 $base_de_datos = "projecte_gip3";
 $mysqli = new mysqli($host, $usuario, $contrasenia, $base_de_datos);
 if ($mysqli->connect_errno) {
