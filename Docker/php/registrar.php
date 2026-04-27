@@ -21,6 +21,6 @@ $sentencia->bind_param("si", $descripcion, $departament);
 $sentencia->execute();
 
 // Redirigir a la pàgina de llistar les incidències
-header("Location: formulari.php");
+header("Location: formulari.php?ok=1");
 exit;
 ?>

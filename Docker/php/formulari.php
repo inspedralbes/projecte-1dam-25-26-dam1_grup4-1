@@ -61,16 +61,29 @@ $password = "1234";
    input[type="submit"]:hover {
      background-color: #45a049;
    }
+
+   .missatge-ok {
+      position: fixed;
+      bottom: 400px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: fadeIn 0.5s ease;
+}
  </style>
 </head>
 <body>
   <h2 style="text-align: center;">FORMULARI</h2>
  <h2 style="text-align: center;">CREAR INCIDÈNCIA</h2>
 
-  <?php if (isset($_GET['ok'])): ?>     
+<?php if (isset($_GET['ok'])): ?>     
     <div class="missatge-ok"> Incidència registrada correctament!</div>   
   <?php endif; ?>
-
 
  <form action="registrar.php" method="POST">
 
@@ -97,6 +110,8 @@ $password = "1234";
     </fieldset>
 
     <button type="submit">Registrar incidència</button>
+
+  
 
   </form>
 </body>
