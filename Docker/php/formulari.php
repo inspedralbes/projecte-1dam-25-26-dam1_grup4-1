@@ -5,7 +5,7 @@ $username = "usuari";
 $password = "1234";
 
    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $departaments = $pdo->query("SELECT NOM FROM DEPARTAMENT ORDER BY NOM")->fetchAll(PDO::FETCH_ASSOC);
+    $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY NOM")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -80,7 +80,7 @@ $password = "1234";
         <select id = "departament" name="departament" required> Selecciona el departament 
         <option value="">-- Tria un departament --</option>
         <?php foreach ($departaments as $dep): ?>
-          <option value="<?= htmlspecialchars($dep['NOM']) ?>">
+          <option value="<?= htmlspecialchars($dep['ID_DEPARTAMENT']) ?>">
             <?= htmlspecialchars($dep['NOM']) ?>
           </option>
         <?php endforeach; ?>

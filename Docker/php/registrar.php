@@ -1,47 +1,26 @@
 <?php
-// Configuració de la connexió (coincideix amb docker-compose.yaml)
-$host     = "db";                  // nom del servei Docker
-$dbname   = "projecte_gip3";
+$host = "db";
+$dbname = "projecte_gip3";
 $username = "usuari";
 $password = "1234";
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error de connexió: " . $e->getMessage());
+//Validació de que arriben les dades necessàries
+if (empty($_POST["departament"]) || empty($_POST["descripcio"])) {
+    exit("Falten dades al fomulari");
 }
+//Connectar la BD 
+$mysqli = include_once "connexio.php";
 
-// Recollir dades del formulari
-$departament_nom = trim($_POST['departament'] ?? '');
-$descripcio      = trim($_POST['obs'] ?? '');
-$prioritat       = trim($_POST['prioritat'] ?? 'MITJANA');
 
-// Validació
-if (empty($departament_nom) || empty($descripcio)) {
-    die("Error: Tots els camps són obligatoris.");
-}
+$descripcion = $_POST["descripcio"];
+$departament = $_POST["departament"];
 
-// Buscar l'ID del departament pel nom
-$stmt = $pdo->prepare("SELECT ID_DEPARTAMENT FROM DEPARTAMENT WHERE NOM = :nom");
-$stmt->execute([':nom' => $departament_nom]);
-$departament = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$departament) {
-    die("Error: Departament no trobat.");
-}
+//Registrar la nova incidència a la BD
+$sentencia = $mysqli->prepare("INSERT INTO INCIDENCIA (DESCRIPCIO, ID_DEPARTAMENT) VALUES (?, ?)"); 
+$sentencia->bind_param("si", $descripcion, $departament);
+$sentencia->execute();
 
-// Inserir la incidència
-$sql = "INSERT INTO INCIDENCIA (DESCRIPCIO, PRIORITAT, ESTAT, ID_DEPARTAMENT)
-        VALUES (:descripcio, :prioritat, 'OBERTA', :id_departament)";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute([
-    ':descripcio'      => $descripcio,
-    ':prioritat'       => $prioritat,
-    ':id_departament'  => $departament['ID_DEPARTAMENT']
-]);
-
-header("Location: formulari.php?ok=1");
+// Redirigir a la pàgina de llistar les incidències
+header("Location: formulari.php");
 exit;
 ?>
