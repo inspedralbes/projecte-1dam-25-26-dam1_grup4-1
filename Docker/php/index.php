@@ -12,47 +12,41 @@
 body {
    margin: 0;
    height: 100vh;
-   font-family: Montserrat, sans-serif;
-   background-color: #f3f4f6;
-   background-image: url("fonslandingpage.png");
+   font-family: 'Montserrat', sans-serif;
+   background-image: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url("fonslandingpage.png");
    background-size: cover;
    background-position: center;
-          
    display: flex;
    flex-direction: column;
-   align-items: center;
-   justify-content: flex-start;
-   padding-top: 80px;
+   justify-content: flex-start; 
+   padding-top: 0; 
+   position: sticky;
+   top: 0;
+   z-index: 1000;
 }
 
 
 .header-container {
-   background-color: white;
-   padding: 60px 100px;
+   background-color: rgba(144, 178, 216, 0.8);
+   width: 100%; 
+   padding: 20px 0; 
    text-align: center;
-   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-   margin-bottom: 60px;
-   width: fit-content;
-   border-radius: 10px;
+   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+   margin-bottom: 80px; 
+   border-radius: 0;
 }
 
-
-.header-container h1{
-   margin: 0;
-   font-family: 'Montserrat', sans-serif;
-   font-size: 3rem;
-   font-weight: bold;
-   color: #333;
-   letter-spacing: 1px;
+.header-container h1 {
+   font-size: 2rem;
+   margin: 5px 0;
 }
-
-
 .buttons-grid {
    display: grid;
    grid-template-columns: 1fr 1fr;
-   gap: 20px;
+   gap: 24px;
    width: 90%;
-   max-width: 1300px;
+   max-width: 900px;
+   margin: 0 auto;  
    justify-items: center;
 }
 
@@ -70,24 +64,38 @@ body {
    box-sizing: border-box;
 }
 .button:hover {
-   opacity: 0.8;
+   transform: translateY(-4px);
+   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+   opacity: 1 !important;
 }
 
+.button {
+   font-size: 1.4rem; 
+   font-weight: 700;
+   color: white;
+   border-radius: 12px;
+   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 30px 0;
+   border: none;
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
 .button1 {
-   background-color: #3b82f6;
+   background-color: #2563eb;
    padding: 40px 0;
 }
 
-
 .button2 {
-   background-color: #636e80;
+   background-color: #475569;
    padding: 40px 0;
 }
 
 
 .button3 {
-   background-color: #f97316;
+   background-color: #ea580c;
    grid-column: span 2;
    margin: 0 auto;
    width: 60%;
@@ -114,8 +122,8 @@ body {
 
 
 <div class="header-container">
-   <h1>Gestió d'incidències</h1>
-   <h1>INS Pedralbes</h1>
+   <h1>GESTIÓ D'INCIDÈNCIES</h1>
+   <h1>INS PEDRALBES</h1>
 </div>
 
 
