@@ -129,7 +129,7 @@ body {
 
 <div class="buttons-grid">
    <a href="formulari.php" class="button button1 text-decoration-none text-center">NOVA INCIDÈNCIA +</a>
-   <a href="" class="button button2 text-decoration-none text-center">CONSULTA INCIDÈNCIA</a>
+   <a href="consultar_incidencia_usuari" class="button button2 text-decoration-none text-center">CONSULTA INCIDÈNCIA</a>
    
 </div>
 
