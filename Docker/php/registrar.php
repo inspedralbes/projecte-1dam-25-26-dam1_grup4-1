@@ -1,40 +1,47 @@
 <?php
+// Configuració de la connexió (coincideix amb docker-compose.yaml)
+$host     = "db";                  // nom del servei Docker
+$dbname   = "projecte_gip3";
+$username = "usuari";
+$password = "1234";
 
-//Validació de que arriben les dades necessàries
-if (empty($_POST["departament"]) || empty($_POST["obs"])) {
-    exit("Falten dades al fomulari");
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de connexió: " . $e->getMessage());
 }
-//Connectar la BD 
 
-$mysqli = include_once "connexio.php";
+// Recollir dades del formulari
+$departament_nom = trim($_POST['departament'] ?? '');
+$descripcio      = trim($_POST['obs'] ?? '');
+$prioritat       = trim($_POST['prioritat'] ?? 'MITJANA');
 
-
-$descripcion = $_POST["obs"];
-$departament = $_POST["departament"];
-
-//Cercar el departament a la BD per obtenir el seu id
-
-$stmt_dept = $mysqli->prepare("SELECT id_departament FROM departament WHERE nom = ?");
-$stmt_dept->bind_param("s", $departament);
-$stmt_dept->execute();
-$result_dept = $stmt_dept->get_result();
-$row_dept = $result_dept->fetch_assoc();
-
-
-// si el departament no existeix en la bd:
-if (!$row_dept) {
-    exit("Departament no trobat");
+// Validació
+if (empty($departament_nom) || empty($descripcio)) {
+    die("Error: Tots els camps són obligatoris.");
 }
-$id_departament = $row_dept["id_departament"];
 
-//Registrar la nova incidència a la BD
-$sentencia = $mysqli->prepare("INSERT INTO incidencies (Descripció, prioritat, estat, id_departament) VALUES (?, 'mitjana', 'oberta', ?)"); 
+// Buscar l'ID del departament pel nom
+$stmt = $pdo->prepare("SELECT ID_DEPARTAMENT FROM DEPARTAMENT WHERE NOM = :nom");
+$stmt->execute([':nom' => $departament_nom]);
+$departament = $stmt->fetch(PDO::FETCH_ASSOC);
 
+if (!$departament) {
+    die("Error: Departament no trobat.");
+}
 
+// Inserir la incidència
+$sql = "INSERT INTO INCIDENCIA (DESCRIPCIO, PRIORITAT, ESTAT, ID_DEPARTAMENT)
+        VALUES (:descripcio, :prioritat, 'OBERTA', :id_departament)";
 
-$sentencia->bind_param("si", $descripcion, $id_departament);
-$sentencia->execute();
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':descripcio'      => $descripcio,
+    ':prioritat'       => $prioritat,
+    ':id_departament'  => $departament['ID_DEPARTAMENT']
+]);
 
-// Redirigir a la pàgina de llistar les incidències
-header("Location: consultar_incidencies.php");
+header("Location: formulari.php?ok=1");
 exit;
+?>

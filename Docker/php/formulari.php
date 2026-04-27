@@ -1,10 +1,10 @@
 <?php
 $host = "db";
-$usuario = "usuari";
-$contrasenia = "1234";
-$base_de_datos = "projecte_gip3";
+$dbname = "projecte_gip3";
+$username = "usuari";
+$password = "1234";
 
-    $pdo = new PDO("mysql:host=$host;dbname=$base_de_datos;charset=utf8mb4", $usuario, $contrasenia);
+   $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $departaments = $pdo->query("SELECT NOM FROM DEPARTAMENT ORDER BY NOM")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ $base_de_datos = "projecte_gip3";
 
    <fieldset style="background-color: #f1ed19; border: 1px solid #555555;">
      <legend>Departament</legend>
-        <select id = "departament" name="departament" required> Selecciona el departament </label>
+        <select id = "departament" name="departament" required> Selecciona el departament 
         <option value="">-- Tria un departament --</option>
         <?php foreach ($departaments as $dep): ?>
           <option value="<?= htmlspecialchars($dep['NOM']) ?>">
