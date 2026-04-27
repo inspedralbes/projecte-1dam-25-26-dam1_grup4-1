@@ -128,8 +128,8 @@ body {
 
 
 <div class="buttons-grid">
-   <a href="usuari.php" class="button button1 text-decoration-none text-center">NOVA INCIDÈNCIA +</a>
-   <a href="tecnic.php" class="button button2 text-decoration-none text-center">CONSULTA INCIDÈNCIA</a>
+   <a href="formulari.php" class="button button1 text-decoration-none text-center">NOVA INCIDÈNCIA +</a>
+   <a href="" class="button button2 text-decoration-none text-center">CONSULTA INCIDÈNCIA</a>
    
 </div>
 

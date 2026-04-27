@@ -62,15 +62,19 @@
  <form action="https://daw.inspedralbes.cat/form/action.php">
 
 
-   <fieldset style="background-color: #fff4f4; border: 1px solid #555;">
+   <fieldset style="background-color: #f1ed19; border: 1px solid #555555;">
      <legend>Departament</legend>
-    
-        <label for="Nom"></label>
-     <input type="text" id="Adreça" name="Adreça">
-   </fieldset>
+        <label for="departament">Selecciona el departament</label>
+      <select id="departament" name="departament" required>
+        <option value="">-- Tria un departament --</option>
+        <option value="informatica">Informàtica</option>
+        <option value="administracio">Matemàtiques</option>
+        <option value="manteniment">Història</option>
+        <option value="direccio">Biologia</option>
+        <option value="direccio">Física i Química</option>
+        <option value="direccio">Llengues</option>
+      </select>
 
-
- 
 
 
    </fieldset>
