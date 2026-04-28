@@ -17,12 +17,36 @@ $password = "1234";
 
  <style>
    body {
-     font-family: Arial, sans-serif;
-     margin: 20px;
-     background-color: #f4f4f4;
-   }
+   margin: 0;
+   height: 100vh;
+   font-family: 'Montserrat', sans-serif;
+   background-image: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url("fonslandingpage.png");
+   background-size: cover;
+   background-position: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start; 
+   padding-top: 0; 
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+}
 
 
+.header-container {
+   background-color: rgba(144, 178, 216, 0.8);
+   width: 100%; 
+   padding: 20px 0; 
+   text-align: center;
+   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+   margin-bottom: 80px; 
+   border-radius: 0;
+}
+
+.header-container h1 {
+   font-size: 2rem;
+   margin: 5px 0;
+}
    fieldset {
      margin-bottom: 20px;
      padding: 10px;
@@ -78,8 +102,11 @@ $password = "1234";
  </style>
 </head>
 <body>
-  <h2 style="text-align: center;">FORMULARI</h2>
- <h2 style="text-align: center;">CREAR INCIDÈNCIA</h2>
+  
+<div class="header-container">
+   <h1>GESTIÓ D'INCIDÈNCIES</h1>
+   <h1>INS PEDRALBES</h1>
+</div>
 
 <?php if (isset($_GET['ok'])): ?>     
     <div class="missatge-ok"> Incidència registrada correctament!</div>   

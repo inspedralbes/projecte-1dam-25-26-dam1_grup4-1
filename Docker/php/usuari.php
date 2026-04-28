@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landing Page</title>
+<title>USUARIS</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -129,7 +129,7 @@ body {
 
 <div class="buttons-grid">
    <a href="formulari.php" class="button button1 text-decoration-none text-center">NOVA INCIDÈNCIA +</a>
-   <a href="consultar_incidencia_usuari" class="button button2 text-decoration-none text-center">CONSULTA INCIDÈNCIA</a>
+   <a href="consultar_incidencia_usuari.php" class="button button2 text-decoration-none text-center">CONSULTAR INCIDÈNCIA</a>
    
 </div>
 
