@@ -130,7 +130,7 @@ body {
 <div class="buttons-grid">
    <a href="usuari.php" class="button button1 text-decoration-none text-center">USUARI</a>
    <a href="tecnic.php" class="button button2 text-decoration-none text-center">TÈCNIC</a>
-   <a href="administrador.php" class="button button3 text-decoration-none text-center">ADMINISTRADOR</a>
+   <a href="llistar.php" class="button button3 text-decoration-none text-center">ADMINISTRADOR</a>
 </div>
 
 
