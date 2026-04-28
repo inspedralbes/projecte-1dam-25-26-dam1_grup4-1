@@ -46,7 +46,7 @@ $incidencies = $pdo->query("SELECT
 
 <style>
     body {
-        background-color: #f0f2f5
+        background-color: #f0f2f5;
         font-family: sans-stream_notification_callback;
     }
 
@@ -58,7 +58,7 @@ $incidencies = $pdo->query("SELECT
     }
 
     table{
-        width: 30px; 
+      width: 100%; 
       border-collapse: collapse;
       background: #fff;
       border-radius: 8px;
@@ -76,59 +76,94 @@ $incidencies = $pdo->query("SELECT
     }
 
     tbody td{
+      padding: 11px 14px;
+      font-size: 0.87rem;
+      color: #374151;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: middle;
+ 
 
     }
 
     tbody tr:last-child td{
-
+    border-bottom: none;
     }
 
     tbody tr:hover{
+        background-color: #f9fafb;
 
     }
 
     td.id {
-
+    font-weight: bold;
+    color: #1f2937;
     }
 
     td.data {
+    color: #374151;
+    font-size: 0.6rem;
 
     }
 
     td.descripcio{
-
+    max-width: 200px;
+    line-height: 1.5;
     }
 
     select {
-
+    padding: 8px 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0.8rem;
+    width: 100%;
     }
 
     .btn-save{
-
+    background-color: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    cursor: pointer;
     }
 
     .btn-save:hover{
-
+    background-color: #4f46e5cc;
     }
 
     .missatge{
-
+    background: #d1fae5;
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin: 0 30px 16px 30px;
+    font-size: 0.88rem;
     }
 
     .empty{
-
+    text-align: center;
+    padding: 40px;
+    color: #9ca3af;
     }
 
     .badge{
-
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-top: 4px;
     }
 
     .badge-ALTA{color:red}
-    .badge-MITJANA{color:yellow}
+    .badge-MITJANA{color:goldenrod}
     .badge-BAIXA{color:green}
     .badge-OBERTA{color:red}
-    .badge-EN_PROCES{color:yellow}
-    .badge-TANCADA{color:red}
+    .badge-EN_PROCES{color:goldenrod}
+    .badge-TANCADA{color:}
 
 
 </style>
@@ -230,12 +265,5 @@ $incidencies = $pdo->query("SELECT
     </tbody>
   </table>
 
-
-
-
-
-   
-
-  
 </body>
 </html>
