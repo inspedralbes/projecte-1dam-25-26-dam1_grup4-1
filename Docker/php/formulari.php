@@ -79,4 +79,3 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
 </body>
 
 </html>
-<?php include 'footer.php'; ?>

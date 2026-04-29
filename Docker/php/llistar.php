@@ -116,10 +116,10 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
                     <?php foreach ($incidencies as $inc): ?>
                         <tr>
                             <td class="id">
-                                <a href="gestionar.php?id=<?= $inc['ID_INCIDENCIA'] ?>" 
-                                title="Clica per gestionar aquesta incidència"
-                                style="color:blue;text-decoration:none;font-weight:bold;">
-                                #<?= $inc['ID_INCIDENCIA'] ?>
+                                <a href="gestionar.php?id=<?= $inc['ID_INCIDENCIA'] ?>"
+                                    title="Clica per gestionar aquesta incidència"
+                                    style="color:blue;text-decoration:none;font-weight:bold;">
+                                    #<?= $inc['ID_INCIDENCIA'] ?>
                                 </a>
                             </td>
                             <td class="data"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>

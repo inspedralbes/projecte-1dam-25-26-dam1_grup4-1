@@ -8,7 +8,6 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
    <style>
-      /* Solo lo que Bootstrap no puede hacer */
       body {
          font-family: 'Montserrat', sans-serif;
          background-image: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url("fonslandingpage.png");
@@ -86,7 +85,14 @@
    </main>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+   <footer class="mt-auto py-3 text-white text-center w-100" style="background-color: #567ba1;">
+      <div class="container">
+         <span>&copy; <?php echo date("Y"); ?> INS Pedralbes</span>
+      </div>
+   </footer>
+
+
 </body>
 
 </html>
-<?php include 'footer.php'; ?>
