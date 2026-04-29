@@ -68,11 +68,11 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
 
         td.id {
             font-weight: bold;
-            color: #1f2937;
+            color: #0d6cf1;
         }
 
         td.data {
-            color: #374151;
+            color: #065dea;
             font-size: 0.6rem;
         }
 
@@ -96,7 +96,7 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
     <main>
         <header>
             <h1>Gestió d'Incidències</h1>
-            <span>ADMINISTRADOR</span>
+            <span>Clica el ID Per gestionar una incidència</span>
         </header>
         <table>
             <thead>
@@ -115,7 +115,13 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
                 <?php else: ?>
                     <?php foreach ($incidencies as $inc): ?>
                         <tr>
-                            <td class="id">#<?= $inc['ID_INCIDENCIA'] ?></td>
+                            <td class="id">
+                                <a href="gestionar.php?id=<?= $inc['ID_INCIDENCIA'] ?>" 
+                                title="Clica per gestionar aquesta incidència"
+                                style="color:blue;text-decoration:none;font-weight:bold;">
+                                #<?= $inc['ID_INCIDENCIA'] ?>
+                                </a>
+                            </td>
                             <td class="data"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>
                             <td class="data"><?= $inc['DATA_INICI'] ? htmlspecialchars($inc['DATA_INICI']) : '—' ?></td>
                             <td class="descripcio"><?= $inc['DESCRIPCIO'] ? htmlspecialchars($inc['DESCRIPCIO']) : '—' ?></td>
