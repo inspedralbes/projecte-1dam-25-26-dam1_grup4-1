@@ -16,8 +16,8 @@ $departament = $_POST["departament"];
 
 
 //Registrar la nova incidència a la BD
-$sentencia = $mysqli->prepare("INSERT INTO INCIDENCIA (DESCRIPCIO, ID_DEPARTAMENT) VALUES (?, ?)"); 
-$sentencia->bind_param("si", $descripcion, $departament);
+$sentencia = $mysqli->prepare("INSERT INTO INCIDENCIA (DESCRIPCIO, ID_DEPARTAMENT, DEPARTAMENT) VALUES (?, ?, ?)");
+$sentencia->bind_param("ssi", $descripcion, $departament, $departament);
 $sentencia->execute();
 
 // Redirigir a la pàgina de llistar les incidències

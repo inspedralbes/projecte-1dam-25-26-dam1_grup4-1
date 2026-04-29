@@ -67,3 +67,20 @@ ALTER TABLE ACTUACIO
 ALTER TABLE ACTUACIO
     ADD CONSTRAINT FK_ACTUACIO_TECNIC
     FOREIGN KEY (ID_TECNIC) REFERENCES TECNIC (ID_TECNIC) ON DELETE SET NULL;
+
+ALTER TABLE INCIDENCIA ADD COLUMN DEPARTAMENT VARCHAR(100);
+
+INSERT INTO DEPARTAMENT (NOM) VALUES
+('Informàtica'),
+('Matemàtiques'),
+('Història'),
+('Biologia'),
+('Física i Química'),
+('Llengues');
+
+INSERT INTO TECNIC (NOM) VALUES
+('Pere Portas'),
+('Joan Garcia'),
+('Maria López'),
+('Laura Martínez'),
+('Carlos Sánchez');
