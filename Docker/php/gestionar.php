@@ -11,10 +11,10 @@ $id = $_GET['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tecnic    = $_POST['tecnic'];
     $prioritat = $_POST['prioritat'];
+    $tipu      = $_POST['tipu'];
 
-
-    $stmt = $pdo->prepare("UPDATE INCIDENCIA SET ID_TECNIC = ?, PRIORITAT = ?  WHERE ID_INCIDENCIA = ?");
-    $stmt->execute([$tecnic, $prioritat, $id]);
+    $stmt = $pdo->prepare("UPDATE INCIDENCIA SET ID_TECNIC = ?, PRIORITAT = ?, ID_TIPU = ? WHERE ID_INCIDENCIA = ?");
+    $stmt->execute([$tecnic, $prioritat, $tipu, $id]);
 
     $missatge = "Incidència actualitzada!";
 }
@@ -26,6 +26,7 @@ $stmt = $pdo->prepare("SELECT
                             i.DESCRIPCIO,
                             i.ID_TECNIC,
                             i.PRIORITAT,
+                            i.ID_TIPU,
                             d.NOM                            
                             FROM INCIDENCIA i
                             LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
@@ -35,6 +36,9 @@ $inc = $stmt->fetch();
 
 // Carregar tècnics
 $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
+
+// Carregar tipus d'incidència
+$tipus = $pdo->query("SELECT * FROM TIPU")->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -133,10 +137,21 @@ $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
                 <?php endforeach; ?>
             </select>
 
+            <label>Tipus d'incidència:</label>
+            <select name="tipu">
+                <option value="">— Selecciona —</option>
+                <?php foreach ($tipus as $t): ?>
+                    <option value="<?= $t['ID_TIPU'] ?>" <?= $inc['ID_TIPU'] == $t['ID_TIPU'] ? 'selected' : '' ?>>
+                    <?= $t['NOM'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
             <label>Prioritat:</label>
             <select name="prioritat">
+                <option value="">— Selecciona —</option>
                 <?php foreach (['ALTA', 'MITJANA', 'BAIXA'] as $p): ?>
-                    <option value="<?= $p ?>" <?= $inc['PRIORITAT'] === $p ? 'selected' : '' ?>>
+                    <option value="<?= $p ?>" <?= $inc['PRIORITAT'] == $p ? 'selected' : '' ?>>
                     <?= $p ?>
                     </option>
                 <?php endforeach; ?>

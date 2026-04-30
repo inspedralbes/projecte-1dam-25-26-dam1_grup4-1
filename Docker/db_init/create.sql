@@ -84,3 +84,15 @@ INSERT INTO TECNIC (NOM) VALUES
 ('Maria López'),
 ('Laura Martínez'),
 ('Carlos Sánchez');
+
+INSERT INTO TIPU (NOM) VALUES
+('Problema de maquinari'),
+('Problema de programari'),
+('Problema de xarxa'),
+('Problema de correu electrònic'),
+('Problema de seguretat'),
+('Problema impressora'),
+('Problema de servidor'),
+('Problema de base de dades'),
+('Problema de còpia de seguretat'),
+('Problema accés o contrasenyes');
