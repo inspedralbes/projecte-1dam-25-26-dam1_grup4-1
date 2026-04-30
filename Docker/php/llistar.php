@@ -134,7 +134,11 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
                 <?php endif; ?>
             </tbody>
         </table>
+           <div class="fixed-bottom p-4">
+      <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+   </div>
     </main>
+
 </body>
 
 </html>

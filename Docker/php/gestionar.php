@@ -134,8 +134,9 @@ $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
             </select>
             <button type="submit" class="btn-save">Guardar</button>
         </form>
-    </div>
-    <a href="llistar.php" style="color:blue;"><--- Tornar</a>
+       <div class="fixed-bottom p-4">
+      <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+   </div>
 </body>
 
 </html>
