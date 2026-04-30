@@ -57,7 +57,9 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
             </tbody>
         </table>
     </div>
-
+    <div class="fixed-bottom p-4">
+        <a href="usuari.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

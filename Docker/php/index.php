@@ -86,12 +86,6 @@
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-   <footer class="mt-auto py-3 text-white text-center w-100" style="background-color: #567ba1;">
-      <div class="container">
-         <span>&copy; <?php echo date("Y"); ?> INS Pedralbes</span>
-      </div>
-   </footer>
-
 
 </body>
 

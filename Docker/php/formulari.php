@@ -73,7 +73,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
     </form>
   </div>
   <div class="fixed-bottom p-4">
-    <a href="index.php" class="btn btn-outline-secondary px-4 shadow-sm">← Tornar</a>
+    <a href="usuari.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -5,12 +5,14 @@ $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $incidencies = $pdo->query("SELECT  
-                                ID_INCIDENCIA,
-                                DATA_CREACIO,
-                                DATA_INICI,
-                                DESCRIPCIO
-FROM INCIDENCIA
-ORDER BY DATA_CREACIO DESC")->fetchAll();
+                                i.ID_INCIDENCIA,
+                                i.DATA_CREACIO,
+                                i.DATA_INICI,
+                                i.DESCRIPCIO,
+                                d.NOM
+FROM INCIDENCIA i
+LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+ORDER BY i.DATA_CREACIO DESC")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -105,6 +107,7 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
                     <th>Data creació</th>
                     <th>Data inici</th>
                     <th>Descripció</th>
+                    <th>Departament</th>
                 </tr>
             </thead>
             <tbody>
@@ -125,7 +128,7 @@ ORDER BY DATA_CREACIO DESC")->fetchAll();
                             <td class="data"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>
                             <td class="data"><?= $inc['DATA_INICI'] ? htmlspecialchars($inc['DATA_INICI']) : '—' ?></td>
                             <td class="descripcio"><?= $inc['DESCRIPCIO'] ? htmlspecialchars($inc['DESCRIPCIO']) : '—' ?></td>
-
+                            <td class="departament"><?= $inc['NOM'] ? htmlspecialchars($inc['NOM']) : '—' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
