@@ -20,7 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Carregar dades de la incidència
-$stmt = $pdo->prepare("SELECT * FROM INCIDENCIA WHERE ID_INCIDENCIA = ?");
+$stmt = $pdo->prepare("SELECT  
+                            i.ID_INCIDENCIA,
+                            i.DATA_CREACIO,
+                            i.DESCRIPCIO,
+                            i.ID_TECNIC,
+                            i.PRIORITAT,
+                            d.NOM                            
+                            FROM INCIDENCIA i
+                            LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+                            WHERE i.ID_INCIDENCIA = ?");
 $stmt->execute([$id]);
 $inc = $stmt->fetch();
 
@@ -105,7 +114,7 @@ $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
     <div class="caixa">
         <h5>Informació</h5>
         <p><strong>Data creació:</strong> <?= $inc['DATA_CREACIO'] ?></p>
-        <p><strong>Data inici:</strong> <?= $inc['DATA_INICI'] ?? '—' ?></p>
+        <p><strong>Departament:</strong> <?= $inc['NOM'] ?? '—' ?></p>
         <p><strong>Descripció:</strong> <?= $inc['DESCRIPCIO'] ?></p>
     </div>
 
@@ -128,14 +137,14 @@ $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
             <select name="prioritat">
                 <?php foreach (['ALTA', 'MITJANA', 'BAIXA'] as $p): ?>
                     <option value="<?= $p ?>" <?= $inc['PRIORITAT'] === $p ? 'selected' : '' ?>>
-                        <?= $p ?>
+                    <?= $p ?>
                     </option>
                 <?php endforeach; ?>
             </select>
             <button type="submit" class="btn-save">Guardar</button>
         </form>
        <div class="fixed-bottom p-4">
-      <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+      <a href="llistar.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
    </div>
 </body>
 
