@@ -4,15 +4,14 @@ $dbname = "projecte_gip3";
 $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$incidencies = $pdo->query("SELECT 
-                               i.ID_INCIDENCIA,
-                               i.DATA_CREACIO,
-                               i.DATA_INICI,
-                               i.DESCRIPCIO,
-                               d.NOM
-FROM INCIDENCIA i
-LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-ORDER BY i.DATA_CREACIO DESC")->fetchAll();
+
+function countIncidencies($pdo, $idTecnic) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM INCIDENCIA WHERE ID_TECNIC = ?");
+    $stmt->execute([$idTecnic]);
+    return $stmt->fetchColumn();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -52,7 +51,7 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
                             <h5 class="fw-bold mb-0">Pere Portas</h5>
                         </div>
                         <p class="text-muted mb-1"><i class="bi bi-tools me-2"></i>Xarxes i Comunicacions</p>
-                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo count($incidencies); ?></p>
+                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo countIncidencies($pdo, 1); ?></p>
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_pere.php" class="btn btn-primary btn-sm">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>
@@ -70,7 +69,7 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
                             <h5 class="fw-bold mb-0">Joan Garcia</h5>
                         </div>
                         <p class="text-muted mb-1"><i class="bi bi-tools me-2"></i>Hardware i Manteniment</p>
-                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo count($incidencies); ?></p>
+                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo countIncidencies($pdo, 2); ?></p>
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_joan.php" class="btn btn-primary btn-sm">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>
@@ -88,7 +87,7 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
                             <h5 class="fw-bold mb-0">Maria Lopez</h5>
                         </div>
                         <p class="text-muted mb-1"><i class="bi bi-tools me-2"></i>Software i Sistemes Operatius</p>
-                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo count($incidencies); ?></p>
+                        <p class="mb-0"><i class="bi bi-exclamation-circle me-2 text-warning"></i>Incidències: <?php echo countIncidencies($pdo, 3); ?></p>
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_maria.php" class="btn btn-primary btn-sm">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>

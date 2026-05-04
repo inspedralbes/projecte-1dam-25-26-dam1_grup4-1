@@ -4,13 +4,20 @@ $dbname = "projecte_gip3";
 $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$incidencies = $pdo->query("SELECT  
-                                i.ID_INCIDENCIA,
-                                i.DESCRIPCIO,
-                                d.NOM
-FROM INCIDENCIA i
-LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-ORDER BY i.DATA_CREACIO DESC")->fetchAll();
+
+$idTecnic = 3; // ID del tècnic Maria López
+$stmt = $pdo->prepare("SELECT 
+                            i.ID_INCIDENCIA,
+                            i.DATA_CREACIO,
+                            i.DATA_INICI,
+                            i.DESCRIPCIO,
+                            d.NOM
+                        FROM INCIDENCIA i
+                        LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+                        WHERE i.ID_TECNIC = ?
+                        ORDER BY i.DATA_CREACIO DESC");
+$stmt->execute([$idTecnic]);
+$incidencies = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="ca">
