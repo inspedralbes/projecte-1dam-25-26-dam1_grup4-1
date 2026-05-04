@@ -14,11 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $visible     = isset($_POST['visible']) ? 1 : 0;
     $finalitzada = isset($_POST['finalitzada']) ? 1 : 0;
     $data_fi     = !empty($_POST['data_fi']) ? $_POST['data_fi'] : date('Y-m-d H:i:s');
-    $stmt = $pdo->prepare("INSERT INTO ACTUACIO (ID_INCIDENCIA, DESCRIPCIO, TEMPS_ACTUACIO_MIN, VISIBLE) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$id, $descripcio, $temps, $visible]);
+    
+    $stmt = $pdo->prepare("INSERT INTO ACTUACIO (ID_INCIDENCIA, DESCRIPCIO, TEMPS_ACTUACIO_MIN, VISIBLE, ESTAT) VALUES (?, ?, ?, ?, ?)");
+    $estat_actuacio = $finalitzada ? 'ACABAT' : 'PENDENT';
+    $stmt->execute([$id, $descripcio, $temps, $visible, $estat_actuacio]);
 
     if ($finalitzada) {
-        $stmt2 = $pdo->prepare("UPDATE INCIDENCIA SET ESTAT = 'FINALITZADA', DATA_FI = ? WHERE ID_INCIDENCIA = ?");
+        $stmt2 = $pdo->prepare("UPDATE INCIDENCIA SET ESTAT = 'TANCADA', DATA_FI = ? WHERE ID_INCIDENCIA = ?");
         $stmt2->execute([$data_fi, $id]);
     }
 
