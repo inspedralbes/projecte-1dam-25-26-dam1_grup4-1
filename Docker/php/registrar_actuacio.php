@@ -7,18 +7,18 @@ $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $pa
 
 $id = $_GET['id'];
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcio  = $_POST['descripcio'];
     $temps       = $_POST['temps'];
     $visible     = isset($_POST['visible']) ? 1 : 0;
     $finalitzada = isset($_POST['finalitzada']) ? 1 : 0;
-    $data_fi     = $_POST['data_fi'];
-
+    $data_fi     = !empty($_POST['data_fi']) ? $_POST['data_fi'] : date('Y-m-d H:i:s');
     $stmt = $pdo->prepare("INSERT INTO ACTUACIO (ID_INCIDENCIA, DESCRIPCIO, TEMPS_ACTUACIO_MIN, VISIBLE) VALUES (?, ?, ?, ?)");
     $stmt->execute([$id, $descripcio, $temps, $visible]);
 
     if ($finalitzada) {
-        $stmt2 = $pdo->prepare("UPDATE INCIDENCIA SET ESTAT = 'FINALITZADA', DATA_FINALITZACIO = ? WHERE ID_INCIDENCIA = ?");
+        $stmt2 = $pdo->prepare("UPDATE INCIDENCIA SET ESTAT = 'FINALITZADA', DATA_FI = ? WHERE ID_INCIDENCIA = ?");
         $stmt2->execute([$data_fi, $id]);
     }
 
@@ -168,8 +168,7 @@ $actuacions = $stmt->fetchAll();
                 <input type="checkbox" name="finalitzada" value="1"> Marcar com a finalitzada
             </div>
 
-            <label>Data de finalització:</label>
-            <input type="datetime-local" name="data_fi">
+           
 
             <button type="submit" class="btn-save">Guardar</button>
         </form>
