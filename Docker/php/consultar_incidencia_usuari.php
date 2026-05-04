@@ -61,7 +61,7 @@ body {
                     <?php else: ?>
                         <?php foreach ($acts as $a): ?>
                             <div class="mb-1">
-                                <strong><?= $a['TEMPS_ACTUACIO_MIN'] ?> min</strong> — <?= htmlspecialchars($a['DESCRIPCIO']) ?>
+                                 <?= htmlspecialchars($a['DESCRIPCIO']) ?>
                             </div>
                         <?php endforeach; ?>
                     <?php endif; ?>
