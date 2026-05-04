@@ -6,8 +6,6 @@ $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $incidencies = $pdo->query("SELECT  
                                 i.ID_INCIDENCIA,
-                                i.DATA_CREACIO,
-                                i.DATA_INICI,
                                 i.DESCRIPCIO,
                                 d.NOM
 FROM INCIDENCIA i
@@ -104,8 +102,6 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
             <thead>
                 <tr>
                     <th>#ID</th>
-                    <th>Data creació</th>
-                    <th>Data inici</th>
                     <th>Descripció</th>
                     <th>Departament</th>
                 </tr>
@@ -125,8 +121,6 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
                                     #<?= $inc['ID_INCIDENCIA'] ?>
                                 </a>
                             </td>
-                            <td class="data"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>
-                            <td class="data"><?= $inc['DATA_INICI'] ? htmlspecialchars($inc['DATA_INICI']) : '—' ?></td>
                             <td class="descripcio"><?= $inc['DESCRIPCIO'] ? htmlspecialchars($inc['DESCRIPCIO']) : '—' ?></td>
                             <td class="departament"><?= $inc['NOM'] ? htmlspecialchars($inc['NOM']) : '—' ?></td>
                         </tr>
