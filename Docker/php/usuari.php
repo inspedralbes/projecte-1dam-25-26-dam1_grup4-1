@@ -56,19 +56,18 @@
 
 
 <body class="min-vh-100">
-   <img src="logo.png" alt="Logo" class="logo">
-   <?php
-   $mysqli = include_once "connexio.php";
-   $stats = $mysqli->query("
+   <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;"> <?php
+                                                                                                            $mysqli = include_once "connexio.php";
+                                                                                                            $stats = $mysqli->query("
    SELECT ESTAT, COUNT(*) AS TOTAL
    FROM INCIDENCIA
    GROUP BY ESTAT
 ")->fetch_all(MYSQLI_ASSOC);
-   $comptadors = ["OBERTA" => 0, "EN_PROCES" => 0, "TANCADA" => 0];
-   foreach ($stats as $stat) {
-      $comptadors[$stat['ESTAT']] = $stat['TOTAL'];
-   }
-   ?>
+                                                                                                            $comptadors = ["OBERTA" => 0, "EN_PROCES" => 0, "TANCADA" => 0];
+                                                                                                            foreach ($stats as $stat) {
+                                                                                                               $comptadors[$stat['ESTAT']] = $stat['TOTAL'];
+                                                                                                            }
+                                                                                                            ?>
 
 
    <!-- Header -->

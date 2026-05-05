@@ -5,7 +5,7 @@ $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
-$idTecnic = 1; // ID del tècnic Pere Puig
+$idTecnic = 1; // ID de la tècnica Pere Portas
 $stmt = $pdo->prepare("SELECT 
                             i.ID_INCIDENCIA,
                             i.DATA_CREACIO,
@@ -25,13 +25,19 @@ $incidencies = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina del administrador</title>
+    <title>Pere Portas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
             background-color: #f0f2f5;
             font-family: sans-serif;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         header {
@@ -104,6 +110,7 @@ $incidencies = $stmt->fetchAll();
         <header>
             <h1>Gestió d'Incidències</h1>
             <span>Clica el ID Per gestionar una incidència</span>
+            <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         </header>
         <table>
             <thead>
@@ -136,7 +143,7 @@ $incidencies = $stmt->fetchAll();
             </tbody>
         </table>
         <div class="fixed-bottom p-4">
-            <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+            <a href="tecnic.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
         </div>
     </main>
 

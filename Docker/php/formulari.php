@@ -34,7 +34,8 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
   <!-- Header -->
   <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
     <h1 class="fs-3 fw-bold mb-1" style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
-    <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
+    <h1 class="fs-3 fw-bold mb-0" style="color: white;">CREAR NOVA</h1>
+    <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
   </div>
 
   <?php if (isset($_GET['ok'])): ?>

@@ -4,15 +4,23 @@ $dbname = "projecte_gip3";
 $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$incidencies = $pdo->query("SELECT  
-                                i.ID_INCIDENCIA,
-                                i.DATA_CREACIO,
-                                i.DATA_INICI,
-                                i.DESCRIPCIO,
-                                d.NOM
-FROM INCIDENCIA i
-LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-ORDER BY i.DATA_CREACIO DESC")->fetchAll();
+
+// 1. Recollim paràmetres de la URL o posem valors per defecte
+$sort = $_GET['sort'] ?? 'DATA_CREACIO';
+$order = $_GET['order'] ?? 'DESC';
+
+// 2. SQL amb l'ordenació dinàmica (Variables $sort i $order)
+$sql = "SELECT  
+            i.ID_INCIDENCIA,
+            i.DATA_CREACIO,
+            i.DATA_INICI,
+            i.DESCRIPCIO,
+            d.NOM
+        FROM INCIDENCIA i
+        LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+        ORDER BY $sort $order";
+
+$incidencies = $pdo->query($sql)->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -27,6 +35,15 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
         body {
             background-color: #f0f2f5;
             font-family: sans-serif;
+        }
+
+        main {
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 0 40px;
+
         }
 
         header {
@@ -75,7 +92,7 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
 
         td.data {
             color: #065dea;
-            font-size: 0.6rem;
+            font-size: 0.8rem;
         }
 
         td.descripcio {
@@ -91,6 +108,13 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
             font-size: 0.8rem;
             width: 100%;
         }
+
+
+        .order-link {
+            text-decoration: none;
+            font-size: 0.7rem;
+            margin-left: 2px;
+        }
     </style>
 </head>
 
@@ -103,17 +127,37 @@ ORDER BY i.DATA_CREACIO DESC")->fetchAll();
         <table>
             <thead>
                 <tr>
-                    <th>#ID</th>
-                    <th>Data creació</th>
-                    <th>Data inici</th>
-                    <th>Descripció</th>
-                    <th>Departament</th>
+                    <th>
+                        #ID
+                        <a href="?sort=ID_INCIDENCIA&order=asc" class="order-link">↑</a>
+                        <a href="?sort=ID_INCIDENCIA&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>
+                        Data creació
+                        <a href="?sort=DATA_CREACIO&order=asc" class="order-link">↑</a>
+                        <a href="?sort=DATA_CREACIO&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>
+                        Data inici
+                        <a href="?sort=DATA_INICI&order=asc" class="order-link">↑</a>
+                        <a href="?sort=DATA_INICI&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>
+                        Descripció
+                        <a href="?sort=DESCRIPCIO&order=asc" class="order-link">↑</a>
+                        <a href="?sort=DESCRIPCIO&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>
+                        Departament
+                        <a href="?sort=NOM&order=asc" class="order-link">↑</a>
+                        <a href="?sort=NOM&order=desc" class="order-link">↓</a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($incidencies)): ?>
                     <tr>
-                        <td colspan="4" class="empty">No hi ha incidències registrades.</td>
+                        <td colspan="5" class="empty">No hi ha incidències registrades.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($incidencies as $inc): ?>

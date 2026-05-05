@@ -10,7 +10,7 @@
    <style>
       body {
          font-family: 'Montserrat', sans-serif;
-         background-image: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url("fonslandingpage.png");
+         background-image: linear-gradient(rgba(215, 235, 255, 0.8), rgba(248, 250, 252, 0.8)), url("fonslandingpage.png");
          background-size: cover;
          background-position: center;
       }
@@ -51,10 +51,10 @@
    <main>
 
       <!-- Header -->
-      <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: rgba(144, 178, 216, 0.8);">
+      <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
          <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-         <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
-         <h1 class="fs-3 fw-bold mb-0">INS PEDRALBES</h1>
+         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
+         <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
       </div>
 
       <!-- Botons -->

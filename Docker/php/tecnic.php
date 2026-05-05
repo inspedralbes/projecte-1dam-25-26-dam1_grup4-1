@@ -5,7 +5,8 @@ $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
-function countIncidencies($pdo, $idTecnic) {
+function countIncidencies($pdo, $idTecnic)
+{
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM INCIDENCIA WHERE ID_TECNIC = ?");
     $stmt->execute([$idTecnic]);
     return $stmt->fetchColumn();
@@ -32,9 +33,11 @@ function countIncidencies($pdo, $idTecnic) {
 <body class="bg-light min-vh-100">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
-        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0">TÈCNICS</h1>
+    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">GESTIÓ D'INCIDÈNCIES</h1>
+        <h1 class="fs-3 fw-bold mb-0 text-white">TÈCNICS</h1>
+        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+
     </div>
 
     <div class="container pb-5" style="max-width: 900px;">
@@ -98,15 +101,13 @@ function countIncidencies($pdo, $idTecnic) {
             </div>
 
 
-
         </div>
     </div>
 
     <!-- Botó tornar -->
-    <div class="position-fixed bottom-0 start-0 p-3">
-        <a href="index.php" class="btn btn-outline-secondary px-4">← Tornar</a>
+    <div class="fixed-bottom p-4">
+        <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
