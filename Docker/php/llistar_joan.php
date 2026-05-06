@@ -36,7 +36,7 @@ $incidencies = $stmt->fetchAll();
     </style>
 </head>
 
-<body class="bg-light min-vh-100" style="background-color: #1e3a5f;">
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
     <!-- Header -->
 

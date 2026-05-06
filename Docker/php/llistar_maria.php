@@ -45,7 +45,7 @@ $incidencies = $stmt->fetchAll();
         <link rel="icon" href="favicon.jpg" type="image/png">
     </div>
 
-    <div class="container-md pb-5">
+    <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
         <p class="text-muted mb-4">Clica el ID per gestionar una incidència</p>
 
@@ -93,14 +93,14 @@ $incidencies = $stmt->fetchAll();
             </table>
         </div>
 
-    </div>
+        </div>
 
-    <!-- Botó tornar -->
-    <div class="fixed-bottom p-4">
-        <a href="tecnic.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
-    </div>
+        <!-- Botó tornar -->
+        <div class="fixed-bottom p-4">
+            <a href="tecnic.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 </html>

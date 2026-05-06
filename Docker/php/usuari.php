@@ -11,9 +11,7 @@
    <style>
       body {
          font-family: 'Montserrat', sans-serif;
-         background-image: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url("fonsusuari.png");
-         background-size: cover;
-         background-position: center;
+
       }
 
 
@@ -55,7 +53,7 @@
 </head>
 
 
-<body class="min-vh-100">
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
    <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;"> <?php
                                                                                                             $mysqli = include_once "connexio.php";
                                                                                                             $stats = $mysqli->query("

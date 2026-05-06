@@ -18,9 +18,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(223, 229, 236, 0.8)), url("fonslandingpage.png");
-      background-size: cover;
-      background-position: center;
+
     }
 
     textarea {
@@ -29,15 +27,17 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
   </style>
 </head>
 
-<body class="min-vh-100">
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
   <!-- Header -->
-  <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
-    <h1 class="fs-3 fw-bold mb-1" style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
-    <h1 class="fs-3 fw-bold mb-0" style="color: white;">CREAR NOVA</h1>
+  <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
     <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+    <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Crear Incidència</h1>
+    <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
     <link rel="icon" href="favicon.jpg" type="image/png">
   </div>
+
+
 
   <?php if (isset($_GET['ok'])): ?>
     <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5 bg-success text-white px-4 py-3 rounded fw-bold shadow">
@@ -46,9 +46,10 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
   <?php endif; ?>
 
 
+
   <div class="container" style="max-width: 700px;">
     <form action="registrar.php" method="POST">
-
+      <p class="text-muted mb-4">Completa el formulari per registrar una nova incidència.</p>
       <!-- Departament -->
       <fieldset class="p-3 mb-4 border border-secondary" style="background-color: #dbeafe;">
         <legend class="fw-bold px-2 w-auto">Departament</legend>

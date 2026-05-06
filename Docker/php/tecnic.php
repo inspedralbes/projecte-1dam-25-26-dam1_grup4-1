@@ -30,7 +30,7 @@ function countIncidencies($pdo, $idTecnic)
     </style>
 </head>
 
-<body class="bg-light min-vh-100">
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
