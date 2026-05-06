@@ -7,7 +7,6 @@ $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $pa
 
 $id = $_GET['id'];
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tecnic    = $_POST['tecnic'];
     $prioritat = $_POST['prioritat'];
@@ -19,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $missatge = "Incidència actualitzada!";
 }
 
-// Carregar dades de la incidència
 $stmt = $pdo->prepare("SELECT  
                             i.ID_INCIDENCIA,
                             i.DATA_CREACIO,
@@ -28,17 +26,14 @@ $stmt = $pdo->prepare("SELECT
                             i.PRIORITAT,
                             i.ID_TIPU,
                             d.NOM                            
-                            FROM INCIDENCIA i
-                            LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-                            WHERE i.ID_INCIDENCIA = ?");
+                        FROM INCIDENCIA i
+                        LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+                        WHERE i.ID_INCIDENCIA = ?");
 $stmt->execute([$id]);
 $inc = $stmt->fetch();
 
-// Carregar tècnics
 $tecnics = $pdo->query("SELECT * FROM TECNIC")->fetchAll();
-
-// Carregar tipus d'incidència
-$tipus = $pdo->query("SELECT * FROM TIPU")->fetchAll();
+$tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -46,121 +41,97 @@ $tipus = $pdo->query("SELECT * FROM TIPU")->fetchAll();
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Incidència #<?= $id ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f0f2f5;
-            font-family: sans-serif;
-        }
-
-        header {
-            padding: 30px;
-        }
-
-        .caixa {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            margin: 0 30px 20px 30px;
-        }
-
-        label {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            margin-bottom: 16px;
-        }
-
-        .btn-save {
-            background-color: #4f46e5;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 20px;
-            cursor: pointer;
-        }
-
-        .btn-save:hover {
-            background-color: #4338ca;
-        }
-
-        .missatge {
-            background: #d1fae5;
-            border: 1px solid #6ee7b7;
-            color: #065f46;
-            padding: 10px 16px;
-            border-radius: 8px;
-            margin: 0 30px 16px 30px;
+            font-family: 'Montserrat', sans-serif;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-light min-vh-100">
 
-    <header>
-
-        <h1>Gestionar Incidència #<?= $id ?></h1>
-    </header>
-
-    <?php if (isset($missatge)): ?>
-        <div class="missatge"><?= $missatge ?></div>
-    <?php endif; ?>
-
-
-    <div class="caixa">
-        <h5>Informació</h5>
-        <p><strong>Data creació:</strong> <?= $inc['DATA_CREACIO'] ?></p>
-        <p><strong>Departament:</strong> <?= $inc['NOM'] ?? '—' ?></p>
-        <p><strong>Descripció:</strong> <?= $inc['DESCRIPCIO'] ?></p>
+    <!-- Header -->
+    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
+        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
+        <h1 class="fs-3 fw-bold mb-0">Gestionar Incidència #<?= $id ?></h1>
     </div>
 
+    <div class="container-md pb-5">
 
-    <div class="caixa">
-        <h5>Assignar tècnic i prioritat</h5>
-        <form method="POST">
+        <!-- Missatge OK -->
+        <?php if (isset($missatge)): ?>
+            <div class="alert alert-success fw-bold mb-4"><?= $missatge ?></div>
+        <?php endif; ?>
 
-            <label>Tècnic:</label>
-            <select name="tecnic">
-                <option value="">— Selecciona —</option>
-                <?php foreach ($tecnics as $t): ?>
-                    <option value="<?= $t['ID_TECNIC'] ?>" <?= $inc['ID_TECNIC'] == $t['ID_TECNIC'] ? 'selected' : '' ?>>
-                        <?= $t['NOM'] ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+        <!-- Informació -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">Informació</h5>
+                <p class="mb-1"><strong>Data creació:</strong> <?= $inc['DATA_CREACIO'] ?></p>
+                <p class="mb-1"><strong>Departament:</strong> <?= $inc['NOM'] ?? '—' ?></p>
+                <p class="mb-0"><strong>Descripció:</strong> <?= $inc['DESCRIPCIO'] ?></p>
+            </div>
+        </div>
 
-            <label>Tipus d'incidència:</label>
-            <select name="tipu">
-                <option value="">— Selecciona —</option>
-                <?php foreach ($tipus as $t): ?>
-                    <option value="<?= $t['ID_TIPU'] ?>" <?= $inc['ID_TIPU'] == $t['ID_TIPU'] ? 'selected' : '' ?>>
-                    <?= $t['NOM'] ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+        <!-- Formulari -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Assignar tècnic i prioritat</h5>
+                <form method="POST">
 
-            <label>Prioritat:</label>
-            <select name="prioritat">
-                <option value="">— Selecciona —</option>
-                <?php foreach (['ALTA', 'MITJANA', 'BAIXA'] as $p): ?>
-                    <option value="<?= $p ?>" <?= $inc['PRIORITAT'] == $p ? 'selected' : '' ?>>
-                    <?= $p ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <button type="submit" class="btn-save">Guardar</button>
-        </form>
-       <div class="fixed-bottom p-4">
-      <a href="llistar.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
-   </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tècnic:</label>
+                        <select name="tecnic" class="form-select">
+                            <option value="">— Selecciona —</option>
+                            <?php foreach ($tecnics as $t): ?>
+                                <option value="<?= $t['ID_TECNIC'] ?>" <?= $inc['ID_TECNIC'] == $t['ID_TECNIC'] ? 'selected' : '' ?>>
+                                    <?= $t['NOM'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tipus d'incidència:</label>
+                        <select name="tipu" class="form-select">
+                            <option value="">— Selecciona —</option>
+                            <?php foreach ($tipus as $t): ?>
+                                <option value="<?= $t['ID_TIPU'] ?>" <?= $inc['ID_TIPU'] == $t['ID_TIPU'] ? 'selected' : '' ?>>
+                                    <?= $t['NOM'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Prioritat:</label>
+                        <select name="prioritat" class="form-select">
+                            <option value="">— Selecciona —</option>
+                            <?php foreach (['ALTA', 'MITJANA', 'BAIXA'] as $p): ?>
+                                <option value="<?= $p ?>" <?= $inc['PRIORITAT'] == $p ? 'selected' : '' ?>>
+                                    <?= $p ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Guardar</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Botó tornar -->
+    <div class="position-fixed bottom-0 start-0 p-3">
+        <a href="llistar.php" class="btn btn-outline-secondary px-4">← Tornar</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

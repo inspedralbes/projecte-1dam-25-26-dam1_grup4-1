@@ -72,8 +72,8 @@
 
    <!-- Header -->
    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
-      <h1 class="fs-3 fw-bold mb-1" style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
-      <h1 class="fs-3 fw-bold mb-0" style="color: white;">USUARIS</h1>
+      <h1 class="fs-3 fw-bold mb-1 text-white">GESTIÓ D'INCIDÈNCIES</h1>
+      <h1 class="fs-3 fw-bold mb-0 text-white">USUARIS</h1>
    </div>
 
 

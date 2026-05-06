@@ -7,14 +7,13 @@ $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $pa
 
 $id = $_GET['id'];
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcio  = $_POST['descripcio'];
     $temps       = $_POST['temps'];
     $visible     = isset($_POST['visible']) ? 1 : 0;
     $finalitzada = isset($_POST['finalitzada']) ? 1 : 0;
     $data_fi     = !empty($_POST['data_fi']) ? $_POST['data_fi'] : date('Y-m-d H:i:s');
-    
+
     $stmt = $pdo->prepare("INSERT INTO ACTUACIO (ID_INCIDENCIA, DESCRIPCIO, TEMPS_ACTUACIO_MIN, VISIBLE, ESTAT) VALUES (?, ?, ?, ?, ?)");
     $estat_actuacio = $finalitzada ? 'ACABAT' : 'PENDENT';
     $stmt->execute([$id, $descripcio, $temps, $visible, $estat_actuacio]);
@@ -27,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $missatge = "Actuació registrada!";
 }
 
-// Carregar actuacions existents
 $stmt = $pdo->prepare("SELECT * FROM ACTUACIO WHERE ID_INCIDENCIA = ? ORDER BY ID_ACTUACIO DESC");
 $stmt->execute([$id]);
 $actuacions = $stmt->fetchAll();
@@ -38,148 +36,104 @@ $actuacions = $stmt->fetchAll();
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Actuació #<?= $id ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f0f2f5;
-            font-family: sans-serif;
-        }
-
-        header {
-            padding: 30px;
-        }
-
-        .caixa {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            margin: 0 30px 20px 30px;
-        }
-
-        label {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        textarea, input[type="number"], input[type="datetime-local"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            margin-bottom: 16px;
-        }
-
-        .btn-save {
-            background-color: #4f46e5;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 20px;
-            cursor: pointer;
-        }
-
-        .btn-save:hover {
-            background-color: #4338ca;
-        }
-
-        .missatge {
-            background: #d1fae5;
-            border: 1px solid #6ee7b7;
-            color: #065f46;
-            padding: 10px 16px;
-            border-radius: 8px;
-            margin: 0 30px 16px 30px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 10px 12px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.9rem;
-        }
-
-        th {
-            background-color: #f9fafb;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-light min-vh-100">
 
-    <header>
-        <h1>Registrar Actuació · Incidència #<?= $id ?></h1>
-    </header>
+    <!-- Header -->
+    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
+        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
+        <h1 class="fs-3 fw-bold mb-0">Registrar Actuació · Incidència #<?= $id ?></h1>
+    </div>
 
-    <?php if (isset($missatge)): ?>
-        <div class="missatge"><?= $missatge ?></div>
-    <?php endif; ?>
+    <div class="container-md pb-5">
 
-    <div class="caixa">
-        <h5>Actuacions fins al moment</h5>
-        <?php if (empty($actuacions)): ?>
-            <p>Encara no hi ha actuacions registrades.</p>
-        <?php else: ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descripció</th>
-                        <th>Temps (min)</th>
-                        <th>Visible usuari</th>
-                        <th>Estat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($actuacions as $a): ?>
-                        <tr>
-                            <td><?= $a['DESCRIPCIO'] ?></td>
-                            <td><?= $a['TEMPS_ACTUACIO_MIN'] ?></td>
-                            <td><?= $a['VISIBLE'] ? 'Sí' : 'No' ?></td>
-                            <td><?= $a['ESTAT'] ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+        <!-- Missatge OK -->
+        <?php if (isset($missatge)): ?>
+            <div class="alert alert-success fw-bold mb-4"><?= $missatge ?></div>
         <?php endif; ?>
-    </div>
 
-    <div class="caixa">
-        <h5>Nova actuació</h5>
-        <form method="POST">
-
-            <label>Descripció:</label>
-            <textarea name="descripcio" rows="4" required></textarea>
-
-            <label>Temps dedicat (minuts):</label>
-            <input type="number" name="temps" min="1" required>
-
-            <label>Visible per a l'usuari:</label>
-            <div style="margin-bottom: 16px;">
-                <input type="checkbox" name="visible" value="1"> Sí
+        <!-- Actuacions existents -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">Actuacions fins al moment</h5>
+                <?php if (empty($actuacions)): ?>
+                    <p class="text-muted">Encara no hi ha actuacions registrades.</p>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Descripció</th>
+                                    <th>Temps (min)</th>
+                                    <th>Visible usuari</th>
+                                    <th>Estat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($actuacions as $a): ?>
+                                    <tr>
+                                        <td><?= $a['DESCRIPCIO'] ?></td>
+                                        <td><?= $a['TEMPS_ACTUACIO_MIN'] ?></td>
+                                        <td><?= $a['VISIBLE'] ? 'Sí' : 'No' ?></td>
+                                        <td><?= $a['ESTAT'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
             </div>
+        </div>
 
-            <label>Finalitzar incidència:</label>
-            <div style="margin-bottom: 16px;">
-                <input type="checkbox" name="finalitzada" value="1"> Marcar com a finalitzada
+        <!-- Nova actuació -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h5 class="fw-bold mb-4">Nova actuació</h5>
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripció:</label>
+                        <textarea name="descripcio" rows="4" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Temps dedicat (minuts):</label>
+                        <input type="number" name="temps" min="1" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="visible" value="1" class="form-check-input" id="visible">
+                        <label class="form-check-label fw-bold" for="visible">Visible per a l'usuari</label>
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" name="finalitzada" value="1" class="form-check-input" id="finalitzada">
+                        <label class="form-check-label fw-bold" for="finalitzada">Marcar com a finalitzada</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Guardar</button>
+
+                </form>
             </div>
+        </div>
 
-           
-
-            <button type="submit" class="btn-save">Guardar</button>
-        </form>
     </div>
 
-    <div class="fixed-bottom p-4">
-        <a href="llistar.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+    <!-- Botó tornar -->
+    <div class="position-fixed bottom-0 start-0 p-3">
+        <a href="llistar.php" class="btn btn-outline-secondary px-4">← Tornar</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
