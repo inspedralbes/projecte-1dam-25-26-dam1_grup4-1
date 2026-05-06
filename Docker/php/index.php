@@ -50,10 +50,10 @@
 
       <!-- Header -->
       <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-         <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+         <img src="Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
          <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
          <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
-         <link rel="icon" href="favicon.jpg" type="image/png">
+         <link rel="icon" href="Imatges/favicon.jpg" type="image/png">
       </div>
 
 
@@ -62,19 +62,19 @@
          <div class="row g-4">
 
             <div class="col-6">
-               <a href="usuari.php" class="btn btn-primary btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase w-100 py-5 shadow-sm">
+               <a href="Usuari/usuari.php" class="btn btn-primary btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase w-100 py-5 shadow-sm">
                   USUARI
                </a>
             </div>
 
             <div class="col-6">
-               <a href="tecnic.php" class="btn btn-gris btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase w-100 py-5 shadow-sm">
+               <a href="Tecnic/tecnic.php" class="btn btn-gris btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase w-100 py-5 shadow-sm">
                   TÈCNIC
                </a>
             </div>
 
             <div class="col-12 d-flex justify-content-center mt-2">
-               <a href="llistar.php" class="btn btn-taronja btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase py-5 shadow-sm" style="width: 60%;">
+               <a href="Administrador/llistar.php" class="btn btn-taronja btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase py-5 shadow-sm" style="width: 60%;">
                   ADMINISTRADOR
                </a>
             </div>

@@ -5,19 +5,20 @@ $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
-$idTecnic = 3;
-$stmt = $pdo->prepare("SELECT 
-                            i.ID_INCIDENCIA,
-                            i.DATA_CREACIO,
-                            i.DATA_INICI,
-                            i.DESCRIPCIO,
-                            d.NOM
-                        FROM INCIDENCIA i
-                        LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-                        WHERE i.ID_TECNIC = ?
-                        ORDER BY i.DATA_CREACIO DESC");
-$stmt->execute([$idTecnic]);
-$incidencies = $stmt->fetchAll();
+$sort  = $_GET['sort']  ?? 'DATA_CREACIO';
+$order = $_GET['order'] ?? 'DESC';
+
+$sql = "SELECT  
+            i.ID_INCIDENCIA,
+            i.DATA_CREACIO,
+            i.DATA_INICI,
+            i.DESCRIPCIO,
+            d.NOM
+        FROM INCIDENCIA i
+        LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+        ORDER BY $sort $order";
+
+$incidencies = $pdo->query($sql)->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -25,7 +26,7 @@ $incidencies = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maria Lopez</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -35,17 +36,17 @@ $incidencies = $stmt->fetchAll();
     </style>
 </head>
 
-<body class="bg-light min-vh-100">
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">TÈCNIC</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Maria Lopez</h1>
-        <link rel="icon" href="favicon.jpg" type="image/png">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Administrador</h1>
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
-    <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
+    <div class="container-md pb-5">
 
         <p class="text-muted mb-4">Clica el ID per gestionar una incidència</p>
 
@@ -57,6 +58,16 @@ $incidencies = $stmt->fetchAll();
                             #ID
                             <a href="?sort=ID_INCIDENCIA&order=asc" class="text-decoration-none ms-1">↑</a>
                             <a href="?sort=ID_INCIDENCIA&order=desc" class="text-decoration-none">↓</a>
+                        </th>
+                        <th>
+                            Data creació
+                            <a href="?sort=DATA_CREACIO&order=asc" class="text-decoration-none ms-1">↑</a>
+                            <a href="?sort=DATA_CREACIO&order=desc" class="text-decoration-none">↓</a>
+                        </th>
+                        <th>
+                            Data inici
+                            <a href="?sort=DATA_INICI&order=asc" class="text-decoration-none ms-1">↑</a>
+                            <a href="?sort=DATA_INICI&order=desc" class="text-decoration-none">↓</a>
                         </th>
                         <th>
                             Descripció
@@ -73,19 +84,21 @@ $incidencies = $stmt->fetchAll();
                 <tbody>
                     <?php if (empty($incidencies)): ?>
                         <tr>
-                            <td colspan="3" class="text-center text-muted py-4">No hi ha incidències registrades.</td>
+                            <td colspan="5" class="text-center text-muted py-4">No hi ha incidències registrades.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($incidencies as $inc): ?>
                             <tr>
                                 <td>
-                                    <a href="registrar_actuacio.php?id=<?= $inc['ID_INCIDENCIA'] ?>"
+                                    <a href="gestionar.php?id=<?= $inc['ID_INCIDENCIA'] ?>"
                                         class="fw-bold text-primary text-decoration-none">
                                         #<?= $inc['ID_INCIDENCIA'] ?>
                                     </a>
                                 </td>
+                                <td class="text-secondary small"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>
+                                <td class="text-secondary small"><?= $inc['DATA_INICI']   ? htmlspecialchars($inc['DATA_INICI'])   : '—' ?></td>
                                 <td><?= $inc['DESCRIPCIO'] ? htmlspecialchars($inc['DESCRIPCIO']) : '—' ?></td>
-                                <td><?= $inc['NOM'] ? htmlspecialchars($inc['NOM']) : '—' ?></td>
+                                <td><?= $inc['NOM']        ? htmlspecialchars($inc['NOM'])        : '—' ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -93,14 +106,14 @@ $incidencies = $stmt->fetchAll();
             </table>
         </div>
 
-        </div>
+    </div>
 
-        <!-- Botó tornar -->
-        <div class="fixed-bottom p-4">
-            <a href="tecnic.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
-        </div>
+    <!-- Botó tornar -->
+    <div class="fixed-bottom p-4">
+        <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </html>

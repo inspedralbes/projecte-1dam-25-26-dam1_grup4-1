@@ -54,26 +54,26 @@
 
 
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
-   <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;"> <?php
-                                                                                                            $mysqli = include_once "connexio.php";
-                                                                                                            $stats = $mysqli->query("
+   <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;"> <?php
+                                                                                                                        $mysqli = include_once "../connexio.php";
+                                                                                                                        $stats = $mysqli->query("
    SELECT ESTAT, COUNT(*) AS TOTAL
    FROM INCIDENCIA
    GROUP BY ESTAT
 ")->fetch_all(MYSQLI_ASSOC);
-                                                                                                            $comptadors = ["OBERTA" => 0, "EN_PROCES" => 0, "TANCADA" => 0];
-                                                                                                            foreach ($stats as $stat) {
-                                                                                                               $comptadors[$stat['ESTAT']] = $stat['TOTAL'];
-                                                                                                            }
-                                                                                                            ?>
+                                                                                                                        $comptadors = ["OBERTA" => 0, "EN_PROCES" => 0, "TANCADA" => 0];
+                                                                                                                        foreach ($stats as $stat) {
+                                                                                                                           $comptadors[$stat['ESTAT']] = $stat['TOTAL'];
+                                                                                                                        }
+                                                                                                                        ?>
 
 
    <!-- Header -->
    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-      <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
       <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Usuari</h1>
       <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
-      <link rel="icon" href="favicon.jpg" type="image/png">
+      <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
    </div>
 
 
@@ -102,7 +102,7 @@
       </div>
    </div>
    <div class="fixed-bottom p-4">
-      <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+      <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
    </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

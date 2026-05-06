@@ -5,7 +5,7 @@ $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
-$idTecnic = 1;
+$idTecnic = 2;
 $stmt = $pdo->prepare("SELECT 
                             i.ID_INCIDENCIA,
                             i.DATA_CREACIO,
@@ -25,12 +25,13 @@ $incidencies = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pere Portas</title>
+    <title>Joan Garcia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+
         }
     </style>
 </head>
@@ -38,11 +39,12 @@ $incidencies = $stmt->fetchAll();
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
     <!-- Header -->
+
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">TÈCNIC</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Pere Portas</h1>
-        <link rel="icon" href="favicon.jpg" type="image/png">
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Joan Garcia</h1>
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
     <div class="container-md pb-5">

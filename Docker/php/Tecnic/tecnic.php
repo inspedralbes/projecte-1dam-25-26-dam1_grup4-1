@@ -34,10 +34,10 @@ function countIncidencies($pdo, $idTecnic)
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
         <h1 class="fs-3 fw-bold mb-0" style="color: white;">TÈCNICS</h1>
-        <link rel="icon" href="favicon.jpg" type="image/png">
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
     <div class="container pb-5" style="max-width: 900px;">
@@ -106,7 +106,7 @@ function countIncidencies($pdo, $idTecnic)
 
     <!-- Botó tornar -->
     <div class="fixed-bottom p-4">
-        <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+        <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

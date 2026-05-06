@@ -55,10 +55,10 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Gestionar Incidència #<?= $id ?></h1>
         <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
-        <link rel="icon" href="favicon.jpg" type="image/png">
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
 

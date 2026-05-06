@@ -1,5 +1,5 @@
 <?php
-$mysqli = include_once "connexio.php";
+$mysqli = include_once "../connexio.php";
 $resultat = $mysqli->query('
 SELECT ID_INCIDENCIA, DESCRIPCIO, DATA_CREACIO, ESTAT FROM INCIDENCIA ORDER BY DATA_CREACIO DESC');
 $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
@@ -25,8 +25,8 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
     <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
         <h1 class="fs-3.5 fw-bold mb-3 text-white">Incidències Registrades</h1>
         <h1 class="fs-3 fw-bold mb-0 text-white"> </h1>
-        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <link rel="icon" href="favicon.jpg" type="image/png">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
     <!-- Taula -->
