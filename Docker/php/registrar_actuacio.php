@@ -49,9 +49,10 @@ $actuacions = $stmt->fetchAll();
 <body class="bg-light min-vh-100">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
-        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0">Registrar Actuació · Incidència #<?= $id ?></h1>
+    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Registrar Actuació · Incidència #<?= $id ?></h1>
     </div>
 
     <div class="container-md pb-5">

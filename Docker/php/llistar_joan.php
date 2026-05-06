@@ -31,17 +31,20 @@ $incidencies = $stmt->fetchAll();
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+
         }
     </style>
 </head>
 
-<body class="bg-light min-vh-100">
+<body class="bg-light min-vh-100" style="background-color: #1e3a5f;">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: rgba(144, 178, 216, 0.8);">
+
+    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
         <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0">Joan Garcia</h1>
+        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">TÈCNIC</h1>
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Joan Garcia</h1>
+        <link rel="icon" href="favicon.jpg" type="image/png">
     </div>
 
     <div class="container-md pb-5">
@@ -95,8 +98,8 @@ $incidencies = $stmt->fetchAll();
     </div>
 
     <!-- Botó tornar -->
-    <div class="position-fixed bottom-0 start-0 p-3">
-        <a href="tecnic.php" class="btn btn-outline-secondary px-4">← Tornar</a>
+    <div class="fixed-bottom p-4">
+        <a href="tecnic.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

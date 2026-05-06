@@ -26,7 +26,7 @@ $incidencies = $pdo->query($sql)->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina de l'administrador</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -39,9 +39,11 @@ $incidencies = $pdo->query($sql)->fetchAll();
 <body class="bg-light min-vh-100">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
-        <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0">ADMINISTRADOR</h1>
+    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+        <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+        <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Administrador</h1>
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
+        <link rel="icon" href="favicon.jpg" type="image/png">
     </div>
 
     <div class="container-md pb-5">
@@ -107,8 +109,8 @@ $incidencies = $pdo->query($sql)->fetchAll();
     </div>
 
     <!-- Botó tornar -->
-    <div class="position-fixed bottom-0 start-0 p-3">
-        <a href="index.php" class="btn btn-outline-secondary px-4">← Tornar</a>
+    <div class="fixed-bottom p-4">
+        <a href="index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

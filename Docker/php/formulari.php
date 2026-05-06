@@ -36,6 +36,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
     <h1 class="fs-3 fw-bold mb-1" style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
     <h1 class="fs-3 fw-bold mb-0" style="color: white;">CREAR NOVA</h1>
     <img src="logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+    <link rel="icon" href="favicon.jpg" type="image/png">
   </div>
 
   <?php if (isset($_GET['ok'])): ?>

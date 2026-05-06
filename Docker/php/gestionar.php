@@ -57,6 +57,7 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
     <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: rgba(144, 178, 216, 0.8);">
         <h1 class="fs-3 fw-bold mb-1">GESTIÓ D'INCIDÈNCIES</h1>
         <h1 class="fs-3 fw-bold mb-0">Gestionar Incidència #<?= $id ?></h1>
+        <link rel="icon" href="favicon.jpg" type="image/png">
     </div>
 
     <div class="container-md pb-5">
@@ -127,8 +128,8 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
     </div>
 
     <!-- Botó tornar -->
-    <div class="position-fixed bottom-0 start-0 p-3">
-        <a href="llistar.php" class="btn btn-outline-secondary px-4">← Tornar</a>
+    <div class="fixed-bottom p-4">
+        <a href="llistar.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
