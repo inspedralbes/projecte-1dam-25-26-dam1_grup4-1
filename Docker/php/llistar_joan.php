@@ -115,9 +115,18 @@ $incidencies = $stmt->fetchAll();
         <table>
             <thead>
                 <tr>
-                    <th>#ID</th>
-                    <th>Descripció</th>
-                    <th>Departament</th>
+                    <th>#ID
+                        <a href="?sort=DATA_INICI&order=asc" class="order-link">↑</a>
+                        <a href="?sort=DATA_INICI&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>Descripció
+                        <a href="?sort=DESCRIPCIO&order=asc" class="order-link">↑</a>
+                        <a href="?sort=DESCRIPCIO&order=desc" class="order-link">↓</a>
+                    </th>
+                    <th>Departament
+                        <a href="?sort=NOM&order=asc" class="order-link">↑</a>
+                        <a href="?sort=NOM&order=desc" class="order-link">↓</a>
+                    </th>
                 </tr>
             </thead>
             <tbody>

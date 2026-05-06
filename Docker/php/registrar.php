@@ -1,8 +1,4 @@
 <?php
-$host = "db";
-$dbname = "projecte_gip3";
-$username = "usuari";
-$password = "1234";
 //Validació de que arriben les dades necessàries
 if (empty($_POST["departament"]) || empty($_POST["descripcio"])) {
     exit("Falten dades al fomulari");
