@@ -11,11 +11,12 @@ $order = $_GET['order'] ?? 'DESC';
 $sql = "SELECT  
             i.ID_INCIDENCIA,
             i.DATA_CREACIO,
-            i.DATA_INICI,
             i.DESCRIPCIO,
-            d.NOM
+            d.NOM,
+            t.NOM AS NOM_TECNIC
         FROM INCIDENCIA i 
         LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+        LEFT JOIN TECNIC t ON i.ID_TECNIC = t.ID_TECNIC
         WHERE i.ESTAT <> 'TANCADA'
         ORDER BY $sort $order";
 
@@ -66,11 +67,6 @@ $incidencies = $pdo->query($sql)->fetchAll();
                             <a href="?sort=DATA_CREACIO&order=desc" class="text-decoration-none">↓</a>
                         </th>
                         <th>
-                            Data inici
-                            <a href="?sort=DATA_INICI&order=asc" class="text-decoration-none ms-1">↑</a>
-                            <a href="?sort=DATA_INICI&order=desc" class="text-decoration-none">↓</a>
-                        </th>
-                        <th>
                             Descripció
                             <a href="?sort=DESCRIPCIO&order=asc" class="text-decoration-none ms-1">↑</a>
                             <a href="?sort=DESCRIPCIO&order=desc" class="text-decoration-none">↓</a>
@@ -79,6 +75,11 @@ $incidencies = $pdo->query($sql)->fetchAll();
                             Departament
                             <a href="?sort=NOM&order=asc" class="text-decoration-none ms-1">↑</a>
                             <a href="?sort=NOM&order=desc" class="text-decoration-none">↓</a>
+                        </th>
+                        <th>
+                            Tècnic
+                            <a href="?sort=NOM_TECNIC&order=asc" class="text-decoration-none ms-1">↑</a>
+                            <a href="?sort=NOM_TECNIC&order=desc" class="text-decoration-none">↓</a>
                         </th>
                     </tr>
                 </thead>
@@ -97,9 +98,9 @@ $incidencies = $pdo->query($sql)->fetchAll();
                                     </a>
                                 </td>
                                 <td class="text-secondary small"><?= $inc['DATA_CREACIO'] ? htmlspecialchars($inc['DATA_CREACIO']) : '—' ?></td>
-                                <td class="text-secondary small"><?= $inc['DATA_INICI']   ? htmlspecialchars($inc['DATA_INICI'])   : '—' ?></td>
                                 <td><?= $inc['DESCRIPCIO'] ? htmlspecialchars($inc['DESCRIPCIO']) : '—' ?></td>
-                                <td><?= $inc['NOM']        ? htmlspecialchars($inc['NOM'])        : '—' ?></td>
+                                <td><?= $inc['NOM'] ? htmlspecialchars($inc['NOM']) : '—' ?></td>
+                                <td><strong><?= $inc['NOM_TECNIC'] ? htmlspecialchars($inc['NOM_TECNIC']) : '<span class="text-danger">Tasca no assignada</span>' ?></strong></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
