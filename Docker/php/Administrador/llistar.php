@@ -111,7 +111,7 @@ $incidencies = $pdo->query($sql)->fetchAll();
 
     <!-- Botó tornar -->
     <div class="fixed-bottom p-4">
-        <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+        <a href="administrador.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

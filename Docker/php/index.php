@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-12 d-flex justify-content-center mt-2">
-               <a href="Administrador/llistar.php" class="btn btn-taronja btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase py-5 shadow-sm" style="width: 60%;">
+               <a href="Administrador/administrador.php" class="btn btn-taronja btn-hover text-white text-decoration-none fw-bold fs-5 text-uppercase py-5 shadow-sm" style="width: 60%;">
                   ADMINISTRADOR
                </a>
             </div>
