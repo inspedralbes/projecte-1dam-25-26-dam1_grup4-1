@@ -4,7 +4,7 @@ if (empty($_POST["departament"]) || empty($_POST["descripcio"])) {
     exit("Falten dades al fomulari");
 }
 //Connectar la BD 
-$mysqli = include_once "connexio.php";
+$mysqli = include_once "../connexio.php";
 
 
 $descripcion = $_POST["descripcio"];
@@ -17,6 +17,6 @@ $sentencia = $mysqli->prepare("INSERT INTO INCIDENCIA (DESCRIPCIO, ID_DEPARTAMEN
 $sentencia->bind_param("ssi", $descripcion, $departament, $departament);
 $sentencia->execute();
 
-// Redirigir a la pàgina de llistar les incidències
+// Redirigir a la pàgina del formulari de l'usuari
 header("Location: formulari.php?ok=1");
 exit;

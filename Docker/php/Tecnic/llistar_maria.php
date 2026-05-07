@@ -14,7 +14,7 @@ $stmt = $pdo->prepare("SELECT
                             d.NOM
                         FROM INCIDENCIA i
                         LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
-                        WHERE i.ID_TECNIC = ?
+                        WHERE i.ID_TECNIC = ? AND i.ESTAT <> 'TANCADA'
                         ORDER BY i.DATA_CREACIO DESC");
 $stmt->execute([$idTecnic]);
 $incidencies = $stmt->fetchAll();

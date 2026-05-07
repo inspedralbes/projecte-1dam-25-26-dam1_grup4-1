@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS projecte_gip3
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-CREATE USER IF NOT EXISTS 'usuari'@'%' IDENTIFIED BY 'password_usuari';
+CREATE USER IF NOT EXISTS 'usuari'@'%' IDENTIFIED BY '1234';
 GRANT ALL PRIVILEGES ON projecte_gip3.* TO 'usuari'@'%';
 FLUSH PRIVILEGES;
 
@@ -81,7 +81,7 @@ INSERT INTO DEPARTAMENT (NOM) VALUES
 INSERT INTO TECNIC (NOM) VALUES
 ('Pere Portas'),
 ('Joan Garcia'),
-('Maria López'),
+('Maria López');
 
 INSERT INTO TIPU (NOM) VALUES
 ('Problema de maquinari'),
@@ -92,4 +92,4 @@ INSERT INTO TIPU (NOM) VALUES
 ('Problema impressora'),
 ('Problema de servidor'),
 ('Problema de base de dades'),
-('Problema de còpia de seguretat'),
+('Problema de còpia de seguretat');

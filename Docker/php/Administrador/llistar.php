@@ -14,8 +14,9 @@ $sql = "SELECT
             i.DATA_INICI,
             i.DESCRIPCIO,
             d.NOM
-        FROM INCIDENCIA i
+        FROM INCIDENCIA i 
         LEFT JOIN DEPARTAMENT d ON i.ID_DEPARTAMENT = d.ID_DEPARTAMENT
+        WHERE i.ESTAT <> 'TANCADA'
         ORDER BY $sort $order";
 
 $incidencies = $pdo->query($sql)->fetchAll();
