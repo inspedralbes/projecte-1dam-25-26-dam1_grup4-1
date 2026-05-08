@@ -47,11 +47,20 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+            background-image: url('../Imatges/fons.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            margin-top: auto;
         }
     </style>
 </head>
 
-<body class="bg-light min-vh-100">
+<body class="bg-light min-vh-100 d-flex flex-column">
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
@@ -133,10 +142,14 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
         </div>
 
     </div>
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+    </footer>
 
     <!-- Botó tornar -->
     <div class="fixed-bottom p-4">
-        <a href="llistar.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+        <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

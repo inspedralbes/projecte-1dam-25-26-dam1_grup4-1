@@ -72,7 +72,14 @@
 
    <!-- Header -->
    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;"> <img src="Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+
       <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;">
+
+         <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menú</a>
+         </div>
+
          <div class="dropdown">
             <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuari</a>
             <ul class="dropdown-menu">
@@ -128,7 +135,12 @@
          </div>
 
       </div>
+
    </div>
+   <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+      <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+      <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+   </footer>
    <div class="fixed-bottom p-4">
       <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
    </div>

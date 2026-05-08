@@ -56,7 +56,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
   <div class="container" style="max-width: 700px;">
     <form action="registrar.php" method="POST">
       <p class="text-muted mb-4">Completa el formulari per registrar una nova incidència.</p>
-      <!-- Departament -->
+      <!-- Escollir Departament -->
       <fieldset class="p-3 mb-4 border border-secondary" style="background-color: #dbeafe;">
         <legend class="fw-bold px-2 w-auto">Departament</legend>
         <select id="departament" name="departament" class="form-select" required>
@@ -69,7 +69,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
         </select>
       </fieldset>
 
-      <!-- Descripció -->
+      <!-- Posar Descripció -->
       <fieldset class="p-3 mb-4 border border-secondary" style="background-color: #eff6ff;">
         <legend class="fw-bold px-2 w-auto">Descripció de la incidència</legend>
         <label for="descripcio" class="form-label">Observacions</label>
@@ -81,6 +81,10 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
 
     </form>
   </div>
+  <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+    <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+    <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+  </footer>
   <div class="fixed-bottom p-4">
     <a href="usuari.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
   </div>

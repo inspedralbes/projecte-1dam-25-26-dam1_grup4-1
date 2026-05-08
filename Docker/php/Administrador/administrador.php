@@ -27,6 +27,8 @@ function countIncidencies($pdo, $idTecnic)
             background-image: url('../Imatges/fons.png');
             background-size: cover;
             background-position: center;
+            display: flex;
+            flex-direction: column;
         }
 
         .btn-orn {
@@ -44,10 +46,14 @@ function countIncidencies($pdo, $idTecnic)
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
             opacity: 1;
         }
+
+        footer {
+            margin-top: auto;
+        }
     </style>
 </head>
 
-<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
+<body class="min-vh-100 bg-secondary bg-opacity-10">
 
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
@@ -83,14 +89,21 @@ function countIncidencies($pdo, $idTecnic)
                 </div>
 
             </div>
-        </div>
 
-        <!-- Botó tornar -->
-        <div class="fixed-bottom p-4">
-            <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+    </footer>
+
+    <!-- Botó tornar -->
+    <div class="fixed-bottom p-4">
+        <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

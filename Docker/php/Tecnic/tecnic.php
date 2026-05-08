@@ -110,7 +110,10 @@ function countIncidencies($pdo, $idTecnic)
 
         </div>
     </div>
-
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+    </footer>
     <!-- Botó tornar -->
     <div class="fixed-bottom p-4">
         <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
