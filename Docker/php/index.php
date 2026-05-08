@@ -52,9 +52,33 @@
 
       <!-- Header -->
       <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;"> <img src="Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-         <div class="position-absolute top-50 end-0 translate-middle-y me-4 d-flex gap-4"> <a href="Usuari/usuari.php" class="text-white text-decoration-none fw-bold">Usuari</a>
-            <a href="Tecnic/tecnic.php" class="text-white text-decoration-none fw-bold">Tècnic</a>
-            <a href="Administrador/administrador.php" class="text-white text-decoration-none fw-bold">Admin</a>
+         <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;">
+            <div class="dropdown">
+               <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuari</a>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="Usuari/usuari.php">Pàgina Usuari</a></li>
+                  <li><a class="dropdown-item" href="Usuari/consultar_incidencia_usuari.php">Consultar Incidències</a></li>
+                  <li><a class="dropdown-item" href="Usuari/formulari.php">Formulari</a></li>
+               </ul>
+            </div>
+            <div class="dropdown">
+               <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tècnic</a>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="Tecnic/tecnic.php">Pàgina Tècnic</a></li>
+                  <li><a class="dropdown-item" href="Tecnic/llistar_joan.php">Llistar Joan</a></li>
+                  <li><a class="dropdown-item" href="Tecnic/llistar_maria.php">Llistar Maria</a></li>
+                  <li><a class="dropdown-item" href="Tecnic/llistar_pere.php">Llistar Pere</a></li>
+               </ul>
+            </div>
+            <div class="dropdown">
+               <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="Administrador/administrador.php">Pàgina Admin</a></li>
+                  <li><a class="dropdown-item" href="Administrador/gestionar.php">Gestionar</a></li>
+                  <li><a class="dropdown-item" href="Administrador/estadistiques.php">Estadístiques</a></li>
+                  <li><a class="dropdown-item" href="Administrador/llistar.php">Llistar</a></li>
+               </ul>
+            </div>
          </div>
          <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
          <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>

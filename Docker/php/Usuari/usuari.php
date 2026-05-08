@@ -11,7 +11,9 @@
    <style>
       body {
          font-family: 'Montserrat', sans-serif;
-
+         background-image: url('../Imatges/fons.png');
+         background-size: cover;
+         background-position: center;
       }
 
 
@@ -69,13 +71,39 @@
 
 
    <!-- Header -->
-   <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-      <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Usuari</h1>
-      <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
-      <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
+   <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;"> <img src="Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+      <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;">
+         <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuari</a>
+            <ul class="dropdown-menu">
+               <li><a class="dropdown-item" href="./php/Usuari/usuari.php">Pàgina Usuari</a></li>
+               <li><a class="dropdown-item" href="./php/Usuari/consultar_incidencia_usuari.php">Consultar Incidències</a></li>
+               <li><a class="dropdown-item" href="./php/Usuari/formulari.php">Formulari</a></li>
+            </ul>
+         </div>
+         <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tècnic</a>
+            <ul class="dropdown-menu">
+               <li><a class="dropdown-item" href="./php/Tecnic/tecnic.php">Pàgina Tècnic</a></li>
+               <li><a class="dropdown-item" href="./php/Tecnic/llistar_joan.php">Llistar Joan</a></li>
+               <li><a class="dropdown-item" href="./php/Tecnic/llistar_maria.php">Llistar Maria</a></li>
+               <li><a class="dropdown-item" href="./php/Tecnic/llistar_pere.php">Llistar Pere</a></li>
+            </ul>
+         </div>
+         <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle text-white text-decoration-none fw-bold p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+            <ul class="dropdown-menu">
+               <li><a class="dropdown-item" href="./php/Administrador/administrador.php">Pàgina Admin</a></li>
+               <li><a class="dropdown-item" href="./php/Administrador/gestionar.php">Gestionar</a></li>
+               <li><a class="dropdown-item" href="./php/Administrador/estadistiques.php">Estadístiques</a></li>
+               <li><a class="dropdown-item" href="./php/Administrador/llistar.php">Llistar</a></li>
+            </ul>
+         </div>
+      </div>
+      <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
+      <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
+      <link rel="icon" href="Imatges/favicon.jpg" type="image/png">
    </div>
-
 
    <!-- Botons -->
    <div class="container pb-5" style="max-width: 900px;">

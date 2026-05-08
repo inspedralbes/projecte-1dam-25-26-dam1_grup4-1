@@ -34,6 +34,9 @@ $incidencies = $pdo->query($sql)->fetchAll();
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+            background-image: url(../Imatges/fons.png);
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
@@ -43,9 +46,13 @@ $incidencies = $pdo->query($sql)->fetchAll();
     <!-- Header -->
     <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3.5 fw-bold mb-3 " style="color: white;">Administrador</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;"> </h1>
+        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">LLISTAR INCIDÈNCIES</h1>
+        <h1 class="fs-3 fw-bold mb-0" style="color: white;">ADMINISTRADOR</h1>
         <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
+        <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;"> <a href="Usuari/usuari.php" class="text-white text-decoration-none fw-bold">Usuari</a>
+            <a href="../Tecnic/tecnic.php" class="text-white text-decoration-none fw-bold">Tècnic</a>
+            <a href="Administrador/administrador.php" class="text-white text-decoration-none fw-bold">Admin</a>
+        </div>
     </div>
 
     <div class="container-md pb-5">
