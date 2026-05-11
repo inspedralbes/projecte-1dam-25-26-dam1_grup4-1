@@ -35,7 +35,7 @@ $paginesMesVisitades = $collection->aggregate([
     $matchStage,
     ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]], 
     ['$sort'   => ['total' => -1]],
-    ['$limit'  => 10],
+    ['$limit'  => 20],
 ])->toArray();
 
 $usuarisMesActius = $collection->aggregate([
