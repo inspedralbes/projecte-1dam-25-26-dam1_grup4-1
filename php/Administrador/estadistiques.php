@@ -214,7 +214,7 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-white py-3">
-                        <h6 class="mb-0 fw-bold">Consum per Departament (MySQL)</h6>
+                        <h6 class="mb-0 fw-bold">Consum per Departament</h6>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
