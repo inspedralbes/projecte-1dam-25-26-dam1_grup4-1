@@ -85,7 +85,7 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
 // Mapa de colors per a les prioritats d'incidències
 
-$mapaColors = ['alta' => 'danger', 'mitja' => 'warning', 'baixa' => 'success'];
+$mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success'];
 ?>
 
 <!DOCTYPE html>
@@ -100,9 +100,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'warning', 'baixa' => 'success'];
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-image: url(../Imatges/fons.png);
-            background-size: cover;
-            background-position: center;
+            background-color:beige;
         }
 
         .bg-custom-dark {
@@ -256,7 +254,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'warning', 'baixa' => 'success'];
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
                 <div class="small d-none d-md-flex gap-2">
-                    <span class="badge bg-danger">Alta</span><span class="badge bg-warning text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
+                    <span class="badge bg-danger">Alta</span><span class="badge bg-secondary">Mitja</span><span class="badge bg-success">Baixa</span>
                 </div>
             </div>
             <div class="card-body bg-light-subtle">
