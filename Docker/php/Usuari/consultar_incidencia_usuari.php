@@ -1,7 +1,24 @@
 <?php
 $mysqli = include_once "../connexio.php";
-$resultat = $mysqli->query('
-SELECT ID_INCIDENCIA, DESCRIPCIO, DATA_CREACIO, ESTAT FROM INCIDENCIA ORDER BY DATA_CREACIO DESC');
+
+// Paràmetres d'ordenació
+$sort = $_GET['sort'] ?? 'DATA_CREACIO';
+$order = $_GET['order'] ?? 'DESC';
+
+// Validar columnes permeses
+$allowed_sorts = ['ID_INCIDENCIA', 'DESCRIPCIO', 'DATA_CREACIO', 'ESTAT'];
+if (!in_array($sort, $allowed_sorts)) {
+    $sort = 'DATA_CREACIO';
+}
+
+// Validar ordre
+$order = strtoupper($order);
+if ($order !== 'ASC' && $order !== 'DESC') {
+    $order = 'DESC';
+}
+
+$query = "SELECT ID_INCIDENCIA, DESCRIPCIO, DATA_CREACIO, ESTAT FROM INCIDENCIA ORDER BY $sort $order";
+$resultat = $mysqli->query($query);
 $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -19,21 +36,24 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
             background-image: url('../Imatges/fons.png');
             background-size: cover;
             background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            margin-top: auto;
         }
     </style>
 </head>
 
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+    <div class="w-100 text-center py-4 shadow-sm mb-5 position-sticky" style="background-color: #1e3a5f;">
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">INCIDÈNCIES REGISTRADES</h1>
         <h1 class="fs-3 fw-bold mb-0" style="color: white;">USUARIS</h1>
         <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-        <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;"> <a href="Usuari/usuari.php" class="text-white text-decoration-none fw-bold">Usuari</a>
-            <a href="Tecnic/tecnic.php" class="text-white text-decoration-none fw-bold">Tècnic</a>
-            <a href="Administrador/administrador.php" class="text-white text-decoration-none fw-bold">Admin</a>
-        </div>
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
     </div>
 
     <!-- Taula -->
@@ -42,10 +62,22 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
         <table class="table table-bordered">
             <thead class="table-light">
                 <tr>
-                    <th>ID</th>
-                    <th>Descripció</th>
-                    <th>Data de Creació</th>
-                    <th>Estat</th>
+                    <th>ID
+                        <a href="?sort=ID_INCIDENCIA&order=asc" class="text-decoration-none ms-1">↑</a>
+                        <a href="?sort=ID_INCIDENCIA&order=desc" class="text-decoration-none">↓</a>
+                    </th>
+                    <th>Descripció
+                        <a href="?sort=DESCRIPCIO&order=asc" class="text-decoration-none ms-1">↑</a>
+                        <a href="?sort=DESCRIPCIO&order=desc" class="text-decoration-none">↓</a>
+                    </th>
+                    <th>Data de Creació
+                        <a href="?sort=DATA_CREACIO&order=asc" class="text-decoration-none ms-1">↑</a>
+                        <a href="?sort=DATA_CREACIO&order=desc" class="text-decoration-none">↓</a>
+                    </th>
+                    <th>Estat
+                        <a href="?sort=ESTAT&order=asc" class="text-decoration-none ms-1">↑</a>
+                        <a href="?sort=ESTAT&order=desc" class="text-decoration-none">↓</a>
+                    </th>
                     <th>Actuacions</th>
                 </tr>
             </thead>

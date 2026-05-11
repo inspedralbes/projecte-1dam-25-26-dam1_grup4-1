@@ -46,10 +46,7 @@ $incidencies = $stmt->fetchAll();
         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">TÈCNIC</h1>
         <h1 class="fs-3 fw-bold mb-0" style="color: white;">Pere Portas</h1>
         <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-        <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;"> <a href="Usuari/usuari.php" class="text-white text-decoration-none fw-bold">Usuari</a>
-            <a href="Tecnic/tecnic.php" class="text-white text-decoration-none fw-bold">Tècnic</a>
-            <a href="Administrador/administrador.php" class="text-white text-decoration-none fw-bold">Admin</a>
-        </div>
+
     </div>
 
     <div class="container-md pb-5">

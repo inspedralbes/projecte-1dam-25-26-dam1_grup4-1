@@ -139,9 +139,7 @@
                <a href="./Administrador/administrador.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
                   <i class="bi bi-door-open me-2"></i>Entrar a Admin
                </a>
-               <a href="./Administrador/gestionar.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-gear me-2"></i>Gestionar
-               </a>
+
                <a href="./Administrador/estadistiques.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
                   <i class="bi bi-bar-chart me-2"></i>Estadístiques
                </a>

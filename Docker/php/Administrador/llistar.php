@@ -41,10 +41,10 @@ $incidencies = $pdo->query($sql)->fetchAll();
     </style>
 </head>
 
-<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
+<body class="min-vh-100 bg-secondary bg-opacity-10">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
         <h1 class="fs-3 fw-bold mb-1 " style="color: white;">LLISTAR INCIDÈNCIES</h1>
         <h1 class="fs-3 fw-bold mb-0" style="color: white;">ADMINISTRADOR</h1>
@@ -59,7 +59,7 @@ $incidencies = $pdo->query($sql)->fetchAll();
 
         <p class="text-muted mb-4">Clica el ID per gestionar una incidència</p>
 
-        <div class="table-responsive shadow-sm rounded">
+        <div class="table-responsive shadow-sm rounded" style="position: relative;">
             <table class="table table-hover table-bordered bg-white mb-0">
                 <thead class="table-light">
                     <tr>
@@ -126,6 +126,47 @@ $incidencies = $pdo->query($sql)->fetchAll();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableResponsive = document.querySelector('.table-responsive');
+            const thead = document.querySelector('.table thead');
+
+            if (tableResponsive && thead) {
+                // Crear un contenedor para el thead sticky
+                const stickyHeader = document.createElement('div');
+                stickyHeader.className = 'sticky-header';
+                stickyHeader.style.cssText = `
+                    position: sticky;
+                    top: 0;
+                    z-index: 10;
+                    background-color: #f8f9fa;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    display: none;
+                `;
+
+                // Clonar el thead
+                const clonedThead = thead.cloneNode(true);
+                stickyHeader.appendChild(clonedThead);
+
+                // Insertar el header sticky antes del table-responsive
+                tableResponsive.parentNode.insertBefore(stickyHeader, tableResponsive);
+
+                // Función para mostrar/ocultar el header sticky
+                function toggleStickyHeader() {
+                    const rect = thead.getBoundingClientRect();
+                    if (rect.top <= 0) {
+                        stickyHeader.style.display = 'block';
+                    } else {
+                        stickyHeader.style.display = 'none';
+                    }
+                }
+
+                // Escuchar el evento scroll
+                tableResponsive.addEventListener('scroll', toggleStickyHeader);
+                window.addEventListener('scroll', toggleStickyHeader);
+            }
+        });
+    </script>
 </body>
 
 </html>
