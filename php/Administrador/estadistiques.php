@@ -79,13 +79,13 @@ $resInc = $mysqli->query("
     SELECT ID_INCIDENCIA AS idInc, nomTecnic AS aula, descripcioIncidencia AS descripcio,
            DATE(dataInici) AS dataIni, PRIORITAT AS prioritat 
     FROM vista_informe_tecnics 
-    ORDER BY FIELD(PRIORITAT, 'alta', 'mitja', 'baixa'), dataInici ASC
+    ORDER BY FIELD(PRIORITAT, 'alta', 'mitjana', 'baixa'), dataInici DESC
 ");
 $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
 // Mapa de colors per a les prioritats d'incidències
 
-$mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success'];
+$mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success'];
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +116,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
         <h1 class="fs-3 fw-bold mb-1 text-white">ESTADÍSTIQUES</h1>
         <p class="text-white-50 mb-0">Logs de Sistema / Departaments / Tècnics</p>
-
+        <link rel ="icon" type="image/png" href="../Imatges/favicon.png">
 
     </header>
 
