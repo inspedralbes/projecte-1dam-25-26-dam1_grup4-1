@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 $mongodbUri = getenv('MONGODB_URI') ?: 'mongodb+srv://a25jawmohbou_db_user:Jawad123@projectegip3.qszzchv.mongodb.net/?appName=PROJECTEGIP3';
 $mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';

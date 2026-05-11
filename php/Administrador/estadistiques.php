@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';;
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 $mongodbUri = getenv('MONGODB_URI') ?: 'mongodb+srv://a25jawmohbou_db_user:Jawad123@projectegip3.qszzchv.mongodb.net/?appName=PROJECTEGIP3';
 $mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';
@@ -7,8 +7,8 @@ $mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';
 $client     = new MongoDB\Client($mongodbUri);
 $collection = $client->selectCollection($mongodbDb, 'logs');
 
-// ── FILTRES ──────────────────────────────────────────────────────────────────
-$filtreData   = $_GET['data']   ?? null;  // format: 2025-01-15
+
+$filtreData   = $_GET['data']   ?? null; 
 $filtreUsuari = $_GET['usuari'] ?? null;
 $filtrePagina = $_GET['pagina'] ?? null;
 
@@ -24,10 +24,10 @@ if ($filtrePagina) $match['url']    = ['$regex' => $filtrePagina, '$options' => 
 
 $matchStage = ['$match' => (object)$match];
 
-// ── 1. TOTAL D'ACCESSOS ───────────────────────────────────────────────────────
+
 $totalAccessos = $collection->countDocuments($match ?: []);
 
-// ── 2. PÀGINES MÉS VISITADES ─────────────────────────────────────────────────
+
 $paginesMesVisitades = $collection->aggregate([
     $matchStage,
     ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
@@ -35,7 +35,7 @@ $paginesMesVisitades = $collection->aggregate([
     ['$limit'  => 10],
 ])->toArray();
 
-// ── 3. USUARIS MÉS ACTIUS ────────────────────────────────────────────────────
+
 $usuarisMesActius = $collection->aggregate([
     $matchStage,
     ['$match'  => ['usuari' => ['$ne' => null]]],
@@ -44,7 +44,7 @@ $usuarisMesActius = $collection->aggregate([
     ['$limit'  => 10],
 ])->toArray();
 
-// ── 4. ACCESSOS PER DIA ───────────────────────────────────────────────────────
+
 $accessosPerDia = $collection->aggregate([
     $matchStage,
     ['$group' => [
@@ -74,7 +74,7 @@ $accessosPerDia = $collection->aggregate([
 </head>
 <body>
 
-<h1>📊 Panell d'estadístiques</h1>
+<h1> Panell d'estadístiques</h1>
 
 <!-- FILTRES -->
 <form method="GET">
@@ -88,7 +88,7 @@ $accessosPerDia = $collection->aggregate([
         <input type="text" name="pagina" placeholder="/index.php" value="<?= htmlspecialchars($filtrePagina ?? '') ?>">
     </label>
     <button type="submit">Filtrar</button>
-    <button type="button" onclick="location.href='admin_stats.php'">Netejar</button>
+    <button type="button" onclick="location.href='estadistiques.php'">Netejar</button>
 </form>
 
 <!-- TOTAL -->
