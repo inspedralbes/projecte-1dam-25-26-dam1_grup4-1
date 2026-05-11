@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . '/../logger.php';
 
-// ─── LÒGICA MONGODB (Estadístiques de Logs) ───
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 $mongodbUri = getenv('MONGODB_URI') ?: 'mongodb+srv://a25jawmohbou_db_user:Jawad123@projectegip3.qszzchv.mongodb.net/?appName=PROJECTEGIP3';
 $mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';
+
+// connexio amb MongoDB
 
 $client     = new MongoDB\Client($mongodbUri);
 $collection = $client->selectCollection($mongodbDb, 'logs');
@@ -13,6 +14,8 @@ $collection = $client->selectCollection($mongodbDb, 'logs');
 $filtreData   = $_GET['data']   ?? null;
 $filtreUsuari = $_GET['usuari'] ?? null;
 $filtrePagina = $_GET['pagina'] ?? null;
+
+//filtres per buscar a MongoDB, es poden combinar entre ells, si no hi ha cap filtre es mostren tots els logs
 
 $match = [];
 if ($filtreData) {
@@ -25,6 +28,8 @@ if ($filtrePagina) $match['url']    = ['$regex' => $filtrePagina, '$options' => 
 
 $matchStage = ['$match' => (object)$match];
 $totalAccessos = $collection->countDocuments($match ?: []);
+
+//sumatori de accessos per pàgina i per usuari, ordenats de més a menys i limitats a 10 resultats
 
 $paginesMesVisitades = $collection->aggregate([
     $matchStage,
@@ -41,6 +46,8 @@ $usuarisMesActius = $collection->aggregate([
     ['$limit'  => 10],
 ])->toArray();
 
+//sumatori dels accesos per dia
+
 $accessosPerDia = $collection->aggregate([
     $matchStage,
     ['$group' => [
@@ -50,8 +57,11 @@ $accessosPerDia = $collection->aggregate([
     ['$sort'  => ['_id' => 1]],
 ])->toArray();
 
-// ─── LÒGICA MYSQL (Departaments i Incidències) ───
+// Les estadistiques dels departaments i les incidencies es mostren a continuació, aquestes dades es treuen de MySQL, no de MongoDB
+
 $mysqli = include_once "../connexio.php";
+
+// Consulta per obtenir el consum total dedicat i el nombre d'incidències per cada departament
 
 $resultat = $mysqli->query("SELECT nomDepartament AS nom, tempsTotalDedicat AS temps, nombreIncidencies AS numInc FROM vista_consum_departaments");
 $departaments = $resultat->fetch_all(MYSQLI_ASSOC);
@@ -63,15 +73,19 @@ foreach ($departaments as $unDepartament) {
     $deptsArray[] = $unDepartament["nom"];
 }
 
+// Consulta per obtenir les incidències obertes, ordenades per prioritat i data d'inici
+
 $resInc = $mysqli->query("
     SELECT ID_INCIDENCIA AS idInc, nomTecnic AS aula, descripcioIncidencia AS descripcio,
            DATE(dataInici) AS dataIni, PRIORITAT AS prioritat 
     FROM vista_informe_tecnics 
-    ORDER BY FIELD(PRIORITAT, 'urgent', 'alta', 'mitja', 'baixa'), dataInici ASC
+    ORDER BY FIELD(PRIORITAT, 'alta', 'mitja', 'baixa'), dataInici ASC
 ");
 $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
-$mapaColors = ['urgent' => 'danger', 'alta' => 'warning', 'mitja' => 'info', 'baixa' => 'success'];
+// Mapa de colors per a les prioritats d'incidències
+
+$mapaColors = ['alta' => 'danger', 'mitja' => 'yellow', 'baixa' => 'success'];
 ?>
 
 <!DOCTYPE html>
@@ -242,7 +256,7 @@ $mapaColors = ['urgent' => 'danger', 'alta' => 'warning', 'mitja' => 'info', 'ba
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
                 <div class="small d-none d-md-flex gap-2">
-                    <span class="badge bg-danger">Urgent</span><span class="badge bg-warning text-dark">Alta</span><span class="badge bg-info text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
+                    <span class="badge bg-danger">Alta</span><span class="badge bg-info text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
                 </div>
             </div>
             <div class="card-body bg-light-subtle">

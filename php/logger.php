@@ -17,7 +17,7 @@ foreach ($autoloadCandidates as $path) {
 }
 
 if (!$autoloadLoaded) {
-    trigger_error('No se ha encontrado vendor/autoload.php desde logger.php', E_USER_WARNING);
+    trigger_error('Hi ha hagut un error', E_USER_WARNING);
     return;
 }
 
