@@ -1,127 +1,225 @@
 <?php
-// ─── Connexió i Recuperació de dades (Consum Departaments) ──────────────
+require_once __DIR__ . '/../logger.php';
+
+// ─── LÒGICA MONGODB (Estadístiques de Logs) ───
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+$mongodbUri = getenv('MONGODB_URI') ?: 'mongodb+srv://a25jawmohbou_db_user:Jawad123@projectegip3.qszzchv.mongodb.net/?appName=PROJECTEGIP3';
+$mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';
+
+$client     = new MongoDB\Client($mongodbUri);
+$collection = $client->selectCollection($mongodbDb, 'logs');
+
+$filtreData   = $_GET['data']   ?? null;
+$filtreUsuari = $_GET['usuari'] ?? null;
+$filtrePagina = $_GET['pagina'] ?? null;
+
+$match = [];
+if ($filtreData) {
+    $inici = new MongoDB\BSON\UTCDateTime(strtotime($filtreData) * 1000);
+    $fi    = new MongoDB\BSON\UTCDateTime((strtotime($filtreData) + 86400) * 1000);
+    $match['timestamp'] = ['$gte' => $inici, '$lt' => $fi];
+}
+if ($filtreUsuari) $match['usuari'] = $filtreUsuari;
+if ($filtrePagina) $match['url']    = ['$regex' => $filtrePagina, '$options' => 'i'];
+
+$matchStage = ['$match' => (object)$match];
+$totalAccessos = $collection->countDocuments($match ?: []);
+
+$paginesMesVisitades = $collection->aggregate([
+    $matchStage,
+    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
+    ['$sort'   => ['total' => -1]],
+    ['$limit'  => 10],
+])->toArray();
+
+$usuarisMesActius = $collection->aggregate([
+    $matchStage,
+    ['$match'  => ['usuari' => ['$ne' => null]]],
+    ['$group'  => ['_id' => '$usuari', 'total' => ['$sum' => 1]]],
+    ['$sort'   => ['total' => -1]],
+    ['$limit'  => 10],
+])->toArray();
+
+$accessosPerDia = $collection->aggregate([
+    $matchStage,
+    ['$group' => [
+        '_id'   => ['$dateToString' => ['format' => '%Y-%m-%d', 'date' => '$timestamp']],
+        'total' => ['$sum' => 1],
+    ]],
+    ['$sort'  => ['_id' => 1]],
+])->toArray();
+
+// ─── LÒGICA MYSQL (Departaments i Incidències) ───
 $mysqli = include_once "../connexio.php";
 
-// Consulta de consum per departaments (MySQL)
 $resultat = $mysqli->query("SELECT nomDepartament AS nom, tempsTotalDedicat AS temps, nombreIncidencies AS numInc FROM vista_consum_departaments");
 $departaments = $resultat->fetch_all(MYSQLI_ASSOC);
 
 $tempsArray = array();
 $deptsArray = array();
-
 foreach ($departaments as $unDepartament) {
     $tempsArray[] = $unDepartament["temps"];
     $deptsArray[] = $unDepartament["nom"];
 }
 
-// ─── Consulta d'Incidències (Corregida) ──────────────────────────────────
 $resInc = $mysqli->query("
-    SELECT ID_INCIDENCIA AS idInc, 
-           nomTecnic AS aula, 
-           descripcioIncidencia AS descripcio,
-           DATE(dataInici) AS dataIni, 
-           PRIORITAT AS prioritat 
+    SELECT ID_INCIDENCIA AS idInc, nomTecnic AS aula, descripcioIncidencia AS descripcio,
+           DATE(dataInici) AS dataIni, PRIORITAT AS prioritat 
     FROM vista_informe_tecnics 
     ORDER BY FIELD(PRIORITAT, 'urgent', 'alta', 'mitja', 'baixa'), dataInici ASC
 ");
-// Hem eliminat la línia: WHERE dataFi IS NULL
 $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
+
+$mapaColors = ['urgent' => 'danger', 'alta' => 'warning', 'mitja' => 'info', 'baixa' => 'success'];
 ?>
+
 <!DOCTYPE html>
 <html lang="ca">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Panell d'Administració - Bootstrap</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Panell d'Administració - Estadístiques</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
+            background-image: url(../Imatges/fons.png);
+            background-size: cover;
+            background-position: center;
         }
 
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-
-        /* Estils per a les files d'incidència basats en el teu requeriment */
-        .incidencia-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .incidencia-row {
-            transition: transform 0.2s;
-            border-left: 5px solid;
-            background-color: #ffffff;
-        }
-
-        .incidencia-row:hover {
-            transform: translateX(5px);
-            background-color: #f1f1f1;
-        }
-
-        /* Colors de prioritat */
-        .prioritaturgent {
-            border-left-color: #dc3545 ! exhaustion;
-        }
-
-        .prioritalta {
-            border-left-color: #fd7e14;
-        }
-
-        .prioritmitja {
-            border-left-color: #ffc107;
-        }
-
-        .prioritbaixa {
-            border-left-color: #198754;
-        }
-
-        .llegenda-dot {
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
+        .bg-custom-dark {
+            background-color: #1e3a5f;
         }
     </style>
 </head>
 
-<body>
+<body class="min-vh-100 bg-secondary bg-opacity-10 d-flex flex-column">
 
-    <nav class="navbar navbar-dark bg-dark mb-4">
-        <div class="container">
-            <span class="navbar-brand mb-0 h1">📊 Gestió d'Incidències</span>
+    <!-- Header -->
+    <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">ESTADÍSTIQUES</h1>
+        <p class="text-white-50 mb-0">Logs de Sistema / Departaments / Tècnics</p>
+
+
+    </header>
+
+    <div class="container mb-5">
+
+        <!-- SECCIÓ FILTRES MONGODB -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white py-3">
+                <h6 class="mb-0 fw-bold"><i class="bi bi-filter"></i> Filtres de Logs (MongoDB)</h6>
+            </div>
+            <div class="card-body">
+                <form method="GET" class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Data</label>
+                        <input type="date" name="data" class="form-control" value="<?= htmlspecialchars($filtreData ?? '') ?>">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Usuari</label>
+                        <input type="text" name="usuari" class="form-control" placeholder="Nom d'usuari" value="<?= htmlspecialchars($filtreUsuari ?? '') ?>">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small fw-bold">Pàgina (URL)</label>
+                        <input type="text" name="pagina" class="form-control" placeholder="/index.php" value="<?= htmlspecialchars($filtrePagina ?? '') ?>">
+                    </div>
+                    <div class="col-md-3 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Filtrar</button>
+                        <button type="button" onclick="location.href='estadistiques.php'" class="btn btn-outline-secondary w-100">Netejar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </nav>
 
-    <div class="container">
+        <!-- RESUM RÀPID -->
         <div class="row mb-4">
-            <!-- Taula de Departaments -->
-            <div class="col-md-8">
-                <div class="card h-100">
-                    <div class="card-header bg-white font-weight-bold">Consum per Departament</div>
-                    <div class="card-body">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm bg-primary text-white p-3 text-center">
+                    <h2 class="display-5 fw-bold mb-0"><?= $totalAccessos ?></h2>
+                    <p class="mb-0 text-uppercase small opacity-75">Total d'Accessos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAULES MONGODB -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white fw-bold">Pàgines més visitades</div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>URL</th>
+                                    <th class="text-end">Visites</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($paginesMesVisitades as $fila): ?>
+                                    <tr>
+                                        <td class="small"><?= htmlspecialchars($fila['_id']) ?></td>
+                                        <td class="text-end fw-bold"><?= $fila['total'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white fw-bold">Usuaris més actius</div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Usuari</th>
+                                    <th class="text-end">Accessos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($usuarisMesActius as $fila): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($fila['_id']) ?></td>
+                                        <td class="text-end fw-bold text-success"><?= $fila['total'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓ MYSQL (EXISTENT) -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="mb-0 fw-bold">Consum per Departament (MySQL)</h6>
+                    </div>
+                    <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle">
+                            <table class="table table-hover align-middle mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Departament</th>
-                                        <th>Temps</th>
-                                        <th>Incidències</th>
+                                        <th class="ps-3 small fw-bold">Departament</th>
+                                        <th class="small fw-bold">Temps</th>
+                                        <th class="small fw-bold text-center">Incidències</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($departaments as $unDepartament): ?>
                                         <tr>
-                                            <th scope="row"><?= $unDepartament["nom"] ?></th>
-                                            <td><span class="badge bg-primary text-white"><?= $unDepartament["temps"] ?> minuts</span></td>
-                                            <td><?= $unDepartament["numInc"] ?></td>
+                                            <td class="ps-3 fw-semibold text-secondary"><?= $unDepartament["nom"] ?></td>
+                                            <td><span class="badge rounded-pill bg-info text-dark px-3"><?= $unDepartament["temps"] ?> min</span></td>
+                                            <td class="text-center fw-bold"><?= $unDepartament["numInc"] ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -131,47 +229,34 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
 
-            <!-- Gràfic -->
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-header bg-white font-weight-bold">Distribució de Temps</div>
-                    <div class="card-body d-flex align-items-center">
-                        <canvas id="myChart"></canvas>
-                    </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm h-100 text-center p-3">
+                    <h6 class="fw-bold mb-3">Distribució de Temps</h6>
+                    <canvas id="myChart" style="max-height: 250px;"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Secció d'Incidències -->
-        <div class="card mb-5">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Incidències Obertes</h5>
-                <div class="small">
-                    <span class="me-2"><span class="llegenda-dot bg-danger"></span> Urgent</span>
-                    <span class="me-2"><span class="llegenda-dot bg-warning"></span> Alta</span>
-                    <span class="me-2"><span class="llegenda-dot bg-info"></span> Mitja</span>
-                    <span><span class="llegenda-dot bg-success"></span> Baixa</span>
+        <!-- INCIDÈNCIES -->
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
+                <div class="small d-none d-md-flex gap-2">
+                    <span class="badge bg-danger">Urgent</span><span class="badge bg-warning text-dark">Alta</span><span class="badge bg-info text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
                 </div>
             </div>
-            <div class="card-body bg-light">
-                <!-- Capçalera de llista -->
-                <div class="row g-0 fw-bold p-2 text-secondary small text-uppercase">
-                    <div class="col-1">ID</div>
-                    <div class="col-2">Dept.</div>
-                    <div class="col-7">Descripció</div>
-                    <div class="col-2 text-end">Data Inici</div>
-                </div>
-
-                <div class="cajaIncidencias">
+            <div class="card-body bg-light-subtle">
+                <div class="list-group gap-2">
                     <?php foreach ($incidencies as $unaIncidencia):
-                        $prioClass = "priorit" . strtolower($unaIncidencia["prioritat"]);
+                        $prioLower = strtolower($unaIncidencia["prioritat"]);
+                        $color = $mapaColors[$prioLower] ?? 'secondary';
                     ?>
-                        <a href="modificar_incidencia.php?id=<?= $unaIncidencia["idInc"] ?>" class="incidencia-link mb-2">
-                            <div class="row g-0 p-3 shadow-sm rounded incidencia-row <?= $prioClass ?> align-items-center">
-                                <div class="col-1 fw-bold text-primary">#<?= $unaIncidencia["idInc"] ?></div>
-                                <div class="col-2 fw-semibold"><?= $unaIncidencia["aula"] ?></div>
-                                <div class="col-7 text-truncate"><?= $unaIncidencia["descripcio"] ?></div>
-                                <div class="col-2 text-end text-muted small"><?= $unaIncidencia["dataIni"] ?></div>
+                        <a href="../Administrador/gestionar.php?id=<?= $unaIncidencia["idInc"] ?>" class="list-group-item list-group-item-action border-0 border-start border-5 border-<?= $color ?> shadow-sm rounded">
+                            <div class="row align-items-center">
+                                <div class="col-md-1 fw-bold text-primary">#<?= $unaIncidencia["idInc"] ?></div>
+                                <div class="col-md-2 fw-semibold text-dark"><?= $unaIncidencia["aula"] ?></div>
+                                <div class="col-md-7 text-truncate text-muted small"><?= $unaIncidencia["descripcio"] ?></div>
+                                <div class="col-md-2 text-end small text-muted"><?= $unaIncidencia["dataIni"] ?></div>
                             </div>
                         </a>
                     <?php endforeach; ?>
@@ -180,8 +265,20 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-4">
+        <div class="container text-center text-muted">
+            <p class="mb-1 fw-bold">&copy; <?= date('Y') ?> INS PEDRALBES</p>
+            <p class="small mb-0 text-uppercase">Projecte GIP3 - Jawad Mohdith & Sergi Martinez</p>
+        </div>
+    </footer>
+
+    <!-- Botó Tornar -->
+    <div class="fixed-bottom p-4 d-none d-md-block" style="width: fit-content;">
+        <a href="administrador.php" class="btn btn-dark shadow px-4">← Tornar</a>
+    </div>
+
     <script>
-        // Configuració del Gràfic de Pastís
         const ctx = document.getElementById('myChart');
         new Chart(ctx, {
             type: 'pie',
@@ -189,9 +286,7 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
                 labels: <?= json_encode($deptsArray); ?>,
                 datasets: [{
                     data: <?= json_encode($tempsArray); ?>,
-                    backgroundColor: [
-                        '#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#dc3545', '#fd7e14', '#ffc107', '#198754'
-                    ],
+                    backgroundColor: ['#0d6efd', '#6610f2', '#a8a8a8', '#d63384', '#dc3545', '#fd7e14', '#ffc107', '#198754'],
                     borderWidth: 2,
                     borderColor: '#ffffff'
                 }]
@@ -199,14 +294,18 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
             options: {
                 plugins: {
                     legend: {
-                        position: 'bottom'
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            font: {
+                                size: 10
+                            }
+                        }
                     }
                 }
             }
         });
     </script>
-
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../logger.php';
+
 $host = "db";
 $dbname = "projecte_gip3";
 $username = "usuari";
@@ -126,47 +128,7 @@ $incidencies = $pdo->query($sql)->fetchAll();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tableResponsive = document.querySelector('.table-responsive');
-            const thead = document.querySelector('.table thead');
 
-            if (tableResponsive && thead) {
-                // Crear un contenedor para el thead sticky
-                const stickyHeader = document.createElement('div');
-                stickyHeader.className = 'sticky-header';
-                stickyHeader.style.cssText = `
-                    position: sticky;
-                    top: 0;
-                    z-index: 10;
-                    background-color: #f8f9fa;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                    display: none;
-                `;
-
-                // Clonar el thead
-                const clonedThead = thead.cloneNode(true);
-                stickyHeader.appendChild(clonedThead);
-
-                // Insertar el header sticky antes del table-responsive
-                tableResponsive.parentNode.insertBefore(stickyHeader, tableResponsive);
-
-                // Función para mostrar/ocultar el header sticky
-                function toggleStickyHeader() {
-                    const rect = thead.getBoundingClientRect();
-                    if (rect.top <= 0) {
-                        stickyHeader.style.display = 'block';
-                    } else {
-                        stickyHeader.style.display = 'none';
-                    }
-                }
-
-                // Escuchar el evento scroll
-                tableResponsive.addEventListener('scroll', toggleStickyHeader);
-                window.addEventListener('scroll', toggleStickyHeader);
-            }
-        });
-    </script>
 </body>
 
 </html>

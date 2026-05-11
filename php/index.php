@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/logger.php';
+?>
 <!-- La sidebar està treta d'un codi al GitHub, combinada amb bootstrap -->
 <!DOCTYPE html>
 <html lang="ca">

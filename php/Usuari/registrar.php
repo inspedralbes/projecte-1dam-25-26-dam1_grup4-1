@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../logger.php';
+
 //Validació de que arriben les dades necessàries
 if (empty($_POST["departament"]) || empty($_POST["descripcio"])) {
     exit("Falten dades al fomulari");

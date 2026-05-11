@@ -1,12 +1,12 @@
 <?php
+require_once __DIR__ . '/../logger.php';
+
 $host = "db";
 $dbname = "projecte_gip3";
 $username = "usuari";
 $password = "1234";
 $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY NOM")->fetchAll(PDO::FETCH_ASSOC);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/logger.php';
 ?>
 <!DOCTYPE html>
 <html lang="ca">

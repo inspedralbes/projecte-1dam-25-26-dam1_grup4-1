@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../logger.php';
+
 $host = "db";
 $dbname = "projecte_gip3";
 $username = "usuari";

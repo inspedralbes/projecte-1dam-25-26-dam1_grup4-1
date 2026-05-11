@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../logger.php';
+
 $mysqli = include_once "../connexio.php";
 
 // Paràmetres d'ordenació
