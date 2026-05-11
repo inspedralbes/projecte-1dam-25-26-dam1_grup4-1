@@ -1,3 +1,4 @@
-db_data/
 db_dataa/
+db_data/
+vendor/
 .env
