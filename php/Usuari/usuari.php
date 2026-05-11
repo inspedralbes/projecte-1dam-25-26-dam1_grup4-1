@@ -5,7 +5,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>USUARIS</title>
+   <title>Usuaris</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
    <style>
@@ -77,7 +77,7 @@
 
       <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
       <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
-      <link rel="icon" href="Imatges/favicon.jpg" type="image/png">
+      <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
    </div>
 
    <!-- Botons -->
