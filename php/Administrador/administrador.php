@@ -75,7 +75,7 @@ function countIncidencies($pdo, $idTecnic)
             <div class="row g-4">
                 <div class="col-6">
                     <a href="llistar.php" class="btn btn-primary btn-hover d-block text-white text-decoration-none py-5 px-4 text-center w-100" style="background-color: #1e5f49;">
-                        <i class="bi bi-clipboard-list d-block fs-2 mb-2"></i>
+                        <i class="bi bi-exclamation-circle-fill d-block fs-2 mb-2"></i>
                         <span class="d-block fw-bold fs-6">GESTIONAR INCIDÈNCIES</span>
                         <span class="d-block mt-2 fw-normal" style="font-size: 0.75rem; opacity: 0.8;">Veure i gestionar les incidències assignades</span>
                     </a>
