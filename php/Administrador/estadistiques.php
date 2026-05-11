@@ -33,7 +33,7 @@ $totalAccessos = $collection->countDocuments($match ?: []);
 
 $paginesMesVisitades = $collection->aggregate([
     $matchStage,
-    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
+    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]], 
     ['$sort'   => ['total' => -1]],
     ['$limit'  => 10],
 ])->toArray();
@@ -85,7 +85,7 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
 // Mapa de colors per a les prioritats d'incidències
 
-$mapaColors = ['alta' => 'danger', 'mitja' => 'yellow', 'baixa' => 'success'];
+$mapaColors = ['alta' => 'danger', 'mitja' => 'warning', 'baixa' => 'success'];
 ?>
 
 <!DOCTYPE html>
@@ -256,7 +256,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'yellow', 'baixa' => 'success'];
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
                 <div class="small d-none d-md-flex gap-2">
-                    <span class="badge bg-danger">Alta</span><span class="badge bg-info text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
+                    <span class="badge bg-danger">Alta</span><span class="badge bg-warning text-dark">Mitja</span><span class="badge bg-success">Baixa</span>
                 </div>
             </div>
             <div class="card-body bg-light-subtle">
