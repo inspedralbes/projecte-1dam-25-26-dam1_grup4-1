@@ -1,5 +1,5 @@
 <?php
-$autoloadPath = __DIR__ . '/../vendor/autoload.php'; 
+$autoloadPath = __DIR__ . '/vendor/autoload.php';
 if (!is_file($autoloadPath)) {
     throw new RuntimeException('Autoload not found. Run: composer install');
 }
@@ -10,9 +10,9 @@ $mongodbDb  = getenv('MONGODB_DB') ?: 'projecte_gip3';
 $client     = new MongoDB\Client($mongodbUri);
 $collection = $client->selectCollection($mongodbDb, 'logs');
 
-$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] 
-    ?? $_SERVER['HTTP_X_REAL_IP'] 
-    ?? $_SERVER['REMOTE_ADDR'] 
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR']
+    ?? $_SERVER['HTTP_X_REAL_IP']
+    ?? $_SERVER['REMOTE_ADDR']
     ?? 'unknown';
 
 if (str_contains($ip, ',')) {
