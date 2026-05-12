@@ -117,6 +117,7 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
         <h1 class="fs-3 fw-bold mb-1 text-white">ESTADÍSTIQUES</h1>
         <p class="text-white-50 mb-0">Logs de Sistema / Departaments / Tècnics</p>
         <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
+
     </header>
 
     <div class="container mb-5">
