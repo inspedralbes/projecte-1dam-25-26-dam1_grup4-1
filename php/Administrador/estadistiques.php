@@ -33,7 +33,7 @@ $totalAccessos = $collection->countDocuments($match ?: []);
 
 $paginesMesVisitades = $collection->aggregate([
     $matchStage,
-    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]], 
+    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
     ['$sort'   => ['total' => -1]],
     ['$limit'  => 10],
 ])->toArray();
@@ -100,7 +100,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color:beige;
+            background-color: beige;
         }
 
         .bg-custom-dark {
@@ -116,7 +116,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
         <h1 class="fs-3 fw-bold mb-1 text-white">ESTADÍSTIQUES</h1>
         <p class="text-white-50 mb-0">Logs de Sistema / Departaments / Tècnics</p>
-
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
 
     </header>
 
@@ -277,17 +277,13 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white bg-opacity-75 border-top mt-auto py-4">
-        <div class="container text-center text-muted">
-            <p class="mb-1 fw-bold">&copy; <?= date('Y') ?> INS PEDRALBES</p>
-            <p class="small mb-0 text-uppercase">Projecte GIP3 - Jawad Mohdith & Sergi Martinez</p>
-        </div>
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
     </footer>
-
-    <!-- Botó Tornar -->
-    <div class="fixed-bottom p-4 d-none d-md-block" style="width: fit-content;">
-        <a href="administrador.php" class="btn btn-dark shadow px-4">← Tornar</a>
+    <!-- Botó tornar -->
+    <div class="fixed-bottom p-4">
+        <a href="administrador.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
     </div>
 
     <script>
@@ -318,6 +314,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
             }
         });
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

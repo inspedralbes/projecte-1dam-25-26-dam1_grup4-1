@@ -54,12 +54,12 @@ $actuacions = $stmt->fetchAll();
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Registrar Actuació · Incidència #<?= $id ?></h1>
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-    </div>
+
+    <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative" style="background-color: #1e3a5f;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">REGISTRAR ACTUACIÓ</h1>
+        <p class="text-white-50 mb-0">Registrar Actuació · Incidència #<?= $id ?></p>
+    </header>
 
     <div class="container-md pb-5">
 
@@ -70,10 +70,10 @@ $actuacions = $stmt->fetchAll();
 
         <!-- Actuacions existents -->
         <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
-                <h5 class="fw-bold mb-3">Actuacions fins al moment</h5>
+            <div class="card-body" style="background: rgba(226, 226, 226, 0.3)">
+                <h5 class=" fw-bold mb-3 ">Actuacions fins al moment</h5>
                 <?php if (empty($actuacions)): ?>
-                    <p class="text-muted">Encara no hi ha actuacions registrades.</p>
+                    <p class=" text-muted">Encara no hi ha actuacions registrades.</p>
                 <?php else: ?>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered mb-0">
@@ -103,9 +103,9 @@ $actuacions = $stmt->fetchAll();
 
         <!-- Nova actuació -->
         <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
+            <div class="card-body" style="background: rgba(231, 231, 231, 0.3)">
                 <h5 class="fw-bold mb-4">Nova actuació</h5>
-                <form method="POST">
+                <form method="POST" id="formulariActuacio">
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">Descripció:</label>

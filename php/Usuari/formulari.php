@@ -28,19 +28,23 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
     textarea {
       resize: none;
     }
+
+    .bg-custom-dark {
+      background-color: #1e3a5f;
+    }
   </style>
 </head>
 
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
 
   <!-- Header -->
-  <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-    <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-    <h1 class="fs-3 fw-bold mb-1 " style="color: white;">CREAR INCIDÈNCIA</h1>
-    <h1 class="fs-3 fw-bold mb-0" style="color: white;"> USUARIS</h1>
-    <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
+  <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+    <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+    <h1 class="fs-3 fw-bold mb-1 text-white">CREAR NOVA INCIDÈNCIA</h1>
+    <p class="text-white-50 mb-0">Omplena el formulari per registrar una nova incidència</p>
+    <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
 
-  </div>
+  </header>
 
 
 
@@ -56,7 +60,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
     <form action="registrar.php" method="POST">
       <p class="text-muted mb-4">Completa el formulari per registrar una nova incidència.</p>
       <!-- Escollir Departament -->
-      <fieldset class="p-3 mb-4 border border-secondary" style="background-color: #dbeafe;">
+      <fieldset class="p-3 mb-4 border border-secondary" style="background: rgba(158, 220, 255, 0.7)">
         <legend class="fw-bold px-2 w-auto">Departament</legend>
         <select id="departament" name="departament" class="form-select" required>
           <option value="">-- Tria un departament --</option>
@@ -69,7 +73,7 @@ $departaments = $pdo->query("SELECT ID_DEPARTAMENT,NOM FROM DEPARTAMENT ORDER BY
       </fieldset>
 
       <!-- Posar Descripció -->
-      <fieldset class="p-3 mb-4 border border-secondary" style="background-color: #eff6ff;">
+      <fieldset class="p-3 mb-4 border border-secondary" style="background: rgba(120, 220, 233, 0.7)">
         <legend class="fw-bold px-2 w-auto">Descripció de la incidència</legend>
         <label for="descripcio" class="form-label">Observacions</label>
         <textarea id="descripcio" name="descripcio" rows="6" class="form-control"

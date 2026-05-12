@@ -42,21 +42,21 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
             flex-direction: column;
         }
 
-        footer {
-            margin-top: auto;
+        .bg-custom-dark {
+            background-color: #1e3a5f;
         }
     </style>
 </head>
 
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-sticky" style="background-color: #1e3a5f;">
-        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">INCIDÈNCIES REGISTRADES</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">USUARIS</h1>
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-    </div>
+    <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">INCIDÈNCIES REGISTRADES</h1>
+        <p class="text-white-50 mb-0">Llistat de totes les incidències registrades</p>
+        <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
+
+    </header>
 
     <!-- Taula -->
     <div class="container">

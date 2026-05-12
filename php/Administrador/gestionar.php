@@ -10,9 +10,9 @@ $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $pa
 $id = $_GET['id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tecnic    = $_POST['tecnic'];
-    $prioritat = $_POST['prioritat'];
-    $tipu      = $_POST['tipu'];
+    $tecnic    = $_POST['tecnic'] !== '' ? $_POST['tecnic'] : null;
+    $prioritat = $_POST['prioritat'] !== '' ? $_POST['prioritat'] : null;
+    $tipu      = $_POST['tipu'] !== '' ? $_POST['tipu'] : null;
 
     $stmt = $pdo->prepare("UPDATE INCIDENCIA SET ID_TECNIC = ?, PRIORITAT = ?, ID_TIPU = ? WHERE ID_INCIDENCIA = ?");
     $stmt->execute([$tecnic, $prioritat, $tipu, $id]);
@@ -65,13 +65,11 @@ $tipus   = $pdo->query("SELECT * FROM TIPU")->fetchAll();
 <body class="bg-light min-vh-100 d-flex flex-column">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIONAR INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">ADMINISTRADOR</h1>
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-
-    </div>
+    <header class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">GESTIONAR INCIDÈNCIES</h1>
+        <p class="text-white-50 mb-0"> Asigna el tècnic, el tiups d'incidència i la prioritat</p>
+    </header>
 
 
 

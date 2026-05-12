@@ -45,13 +45,12 @@ $incidencies = $stmt->fetchAll();
 
     <!-- Header -->
 
-    <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
-        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">TÈCNIC</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">Joan Garcia</h1>
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
+    <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative" style="background-color: #1e3a5f;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">JOAN GARCÍA</h1>
+        <p class="text-white-50 mb-0">Llistat de les incidències a gestionar</p>
+    </header>
 
-    </div>
 
     <div class="container-md pb-5">
 

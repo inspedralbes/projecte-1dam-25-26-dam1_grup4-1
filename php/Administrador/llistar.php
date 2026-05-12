@@ -46,16 +46,11 @@ $incidencies = $pdo->query($sql)->fetchAll();
 <body class="min-vh-100 bg-secondary bg-opacity-10">
 
     <!-- Header -->
-    <div class="w-100 text-center py-4 shadow-sm mb-5" style="background-color: #1e3a5f;">
-        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-        <h1 class="fs-3 fw-bold mb-1 " style="color: white;">LLISTAR INCIDÈNCIES</h1>
-        <h1 class="fs-3 fw-bold mb-0" style="color: white;">ADMINISTRADOR</h1>
-        <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-        <div class="position-absolute top-50 translate-middle-y d-flex gap-4" style="right: 10%;"> <a href="Usuari/usuari.php" class="text-white text-decoration-none fw-bold">Usuari</a>
-            <a href="../Tecnic/tecnic.php" class="text-white text-decoration-none fw-bold">Tècnic</a>
-            <a href="Administrador/administrador.php" class="text-white text-decoration-none fw-bold">Admin</a>
-        </div>
-    </div>
+    <header class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
+        <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+        <h1 class="fs-3 fw-bold mb-1 text-white">LLISTAR INCIDÈNCIES</h1>
+        <p class="text-white-50 mb-0">Administrador</p>
+    </header>
 
     <div class="container-md pb-5">
 

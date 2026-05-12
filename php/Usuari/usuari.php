@@ -54,6 +54,10 @@ require_once __DIR__ . '/../logger.php';
          background-color: #c2410c;
          color: white;
       }
+
+      .bg-custom-dark {
+         background-color: #1e3a5f;
+      }
    </style>
 </head>
 
@@ -74,19 +78,18 @@ require_once __DIR__ . '/../logger.php';
 
 
    <!-- Header -->
-   <div class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;"> <img src="Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
-      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;">
+   <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+      <h1 class="fs-3 fw-bold mb-1 text-white">USUARI</h1>
+      <p class="text-white-50 mb-0">Pàgina principal de l'usuari</p>
+      <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
 
-
-      <h1 class="fs-3 fw-bold mb-1 " style="color: white;">GESTIÓ D'INCIDÈNCIES</h1>
-      <h1 class="fs-3 fw-bold mb-0" style="color: white;">INS PEDRALBES</h1>
-      <link rel="icon" href="../Imatges/favicon.jpg" type="image/png">
-   </div>
+   </header>
 
    <!-- Botons -->
    <div class="container pb-5" style="max-width: 900px;">
       <div class="row g-4 px-2">
-
+         <p class="text-muted mb-4">Crea una nova incidència o consulta les ja existents</p>
 
          <div class="col-6">
             <a href="formulari.php" class="btn btn-primary btn-square btn-hover d-block text-white text-decoration-none py-5 px-4 text-center w-100">

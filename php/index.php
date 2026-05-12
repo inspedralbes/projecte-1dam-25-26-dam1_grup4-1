@@ -12,7 +12,7 @@ require_once __DIR__ . '/logger.php';
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-   <link rel="icon" href="./Imatges/favicon.jpg" type="image/png">
+   <link rel="icon" href="./Imatges/favicon.jpg" type="image/jpeg">
    <style>
       body {
          font-family: 'Montserrat', sans-serif;
@@ -81,10 +81,15 @@ require_once __DIR__ . '/logger.php';
          background-color: #c2410c;
          color: white;
       }
+
+      .bg-custom-dark {
+         background-color: #1e3a5f;
+      }
    </style>
 </head>
 
-<body>
+<body class="min-vh-100 bg-secondary bg-opacity-10">
+
    <div class="d-flex">
 
       <!-- Sidebar -->
@@ -158,15 +163,16 @@ require_once __DIR__ . '/logger.php';
       <div class="main-content d-flex flex-column">
 
          <!-- Header -->
-         <div class="w-100 text-center py-4 shadow-sm position-relative" style="background-color: #1e3a5f;">
-            <!-- Botó hamburguesa -->
-            <button id="sidebar-toggle" onclick="toggleSidebar()"
-               class="position-absolute top-50 start-0 translate-middle-y ms-3 btn btn-outline-light btn-sm">
-               <i class="bi bi-list fs-4"></i>
-            </button>
+
+         <!-- Header -->
+         <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+            <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
             <h1 class="fs-3 fw-bold mb-1 text-white">GESTIÓ D'INCIDÈNCIES</h1>
-            <h1 class="fs-3 fw-bold mb-0 text-white">INS PEDRALBES</h1>
-         </div>
+            <p class="text-white-50 mb-0">Gestio de incidències Institut Pedralbes</p>
+            <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
+
+         </header>
+
 
          <!-- Botons -->
          <div class="flex-grow-1 d-flex align-items-start pt-5">
