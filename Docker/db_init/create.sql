@@ -70,6 +70,46 @@ ALTER TABLE ACTUACIO
 
 ALTER TABLE INCIDENCIA ADD COLUMN DEPARTAMENT VARCHAR(100);
 
+CREATE OR REPLACE VIEW vista_informe_tecnics AS
+SELECT
+    t.ID_TECNIC,
+    t.NOM AS nomTecnic,
+    i.PRIORITAT,
+    i.ID_INCIDENCIA,
+    i.DESCRIPCIO AS descripcioIncidencia,
+    i.DATA_CREACIO AS dataInici,
+    IFNULL(SUM(a.TEMPS_ACTUACIO_MIN), 0) AS tempsTotalDedicat
+FROM TECNIC t
+INNER JOIN INCIDENCIA i ON t.ID_TECNIC = i.ID_TECNIC
+LEFT JOIN ACTUACIO a ON i.ID_INCIDENCIA = a.ID_INCIDENCIA
+WHERE i.DATA_FI IS NULL
+GROUP BY
+    t.ID_TECNIC,
+    t.NOM,
+    i.PRIORITAT,
+    i.ID_INCIDENCIA,
+    i.DESCRIPCIO,
+    i.DATA_CREACIO;
+
+CREATE OR REPLACE VIEW vista_consum_departaments AS
+SELECT
+    d.ID_DEPARTAMENT,
+    d.NOM AS nomDepartament,
+    COUNT(i.ID_INCIDENCIA) AS nombreIncidencies,
+    IFNULL(SUM(temps_per_incidencia.tempsTotal), 0) AS tempsTotalDedicat
+FROM DEPARTAMENT d
+LEFT JOIN INCIDENCIA i ON d.ID_DEPARTAMENT = i.ID_DEPARTAMENT
+LEFT JOIN (
+    SELECT
+        ID_INCIDENCIA,
+        SUM(TEMPS_ACTUACIO_MIN) AS tempsTotal
+    FROM ACTUACIO
+    GROUP BY ID_INCIDENCIA
+) AS temps_per_incidencia ON i.ID_INCIDENCIA = temps_per_incidencia.ID_INCIDENCIA
+GROUP BY
+    d.ID_DEPARTAMENT,
+    d.NOM;
+
 INSERT INTO DEPARTAMENT (NOM) VALUES
 ('Informàtica'),
 ('Matemàtiques'),

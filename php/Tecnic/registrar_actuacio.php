@@ -1,11 +1,6 @@
 <?php
 require_once __DIR__ . '/../logger.php';
-
-$host = "db";
-$dbname = "projecte_gip3";
-$username = "usuari";
-$password = "1234";
-$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+require_once __DIR__ . '/../connexio.php';
 
 $id = $_GET['id'];
 
