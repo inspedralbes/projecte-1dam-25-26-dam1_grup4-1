@@ -100,7 +100,9 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: beige;
+            background-image: url('../Imatges/fons.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         .bg-custom-dark {

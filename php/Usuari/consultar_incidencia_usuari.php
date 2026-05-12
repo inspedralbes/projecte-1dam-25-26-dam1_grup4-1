@@ -35,7 +35,7 @@ $resultat = $resultat->fetch_all(MYSQLI_ASSOC);
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-image: url('../Imatges/fons.png');
+            background-image: url('../Imatges/fons.jpg');
             background-size: cover;
             background-position: center;
             display: flex;

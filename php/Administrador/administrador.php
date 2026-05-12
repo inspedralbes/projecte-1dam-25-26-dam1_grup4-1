@@ -46,7 +46,7 @@ foreach ($stats as $stat) {
     </style>
 </head>
 
-<body class="min-vh-100 d-flex flex-column" style="background-image: url('../Imatges/fons.png'); background-size: cover; background-position: center;">
+<body class="min-vh-100 d-flex flex-column" style="background-image: url('../Imatges/fons.jpg'); background-size: cover; background-position: center;">
 
     <!-- Header -->
     <header class="w-100 text-center py-4 shadow-sm mb-5 position-relative" style="background-color: #1e3a5f;">
