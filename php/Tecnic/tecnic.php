@@ -10,7 +10,7 @@ function countIncidencies($pdo, $idTecnic)
     return $stmt->fetchColumn();
 }
 
-// NOVA FUNCIÓ: Funció per comptar incidències resoltes (Rendiment)
+// Funció per comptar incidències resoltes (Rendiment)
 function countResoltes($pdo, $idTecnic)
 {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM INCIDENCIA WHERE ID_TECNIC = ? AND ESTAT = 'TANCADA'");
@@ -30,7 +30,7 @@ function countResoltes($pdo, $idTecnic)
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-image: url('../Imatges/fons.png');
+            background-image: url('../Imatges/fons.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -50,6 +50,7 @@ function countResoltes($pdo, $idTecnic)
 </head>
 
 <body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
+
 
     <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">

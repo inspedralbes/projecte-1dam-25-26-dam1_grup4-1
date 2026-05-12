@@ -53,7 +53,7 @@ require_once __DIR__ . '/logger.php';
       .main-content {
          width: 100%;
          min-height: 100vh;
-         background-image: url('Imatges/fons.png');
+         background-image: url('Imatges/fons.jpg');
          background-size: cover;
          background-position: center;
          transition: margin-left 0.3s ease;
@@ -214,7 +214,7 @@ require_once __DIR__ . '/logger.php';
          document.getElementById('sidebar').classList.toggle('open');
       }
 
-      // Tancar la sidebar si es clica fora d'ella
+      // Tancar la sidebar si es clica fora d'ella 
       document.addEventListener('click', function(e) {
          const sidebar = document.getElementById('sidebar');
          const toggle = document.getElementById('sidebar-toggle');
