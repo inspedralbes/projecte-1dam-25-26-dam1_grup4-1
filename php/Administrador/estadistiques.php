@@ -35,7 +35,7 @@ $paginesMesVisitades = $collection->aggregate([
     $matchStage,
     ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
     ['$sort'   => ['total' => -1]],
-    ['$limit'  => 10],
+    ['$limit'  => 20],
 ])->toArray();
 
 $usuarisMesActius = $collection->aggregate([
@@ -79,13 +79,13 @@ $resInc = $mysqli->query("
     SELECT ID_INCIDENCIA AS idInc, nomTecnic AS aula, descripcioIncidencia AS descripcio,
            DATE(dataInici) AS dataIni, PRIORITAT AS prioritat 
     FROM vista_informe_tecnics 
-    ORDER BY FIELD(PRIORITAT, 'alta', 'mitja', 'baixa'), dataInici ASC
+    ORDER BY FIELD(PRIORITAT, 'alta', 'mitjana', 'baixa'), dataInici DESC
 ");
 $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
 // Mapa de colors per a les prioritats d'incidències
 
-$mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success'];
+$mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success'];
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +117,6 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
         <h1 class="fs-3 fw-bold mb-1 text-white">ESTADÍSTIQUES</h1>
         <p class="text-white-50 mb-0">Logs de Sistema / Departaments / Tècnics</p>
         <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
-
     </header>
 
     <div class="container mb-5">
@@ -214,7 +213,7 @@ $mapaColors = ['alta' => 'danger', 'mitja' => 'secondary', 'baixa' => 'success']
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-white py-3">
-                        <h6 class="mb-0 fw-bold">Consum per Departament (MySQL)</h6>
+                        <h6 class="mb-0 fw-bold">Consum per Departament</h6>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
