@@ -86,7 +86,25 @@ $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 // Mapa de colors per a les prioritats d'incidències
 
 $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success'];
+
+// Agafa el temps total que ha dedicat cada tècnic sumant totes les seves actuacions
+
+$resTecnics = $mysqli->query("
+    SELECT 
+        t.NOM AS nomTecnic,
+        COUNT(DISTINCT i.ID_INCIDENCIA) AS totalIncidencies,
+        IFNULL(SUM(a.TEMPS_ACTUACIO_MIN), 0) AS tempsTotal,
+        ROUND(AVG(a.TEMPS_ACTUACIO_MIN), 0) AS tempsMitja
+    FROM TECNIC t
+    LEFT JOIN INCIDENCIA i ON t.ID_TECNIC = i.ID_TECNIC
+    LEFT JOIN ACTUACIO a ON i.ID_INCIDENCIA = a.ID_INCIDENCIA
+    GROUP BY t.ID_TECNIC, t.NOM
+    ORDER BY tempsTotal DESC
+");
+$tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ca">
@@ -111,6 +129,7 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
     </style>
 </head>
 
+
 <body class="min-vh-100 bg-secondary bg-opacity-10 d-flex flex-column">
 
     <!-- Header -->
@@ -122,10 +141,42 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
 
     </header>
 
+
+    <div class="row g-4 mb-5 px-4">
+        <div class="col-4">
+            <a href="#seccio-logs" class="text-decoration-none">
+                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75 h-100"
+                    style="cursor:pointer; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h2 class="fw-bold mb-0 text-danger">Logs</h2>
+
+                </div>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="#seccio-departaments" class="text-decoration-none">
+                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75 h-100"
+                    style="cursor:pointer; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h2 class="fw-bold mb-0 text-warning">Departaments</h2>
+
+                </div>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="#seccio-tecnics" class="text-decoration-none">
+                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75 h-100"
+                    style="cursor:pointer; transition: transform 0.2s, box-shadow 0.2s;">
+                    <h2 class="fw-bold mb-0 text-success">Tècnics</h2>
+
+                </div>
+            </a>
+        </div>
+    </div>
+
+
     <div class="container mb-5">
 
         <!-- SECCIÓ FILTRES MONGODB -->
-        <div class="card border-0 shadow-sm mb-4">
+        <div id="seccio-logs" class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white py-3">
                 <h6 class="mb-0 fw-bold"><i class="bi bi-filter"></i> Filtres de Logs (MongoDB)</h6>
             </div>
@@ -211,8 +262,8 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
             </div>
         </div>
 
-        <!-- SECCIÓ MYSQL (EXISTENT) -->
-        <div class="row g-4 mb-4">
+        <!-- SECCIÓ MYSQL -->
+        <div id="seccio-departaments" class="row g-4 mb-4">
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-white py-3">
@@ -244,79 +295,151 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
             </div>
 
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
                     <h6 class="fw-bold mb-3">Distribució de Temps</h6>
-                    <canvas id="myChart" style="max-height: 250px;"></canvas>
+                    <div style="position: relative; height: 350px;">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- INCIDÈNCIES -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
+                    <div class="small d-none d-md-flex gap-2">
+                        <span class="badge bg-danger">Alta</span><span class="badge bg-secondary">Mitja</span><span class="badge bg-success">Baixa</span>
+                    </div>
+                </div>
+                <div class="card-body bg-light-subtle">
+                    <div class="list-group gap-2">
+                        <?php foreach ($incidencies as $unaIncidencia):
+                            $prioLower = strtolower($unaIncidencia["prioritat"]);
+                            $color = $mapaColors[$prioLower] ?? 'secondary';
+                        ?>
+                            <a href="../Administrador/gestionar.php?id=<?= $unaIncidencia["idInc"] ?>" class="list-group-item list-group-item-action border-0 border-start border-5 border-<?= $color ?> shadow-sm rounded">
+                                <div class="row align-items-center">
+                                    <div class="col-md-1 fw-bold text-primary">#<?= $unaIncidencia["idInc"] ?></div>
+                                    <div class="col-md-2 fw-semibold text-dark"><?= $unaIncidencia["aula"] ?></div>
+                                    <div class="col-md-7 text-truncate text-muted small"><?= $unaIncidencia["descripcio"] ?></div>
+                                    <div class="col-md-2 text-end small text-muted"><?= $unaIncidencia["dataIni"] ?></div>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- INCIDÈNCIES -->
-        <div class="card border-0 shadow-sm mb-5">
+        <!-- SECCIÓ TÈCNICS -->
+
+        <div id="seccio-tecnics" class="card border-0 shadow-sm mb-5">
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                <h5 class="mb-0 fw-bold">Incidències Obertes</h5>
-                <div class="small d-none d-md-flex gap-2">
-                    <span class="badge bg-danger">Alta</span><span class="badge bg-secondary">Mitja</span><span class="badge bg-success">Baixa</span>
-                </div>
+                <h5 class="mb-0 fw-bold">Rendiment dels Tècnics</h5>
+                <span class="badge bg-primary rounded-pill"><?= count($tecnicsTotalTemps) ?> tècnics</span>
             </div>
-            <div class="card-body bg-light-subtle">
-                <div class="list-group gap-2">
-                    <?php foreach ($incidencies as $unaIncidencia):
-                        $prioLower = strtolower($unaIncidencia["prioritat"]);
-                        $color = $mapaColors[$prioLower] ?? 'secondary';
-                    ?>
-                        <a href="../Administrador/gestionar.php?id=<?= $unaIncidencia["idInc"] ?>" class="list-group-item list-group-item-action border-0 border-start border-5 border-<?= $color ?> shadow-sm rounded">
-                            <div class="row align-items-center">
-                                <div class="col-md-1 fw-bold text-primary">#<?= $unaIncidencia["idInc"] ?></div>
-                                <div class="col-md-2 fw-semibold text-dark"><?= $unaIncidencia["aula"] ?></div>
-                                <div class="col-md-7 text-truncate text-muted small"><?= $unaIncidencia["descripcio"] ?></div>
-                                <div class="col-md-2 text-end small text-muted"><?= $unaIncidencia["dataIni"] ?></div>
-                            </div>
-                        </a>
-                    <?php endforeach; ?>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-3 small fw-bold">Tècnic</th>
+                                <th class="text-center small fw-bold">Incidències</th>
+                                <th class="small fw-bold">Temps Total</th>
+                                <th class="small fw-bold">Temps Mitjà</th>
+                                <th class="small fw-bold">Càrrega de Treball</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $maxTemps = max(array_column($tecnicsTotalTemps, 'tempsTotal')) ?: 1;
+                            foreach ($tecnicsTotalTemps as $tecnic):
+                                $percentatge = round(($tecnic['tempsTotal'] / $maxTemps) * 100);
+                                if ($percentatge >= 75) $barColor = 'danger';
+                                elseif ($percentatge >= 40) $barColor = 'warning';
+                                else $barColor = 'success';
+                            ?>
+                                <tr>
+                                    <td class="ps-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
+                                                style="width:36px; height:36px; font-size:14px; flex-shrink:0;">
+                                                <?= strtoupper(substr($tecnic['nomTecnic'], 0, 1)) ?>
+                                            </div>
+                                            <span class="fw-semibold"><?= htmlspecialchars($tecnic['nomTecnic']) ?></span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary rounded-pill px-3"><?= $tecnic['totalIncidencies'] ?></span>
+                                    </td>
+                                    <td>
+                                        <span class="badge rounded-pill bg-info text-dark px-3"><?= $tecnic['tempsTotal'] ?> min</span>
+                                    </td>
+                                    <td>
+                                        <?php if ($tecnic['tempsMitja']): ?>
+                                            <span class="text-muted small"><?= $tecnic['tempsMitja'] ?> min/inc</span>
+                                        <?php else: ?>
+                                            <span class="text-muted small">—</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td style="min-width: 150px;">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="progress flex-grow-1" style="height: 8px;">
+                                                <div class="progress-bar bg-<?= $barColor ?>"
+                                                    role="progressbar"
+                                                    style="width: <?= $percentatge ?>%"
+                                                    aria-valuenow="<?= $percentatge ?>"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            <small class="text-muted" style="min-width:30px;"><?= $percentatge ?>%</small>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
-        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
-        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
-    </footer>
-    <!-- Botó tornar -->
-    <div class="fixed-bottom p-4">
-        <a href="administrador.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
-    </div>
 
-    <script>
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: <?= json_encode($deptsArray); ?>,
-                datasets: [{
-                    data: <?= json_encode($tempsArray); ?>,
-                    backgroundColor: ['#0d6efd', '#6610f2', '#a8a8a8', '#d63384', '#dc3545', '#fd7e14', '#ffc107', '#198754'],
-                    borderWidth: 2,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            usePointStyle: true,
-                            font: {
-                                size: 10
+        <script>
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: <?= json_encode($deptsArray); ?>,
+                    datasets: [{
+                        data: <?= json_encode($tempsArray); ?>,
+                        backgroundColor: ['#0d6efd', '#6610f2', '#a8a8a8', '#d63384', '#dc3545', '#fd7e14', '#ffc107', '#198754'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
-    </script>
-
+            });
+        </script>
+    </div>
+    <div class="fixed-bottom p-4">
+        <a href="administrador.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+    </div>
+    <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+        <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+        <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

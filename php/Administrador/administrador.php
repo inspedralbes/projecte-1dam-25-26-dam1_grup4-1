@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../logger.php';
 require_once __DIR__ . '/../connexio.php';
 
+$pdo = new PDO("mysql:host=$host;dbname=$base_de_datos;charset=utf8mb4", $usuario, $contrasenia);
 // Funció per comptar incidències per tècnic (Tarjeta tècnics)
 function countIncidencies($pdo, $idTecnic)
 {
