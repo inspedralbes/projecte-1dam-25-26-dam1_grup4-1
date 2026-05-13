@@ -98,79 +98,12 @@ require_once __DIR__ . '/logger.php';
 
    <div class="d-flex">
 
-      <!-- Sidebar -->
-      <div id="sidebar" class="bg-white bg-opacity-90 shadow overflow-auto">
-         <div class="d-flex justify-content-center align-items-center p-4 pb-5 border-bottom">
-            <img src="./Imatges/logo.png" alt="Logo" style="width: 100px;">
-         </div>
-
-         <div id="sidebar-menu">
-            <!-- Usuari -->
-            <a href="#usuari-items" data-bs-toggle="collapse" aria-expanded="false"
-               class="sidebar-item d-block px-3 py-3 text-decoration-none text-dark border-bottom mt-2">
-               <i class="bi bi-person me-2"></i>Usuari
-            </a>
-            <div id="usuari-items" class="collapse border-top" data-bs-parent="#sidebar-menu">
-               <a href="./Usuari/usuari.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-door-open me-2"></i>Entrar a Usuari
-               </a>
-               <a href="./Usuari/consultar_incidencia_usuari.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-search me-2"></i>Consultar Incidències
-               </a>
-               <a href="./Usuari/formulari.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-file-text me-2"></i>Formulari
-               </a>
-            </div>
-
-            <!-- Tècnic -->
-            <a href="#tecnic-items" data-bs-toggle="collapse" aria-expanded="false"
-               class="sidebar-item d-block px-3 py-3 text-decoration-none text-dark border-bottom">
-               <i class="bi bi-tools me-2"></i>Tècnic
-            </a>
-            <div id="tecnic-items" class="collapse border-top" data-bs-parent="#sidebar-menu">
-               <a href="./Tecnic/tecnic.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-door-open me-2"></i>Entrar a Tècnic
-               </a>
-               <a href="./Tecnic/llistar_joan.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-list me-2"></i>Llistar Joan
-               </a>
-               <a href="./Tecnic/llistar_maria.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-list me-2"></i>Llistar Maria
-               </a>
-               <a href="./Tecnic/llistar_pere.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-list me-2"></i>Llistar Pere
-               </a>
-            </div>
-
-            <!-- Administrador -->
-            <a href="#admin-items" data-bs-toggle="collapse" aria-expanded="false"
-               class="sidebar-item d-block px-3 py-3 text-decoration-none text-dark border-bottom">
-               <i class="bi bi-shield-lock me-2"></i>Administrador
-            </a>
-            <div id="admin-items" class="collapse border-top" data-bs-parent="#sidebar-menu">
-               <a href="./Administrador/administrador.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-door-open me-2"></i>Entrar a Admin
-               </a>
-               <a href="./Administrador/estadistiques.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-bar-chart me-2"></i>Estadístiques
-               </a>
-               <a href="./Administrador/llistar.php" class="sidebar-item d-block px-5 py-2 text-decoration-none text-dark border-bottom small">
-                  <i class="bi bi-list me-2"></i>Llistar
-               </a>
-            </div>
-         </div>
-      </div>
 
       <!-- Main Content -->
       <div class="main-content d-flex flex-column">
 
          <!-- Header amb botó per obrir sidebar -->
          <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
-            <!-- Botó Hamburguesa -->
-            <button id="sidebar-toggle" onclick="toggleSidebar()" class="btn btn-outline-light position-absolute top-50 start-0 translate-middle-y ms-3">
-               <i class="bi bi-list fs-3"></i>
-            </button>
-
             <h1 class="fs-3 fw-bold mb-1 text-white">GESTIÓ D'INCIDÈNCIES</h1>
             <p class="text-white-50 mb-0">Institut Pedralbes</p>
          </header>

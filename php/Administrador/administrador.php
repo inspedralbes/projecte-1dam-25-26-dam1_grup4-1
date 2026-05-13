@@ -3,6 +3,7 @@ require_once __DIR__ . '/../logger.php';
 require_once __DIR__ . '/../connexio.php';
 
 $pdo = new PDO("mysql:host=$host;dbname=$base_de_datos;charset=utf8mb4", $usuario, $contrasenia);
+
 // Funció per comptar incidències per tècnic (Tarjeta tècnics)
 function countIncidencies($pdo, $idTecnic)
 {
@@ -52,28 +53,6 @@ foreach ($stats as $stat) {
     </header>
 
     <div class="container pb-5" style="max-width: 900px;">
-
-        <!-- Targetes estadístiques -->
-        <div class="row g-4 mb-5">
-            <div class="col-4">
-                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75">
-                    <h2 class="fw-bold mb-0 text-danger"><?= $comptadors['OBERTA'] ?></h2>
-                    <p class="text-muted small text-uppercase fw-bold mt-1 mb-0">Obertes</p>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75">
-                    <h2 class="fw-bold mb-0 text-warning"><?= $comptadors['EN_PROCES'] ?></h2>
-                    <p class="text-muted small text-uppercase fw-bold mt-1 mb-0">En procés</p>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card border-0 shadow-sm text-center py-4 bg-white bg-opacity-75">
-                    <h2 class="fw-bold mb-0 text-success"><?= $comptadors['TANCADA'] ?></h2>
-                    <p class="text-muted small text-uppercase fw-bold mt-1 mb-0">Tancades</p>
-                </div>
-            </div>
-        </div>
 
         <p class="text-muted mb-4">Els següents enllaços et permetran gestionar les incidències i visualitzar estadístiques.</p>
 

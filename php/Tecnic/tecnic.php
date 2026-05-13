@@ -57,6 +57,7 @@ function countResoltes($pdo, $idTecnic)
         <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
         <h1 class="fs-3 fw-bold mb-1 text-white">TÈCNIC</h1>
         <p class="text-white-50 mb-0">Pàgina principal de tècnics</p>
+        <link rel="icon" type="image/jpg" href="../Imatges/favicon.jpg">
     </header>
 
     <div class="container pb-5" style="max-width: 900px;">
