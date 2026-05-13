@@ -27,6 +27,7 @@ if ($filtreUsuari) $match['usuari'] = $filtreUsuari;
 if ($filtrePagina) $match['url']    = ['$regex' => $filtrePagina, '$options' => 'i'];
 
 $matchStage = ['$match' => (object)$match];
+
 $totalAccessos = $collection->countDocuments($match ?: []);
 
 //sumatori de accessos per pàgina i per usuari, ordenats de més a menys i limitats a 10 resultats
@@ -127,7 +128,7 @@ $mapaColors = ['alta' => 'danger', 'mitjana' => 'secondary', 'baixa' => 'success
         <!-- SECCIÓ FILTRES MONGODB -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white py-3">
-                <h6 class="mb-0 fw-bold"><i class="bi bi-filter"></i> Filtres de Logs (MongoDB)</h6>
+                <h6 class="mb-0 fw-bold"><i class="bi bi-filter"></i> Filtres de Logs </h6>
             </div>
             <div class="card-body">
                 <form method="GET" class="row g-3 align-items-end">
