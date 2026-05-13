@@ -70,6 +70,31 @@ $resultat = $mysqli->query($query)->fetch_all(MYSQLI_ASSOC);
         .bg-custom-dark {
             background-color: #1e3a5f;
         }
+
+        /* Fijar altura mínima de cabecera y alinear flechas */
+        thead th {
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        /* Limitar el ancho de la columna descripción */
+        td:nth-child(2) {
+            max-width: 300px;
+            word-wrap: break-word;
+        }
+
+        /* Colores forçats per sobre de Bootstrap */
+        tr.table-warning {
+            background-color: #fff3cd;
+        }
+
+        tr.table-info {
+            background-color: #cff4fc;
+        }
+
+        tr.table-success {
+            background-color: #d1e7dd;
+        }
     </style>
 </head>
 
@@ -123,23 +148,23 @@ $resultat = $mysqli->query($query)->fetch_all(MYSQLI_ASSOC);
             <thead class="table-light">
                 <tr>
                     <!-- Cada columna té dues fletxes per ordenar de forma ascendent o descendent -->
-                    <th>ID
+                    <th style="white-space: nowrap;">ID
                         <a href="?sort=ID_INCIDENCIA&order=asc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none ms-1">↑</a>
                         <a href="?sort=ID_INCIDENCIA&order=desc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none">↓</a>
                     </th>
-                    <th>Descripció
+                    <th style="white-space: nowrap;">Descripció
                         <a href="?sort=DESCRIPCIO&order=asc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none ms-1">↑</a>
                         <a href="?sort=DESCRIPCIO&order=desc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none">↓</a>
                     </th>
-                    <th>Data de Creació
+                    <th style="white-space: nowrap;">Data de Creació
                         <a href="?sort=DATA_CREACIO&order=asc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none ms-1">↑</a>
                         <a href="?sort=DATA_CREACIO&order=desc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none">↓</a>
                     </th>
-                    <th>Estat
+                    <th style="white-space: nowrap;">Estat
                         <a href="?sort=ESTAT&order=asc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none ms-1">↑</a>
                         <a href="?sort=ESTAT&order=desc&page=1&search_id=<?= urlencode($search_id) ?>" class="text-decoration-none">↓</a>
                     </th>
-                    <th>Actuacions</th>
+                    <th style="white-space: nowrap;">Actuacions</th>
                 </tr>
             </thead>
             <tbody>
@@ -147,9 +172,9 @@ $resultat = $mysqli->query($query)->fetch_all(MYSQLI_ASSOC);
                 <?php foreach ($resultat as $inc):
                     // Posa color de fons
                     $color = '';
-                    if ($inc['ESTAT'] === 'OBERTA') $color = 'table-warning';      
-                    elseif ($inc['ESTAT'] === 'EN_PROCES') $color = 'table-info';  
-                    elseif ($inc['ESTAT'] === 'TANCADA') $color = 'table-success'; 
+                    if ($inc['ESTAT'] === 'OBERTA') $color = 'table-warning';
+                    elseif ($inc['ESTAT'] === 'EN_PROCES') $color = 'table-info';
+                    elseif ($inc['ESTAT'] === 'TANCADA') $color = 'table-success';
 
                     // Busca les actuacions visibles d'aquesta incidència a la base de dades
                     $id_inc = $inc['ID_INCIDENCIA'];
