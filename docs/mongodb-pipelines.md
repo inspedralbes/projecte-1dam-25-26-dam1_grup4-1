@@ -2,7 +2,7 @@ Documentació de pipelines i consulta a bbdd
 
 La tasca ens demana filtrar (READ) les dades que tenim tant a MongoDB com a phpMyAdmin i mostrar-les en gràfics, amb unes condicions específiques com el filtre d'HTTP, els minuts emprats per departament...
 
-Consultes SQL:
+CONSULTES SQL:
 
 En primer lloc, hem tractat les dades SQL per mostrar el consum dels departaments. Per fer-ho, com que treballem amb PHP, definim la variable, en aquest cas li diem $resultat, a aquesta li passem els resultats d'un SELECT que consulta la vista vista_consum_departaments, que ens retorna el nom del departament, el temps total dedicat i el nombre d'incidències:
 
@@ -39,3 +39,17 @@ $resInc = $mysqli->query("
 $incidencies = $resInc->fetch_all(MYSQLI_ASSOC);
 
 El DATE(dataInici) serveix per treure només la data sense l'hora, que és el que volem mostrar a la taula. Com a les consultes anteriors, acabem amb fetch_all(MYSQLI_ASSOC) per carregar tots els resultats en un array associatiu PHP.
+
+COONSULTES NOSQL:
+
+La tasca ens demana registrar els loggs de la pàgina, és a dir, cada cop que algu accedeixi, mitjancant un logger, aquest registri l'entrada a mongodb, creant un document amb la url del lloc visitat, URL visitada
+
+Mètode HTTP (GET, POST...)
+
+Usuari que ha accedit (si està autenticat, null si no)
+
+Timestamp de l'accés
+
+Informació bàsica del navegador
+
+IP del client
