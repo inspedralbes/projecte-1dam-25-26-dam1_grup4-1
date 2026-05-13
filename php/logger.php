@@ -1,5 +1,5 @@
 <?php
-$autoloadPath = __DIR__ . '/vendor/autoload.php';
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
 if (!is_file($autoloadPath)) {
     throw new RuntimeException('Autoload not found. Run: composer install');
 }

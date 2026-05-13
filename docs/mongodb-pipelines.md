@@ -42,14 +42,5 @@ El DATE(dataInici) serveix per treure només la data sense l'hora, que és el qu
 
 COONSULTES NOSQL:
 
-La tasca ens demana registrar els loggs de la pàgina, és a dir, cada cop que algu accedeixi, mitjancant un logger, aquest registri l'entrada a mongodb, creant un document amb la url del lloc visitat, URL visitada
+La tasca ens demana registrar els loggs de la pàgina, és a dir, cada cop que algu accedeixi, mitjancant un logger, aquest registri l'entrada a mongodb, creant un document amb la url del lloc visitat, el mètode que s'ha fet servir (GET, POST...), Timestamp de l'accés,Informació bàsica del navegador i l'IP del client
 
-Mètode HTTP (GET, POST...)
-
-Usuari que ha accedit (si està autenticat, null si no)
-
-Timestamp de l'accés
-
-Informació bàsica del navegador
-
-IP del client
