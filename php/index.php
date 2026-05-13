@@ -99,11 +99,13 @@ require_once __DIR__ . '/logger.php';
    <div class="d-flex">
 
 
-      <!-- Main Content -->
+
       <div class="main-content d-flex flex-column">
 
-         <!-- Header amb botó per obrir sidebar -->
+         <!-- Header -->
          <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+            <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+
             <h1 class="fs-3 fw-bold mb-1 text-white">GESTIÓ D'INCIDÈNCIES</h1>
             <p class="text-white-50 mb-0">Institut Pedralbes</p>
          </header>

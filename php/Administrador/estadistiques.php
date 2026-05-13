@@ -116,7 +116,7 @@ $tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Panell d'Administració - Estadístiques</title>
+    <title>Estadístiques</title>
     <!-- Estils de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Carrega Chart.js per fer el gràfic de pastís -->
@@ -359,17 +359,11 @@ $tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
                                 <th class="text-center small fw-bold">Incidències</th>
                                 <th class="small fw-bold">Temps Total</th>
                                 <th class="small fw-bold">Temps Mitjà</th>
-                                <th class="small fw-bold">Càrrega de Treball</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $maxTemps = max(array_column($tecnicsTotalTemps, 'tempsTotal')) ?: 1;
                             foreach ($tecnicsTotalTemps as $tecnic):
-                                $percentatge = round(($tecnic['tempsTotal'] / $maxTemps) * 100);
-                                if ($percentatge >= 75) $barColor = 'danger';
-                                elseif ($percentatge >= 40) $barColor = 'warning';
-                                else $barColor = 'success';
                             ?>
                                 <tr>
                                     <td class="ps-3">
@@ -393,20 +387,6 @@ $tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
                                         <?php else: ?>
                                             <span class="text-muted small">—</span>
                                         <?php endif; ?>
-                                    </td>
-                                    <td style="min-width: 150px;">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="progress flex-grow-1" style="height: 8px;">
-                                                <div class="progress-bar bg-<?= $barColor ?>"
-                                                    role="progressbar"
-                                                    style="width: <?= $percentatge ?>%"
-                                                    aria-valuenow="<?= $percentatge ?>"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                            <small class="text-muted" style="min-width:30px;"><?= $percentatge ?>%</small>
-                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
