@@ -247,25 +247,25 @@ $tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
                             </thead>
                             <tbody>
                                 <!-- Recorre i mostra cada pàgina amb el seu nombre de visites -->
-<?php foreach ($paginesMesVisitades as $fila): ?>
-<tr>
-    <td class="small" style="max-width:300px; word-break:break-word;">
-        <?= htmlspecialchars($fila['_id']['url']) ?>
-    </td>
+                                <?php foreach ($paginesMesVisitades as $fila): ?>
+                                    <tr>
+                                        <td class="small" style="max-width:300px; word-break:break-word;">
+                                            <?= htmlspecialchars($fila['_id']['url']) ?>
+                                        </td>
 
-    <td class="small" style="max-width:300px; word-break:break-word;">
-        <?= htmlspecialchars($fila['_id']['ip']) ?>
-    </td>
+                                        <td class="small" style="max-width:300px; word-break:break-word;">
+                                            <?= htmlspecialchars($fila['_id']['ip']) ?>
+                                        </td>
 
-    <td class="small text-truncate" style="max-width:250px;">
-        <?= htmlspecialchars($fila['_id']['navegador']) ?>
-    </td>
+                                        <td class="small text-truncate" style="max-width:250px;">
+                                            <?= htmlspecialchars($fila['_id']['navegador']) ?>
+                                        </td>
 
-    <td class="text-end fw-bold">
-        <?= $fila['total'] ?>
-    </td>
-</tr>
-<?php endforeach; ?>
+                                        <td class="text-end fw-bold">
+                                            <?= $fila['total'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

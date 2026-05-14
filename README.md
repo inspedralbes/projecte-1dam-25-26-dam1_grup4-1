@@ -1,18 +1,35 @@
 # transversals
 Esquema mínim de carpetes pels projectes transversals
 
-És obligatori seguir aquesta estructura tot i que la podeu ampliar.
+/php:
+    /Administrador:
+        /administrador.php
+        /estadístiques.php
+        /gestionar.php
+        /llistar.php
+    /Imatges:
+        /favicon.jpg
+        /fons.jpg
+        /logo.png
+    /Tecnic:
+        /tecnic.php
+        /registrar_actuacio.php
+        /llistar.pere.php
+        /llistar.maria.php
+        /llisatr.joan.php
+    /Usuari
+        /usuari.php
+        /registrar.php
+        /formulari.php
+        /consultar_incidencia_usuari.php
 
-## Atenció
-Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre projecte (utilitzant markdown)
 
-# Aquest fitxer ha de contenir com a mínim:
 
-* Nom dels integrants
+#  Nom dels integrants
 
 Jawad Mohdith i Sergi Martinez
 
- * Nom del projecte
+#  Nom del projecte
 
 PROJECTE-1DAM-25-26-DAM1_GRUP4-1
 
@@ -36,13 +53,27 @@ https://tree.taiga.io/project/a25jawmohbou-projecte-gi3p/timeline
 
 https://design.penpot.app/#/view?file-id=29a60c49-971d-80dc-8007-e7079f4cf328&page-id=6778173c-fbf4-8077-8004-a37f50a5020f&section=interactions&index=0&share-id=8c927302-d076-8020-8008-00b641c8da1f
 
- * URL de producció (quan la tingueu)
+ * URL de producció 
 
 http://g4.dam.inspedralbes.cat/index.php
 
  * Estat: (explicació d'en quin punt està)
 
-
+El projecte es troba en la fase final de desplegament. Tota la lògica de base de dades i les interfícies d'usuari estan operatives, complint amb els requisits de totes les assignatures implicades.
 
 
 Funcionalitats mínimes
+
+Les funcionalitats mínimes del projecte són:
+
+    Gestió per rols: Sistema d'accés diferenciat per a professors (creació d'incidències), tècnics (gestió d'actuacions i temps) i administradors (control total i assignació).
+
+    Registre i traçabilitat: Notificació d'avaries detallada i seguiment de l'estat de cada tiquet (Oberta, En Procés, Tancada).
+
+    Anàlisi de dades: Càlcul automàtic de temps invertits per departament i generació de gràfics estadístics amb Chart.js.
+
+    Seguretat i Monitorització: Registre automatitzat de cada accés i acció en una base de dades MongoDB (logs) per a la traçabilitat de xarxa.
+
+    Interfície Multiplataforma: Disseny responsive amb Bootstrap 5.3 que permet l'ús de l'aplicació en qualsevol dispositiu.
+
+    Infraestructura automatitzada: Desplegament integral de tot l'entorn (servidor web i bases de dades) mitjançant contenidors Docker.
