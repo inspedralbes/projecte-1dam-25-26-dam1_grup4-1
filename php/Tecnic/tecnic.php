@@ -3,21 +3,7 @@ require_once __DIR__ . '/../logger.php';
 require_once __DIR__ . '/../connexio.php';
 $pdo = new PDO("mysql:host=$host;dbname=$base_de_datos;charset=utf8mb4", $usuario, $contrasenia);
 
-// Funció per comptar incidències pendents/assignades
-function countIncidencies($pdo, $idTecnic)
-{
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM INCIDENCIA WHERE ID_TECNIC = ? AND ESTAT != 'TANCADA'");
-    $stmt->execute([$idTecnic]);
-    return $stmt->fetchColumn();
-}
 
-// Funció per comptar incidències resoltes (Rendiment)
-function countResoltes($pdo, $idTecnic)
-{
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM INCIDENCIA WHERE ID_TECNIC = ? AND ESTAT = 'TANCADA'");
-    $stmt->execute([$idTecnic]);
-    return $stmt->fetchColumn();
-}
 ?>
 <!DOCTYPE html>
 <html lang="ca">
