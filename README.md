@@ -1,29 +1,65 @@
 # transversals
 Esquema mínim de carpetes pels projectes transversals
 
-/php:
-    /Administrador:
-        /administrador.php
-        /estadístiques.php
-        /gestionar.php
-        /llistar.php
-    /Imatges:
-        /favicon.jpg
-        /fons.jpg
-        /logo.png
-    /Tecnic:
-        /tecnic.php
-        /registrar_actuacio.php
-        /llistar.pere.php
-        /llistar.maria.php
-        /llisatr.joan.php
-    /Usuari
-        /usuari.php
-        /registrar.php
-        /formulari.php
-        /consultar_incidencia_usuari.php
-
-
+/PROJECTE-1DAM-25-26-DAM1_GRUP4-1
+    /.github
+        /.keep
+    /Diagrama de casos d'ús
+        /IMG_8157.jpeg
+    /Diagrama de flux web
+        /ADMIN.jpeg
+        /doc
+        /Link Penpot Disseny Web.pdf
+        /Principal.jpeg
+        /TÈCNIC.jpeg
+        /USUARI.jpeg
+    /doc
+        /BBDD.md
+        /DIG+SOS.md
+        /LLMM.md
+        /PROG.md
+        /README.md
+        /SGE.md
+    /Docker
+        /db_data
+        /db_dataa
+        /db_init
+            /Create.sql
+        /images
+            /Dockerfilr_php
+            /Dockerfile_php_mongodb
+        /.env
+        /.gitignore
+        /docker-compose.yaml
+    /php:
+        /Administrador:
+            /administrador.php
+            /estadístiques.php
+            /gestionar.php
+            /llistar.php
+        /Imatges:
+            /favicon.jpg
+            /fons.jpg
+            /logo.png
+        /Tecnic:
+            /tecnic.php
+            /registrar_actuacio.php
+            /llistar.pere.php
+            /llistar.maria.php
+            /llisatr.joan.php
+        /Usuari
+            /usuari.php
+            /registrar.php
+            /formulari.php
+            /consultar_incidencia_usuari.php
+        /composer.json
+        /composer.lock
+        /connexio.php
+        /index.php
+        /logger.php
+    /vendor
+    /LICENSE
+    /README.md
 
 #  Nom dels integrants
 

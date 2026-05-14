@@ -1,10 +1,5 @@
 # Documentació de Base de Dades (BBDD)
 
-## Diagrama Entitat-Relació (E-R)
-
-
-
-
 ## 🔍 Documentació de les Consultes Principals en Pipeline 
 
 Documentació de pipelines i consulta a bbdd

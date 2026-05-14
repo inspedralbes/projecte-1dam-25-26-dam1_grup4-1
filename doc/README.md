@@ -4,9 +4,9 @@ Aquest projecte és una aplicació web completa per a la gestió d'incidències 
 
 ## Documentació per Assignatures
 * **[Base de Dades (BBDD)](BBDD.md)**: Diagrama E-R i consultes principals.
-* **[Llenguatges de Marques (LLMM)](./docs/LLMM.md)**: Desenvolupament de components i JS.
-* **[Programació](./docs/PROGRAMACION.md)**: Gestió del projecte (Taiga) i Git.
-* **[SGE & DIG+SOS](./docs/SGE_DIGSOS.md)**: Estructura del projecte, funcionalitats i guia de desplegament.
+* **[Llenguatges de Marques (LLMM)](LLMM.md)**: Desenvolupament de components i JS.
+* **[Programació](PROG.md)**: Gestió del projecte (Taiga) i Git.
+* **[SGE & DIG+SOS](SGE.md)**: Estructura del projecte, funcionalitats i guia de desplegament.
 
 ---
 
