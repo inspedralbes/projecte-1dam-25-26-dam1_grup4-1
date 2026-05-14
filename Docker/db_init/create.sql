@@ -134,26 +134,51 @@ INSERT INTO TIPU (NOM) VALUES
 ('Problema de base de dades'),
 ('Altres');
 
-INSERT INTO INCIDENCIA (DATA_CREACIO, DESCRIPCIO, PRIORITAT, ESTAT, ID_TIPU, ID_TECNIC, ID_DEPARTAMENT) VALUES
+INSERT INTO INCIDENCIA (DATA_INICI, DESCRIPCIO, PRIORITAT, ESTAT, ID_TIPU, ID_TECNIC, ID_DEPARTAMENT) VALUES
+('2025-05-01', 'Ordinador no arrenca despres actualitzacio Windows', 'ALTA', 'OBERTA', 1, 1, 1),
+('2025-05-03', 'Projector aula 204 no connecta per HDMI', 'MITJANA', 'OBERTA', 1, 2, 3),
+('2025-05-05', 'No es pot accedir Wi-Fi laboratori portatils', 'ALTA', 'OBERTA', 3, 3, 4),
+('2025-05-06', 'Programari simulacio molecular no sinstalla correctament', 'MITJANA', 'OBERTA', 2, 1, 4),
+('2025-05-07', 'Problemes impressora departament Fisica', 'BAIXA', 'OBERTA', 6, 2, 5),
+('2025-05-08', 'Compte correu professor no rep missatges externs', 'MITJANA', 'OBERTA', 4, 3, 6),
+('2025-05-09', 'Servidor fitxers compartits no accessible fora campus', 'ALTA', 'OBERTA', 7, 1, 1);
 
--- EN PROCÉS
-('2025-04-01 08:00:00', 'La pantalla d\'un professor parpelleja i de vegades es queda en negre.', 'MITJANA', 'EN_PROCES', 1, 1, 3),
-('2025-04-05 09:15:00', 'El sistema operatiu d\'un ordinador de l\'aula no actualitza correctament.', 'BAIXA', 'EN_PROCES', 2, 2, 1),
-('2025-04-08 11:30:00', 'La xarxa WiFi del departament cau cada cert temps.', 'MITJANA', 'EN_PROCES', 3, 3, 4),
-('2025-04-10 10:00:00', 'No es reben correus externs des de fa 2 dies.', 'ALTA', 'EN_PROCES', 4, 1, 5),
-('2025-04-14 08:30:00', 'S\'ha detectat accés no autoritzat a un compte d\'usuari.', 'ALTA', 'EN_PROCES', 5, 2, 1),
-('2025-04-17 09:00:00', 'El servidor de fitxers compartits va molt lent des de l\'actualització.', 'MITJANA', 'EN_PROCES', 7, 3, 2),
-('2025-04-19 10:45:00', 'Error de connexió intermitent a la base de dades del sistema de notes.', 'ALTA', 'EN_PROCES', 8, 1, 3),
-('2025-04-21 08:15:00', 'La impressora del departament fa soroll però no imprimeix.', 'BAIXA', 'EN_PROCES', 6, 2, 6),
+INSERT INTO INCIDENCIA (DATA_INICI, DESCRIPCIO, PRIORITAT, ESTAT, ID_TIPU, ID_TECNIC, ID_DEPARTAMENT) VALUES
+('2025-04-10', 'Virus detectat als ordinadors de matematiques', 'ALTA', 'EN_PROCES', 5, 1, 2),
+('2025-04-12', 'Base de dades de notes no respon correctament', 'ALTA', 'EN_PROCES', 8, 3, 1),
+('2025-04-15', 'Caiguda de xarxa a la planta 2', 'ALTA', 'EN_PROCES', 3, 2, 2),
+('2025-04-18', 'Actualitzacio fallida Office en aules Historia', 'MITJANA', 'EN_PROCES', 2, 1, 3),
+('2025-04-20', 'Impressora planta 1 no imprimeix en color', 'BAIXA', 'EN_PROCES', 6, 2, 2),
+('2025-04-22', 'Correu institucional no sincronitza calendari', 'MITJANA', 'EN_PROCES', 4, 3, 5),
+('2025-04-25', 'Servidor web intern caigut intermitentment', 'ALTA', 'EN_PROCES', 7, 1, 1);
 
--- OBERTES
-('2025-04-20 09:00:00', 'La impressora de la sala de professors no agafa el paper correctament.', 'BAIXA', 'OBERTA', 6, NULL, 6),
-('2025-04-22 10:30:00', 'El projector de l\'aula 3 no es connecta per HDMI.', 'MITJANA', 'OBERTA', 1, NULL, 2),
-('2025-04-25 11:00:00', 'Diversos alumnes no poden accedir a la plataforma Moodle.', 'ALTA', 'OBERTA', 2, NULL, 3),
-('2025-04-28 08:15:00', 'El servidor de còpies de seguretat no ha executat la tasca nocturna.', 'ALTA', 'OBERTA', 7, NULL, 1),
-('2025-04-30 09:45:00', 'El teclat d\'un ordinador de la biblioteca no funciona bé (tecles enganxades).', 'BAIXA', 'OBERTA', 1, NULL, 4),
-('2025-05-02 10:00:00', 'No es pot accedir a la base de dades de la biblioteca des de cap terminal.', 'ALTA', 'OBERTA', 8, NULL, 5),
-('2025-05-04 11:30:00', 'El correu electrònic del departament no carrega els adjunts.', 'MITJANA', 'OBERTA', 4, NULL, 2),
-('2025-05-05 08:00:00', 'Problema general no identificat amb el sistema d\'autenticació corporatiu.', 'MITJANA', 'OBERTA', 9, NULL, 6),
-('2025-05-06 09:30:00', 'Virus detectat en un ordinador de l\'aula d\'informàtica 2.', 'ALTA', 'OBERTA', 5, NULL, 1),
-('2025-05-07 07:45:00', 'L\'ordinador del professor de Física no arrenca després del cap de setmana.', 'MITJANA', 'OBERTA', 1, NULL, 5);
+INSERT INTO INCIDENCIA (DATA_INICI, DATA_FI, DESCRIPCIO, PRIORITAT, ESTAT, ID_TIPU, ID_TECNIC, ID_DEPARTAMENT) VALUES
+('2025-03-01', '2025-03-05', 'Ratolins i teclats sense resposta aula 101', 'BAIXA', 'TANCADA', 1, 2, 3),
+('2025-03-08', '2025-03-10', 'Problemes connexio VPN professors', 'MITJANA', 'TANCADA', 3, 3, 6),
+('2025-03-12', '2025-03-15', 'Antivirus caducat ordinadors biologia', 'ALTA', 'TANCADA', 5, 1, 4),
+('2025-03-18', '2025-03-20', 'Aplicacio gestio horaris no carrega', 'MITJANA', 'TANCADA', 2, 2, 1),
+('2025-03-22', '2025-03-25', 'Switch de xarxa avariat planta 3', 'ALTA', 'TANCADA', 3, 3, 5),
+('2025-03-28', '2025-04-01', 'Servidor correu sense espai en disc', 'ALTA', 'TANCADA', 7, 1, 1);
+
+INSERT INTO ACTUACIO (DESCRIPCIO, TEMPS_ACTUACIO_MIN, VISIBLE, ESTAT, ID_INCIDENCIA, ID_TECNIC) VALUES
+('Revisio inicial maquinari i diagnostics', 45, TRUE, 'PENDENT', 1, 1),
+('Comprovacio cables i adaptadors HDMI', 30, TRUE, 'PENDENT', 2, 2),
+('Reinici router i configuracio DHCP', 60, TRUE, 'PENDENT', 3, 3),
+('Descarrega dependencies programari', 50, TRUE, 'PENDENT', 4, 1),
+('Neteja capçals impressora', 20, TRUE, 'PENDENT', 5, 2),
+('Revisio filtres antispam correu', 35, TRUE, 'PENDENT', 6, 3),
+('Revisio firewall i ports oberts servidor', 90, TRUE, 'PENDENT', 7, 1),
+('Escaneig complet sistema antivirus', 120, TRUE, 'ACABAT', 8, 1),
+('Restauracio backup base de dades', 180, TRUE, 'ACABAT', 9, 3),
+('Substitucio switch avariat planta 2', 90, TRUE, 'ACABAT', 10, 2),
+('Desinstalacio Office i reinstallacio', 75, TRUE, 'ACABAT', 11, 1),
+('Canvi cartutx tinta color impressora', 25, TRUE, 'PENDENT', 12, 2),
+('Reconfiguracio compte Exchange', 40, TRUE, 'ACABAT', 13, 3),
+('Reinici serveis Apache i monitoratge', 60, TRUE, 'ACABAT', 14, 1),
+('Substitucio teclats i ratolins defectuosos', 30, TRUE, 'ACABAT', 15, 2),
+('Actualitzacio certificat VPN', 45, TRUE, 'ACABAT', 16, 3),
+('Renovacio llicencies antivirus', 20, TRUE, 'ACABAT', 17, 1),
+('Reinstallacio aplicacio gestio horaris', 55, TRUE, 'ACABAT', 18, 2),
+('Substitucio switch i reconfiguracio VLANs', 120, TRUE, 'ACABAT', 19, 3),
+('Alliberament espai disc i arxivat logs', 80, TRUE, 'ACABAT', 20, 1);
+
