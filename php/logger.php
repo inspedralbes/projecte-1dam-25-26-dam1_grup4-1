@@ -1,5 +1,5 @@
 <?php
-$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+$autoloadPath = __DIR__ . '/vendor/autoload.php';
 if (!is_file($autoloadPath)) {
     throw new RuntimeException('Autoload not found. Run: composer install');
 }
@@ -41,8 +41,8 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
 
 $log = [
     'url'        => $protocol .
-                    ($_SERVER['HTTP_HOST'] ?? 'unknown') .
-                    ($_SERVER['REQUEST_URI'] ?? '/'),
+        ($_SERVER['HTTP_HOST'] ?? 'unknown') .
+        ($_SERVER['REQUEST_URI'] ?? '/'),
 
     'metode'     => $_SERVER['REQUEST_METHOD'] ?? 'unknown',
     'usuari'     => null,

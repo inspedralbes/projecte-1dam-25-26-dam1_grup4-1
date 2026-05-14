@@ -34,7 +34,15 @@ https://tree.taiga.io/project/a25jawmohbou-projecte-gi3p/timeline
 
  * Adreça del prototip gràfic del projecte (Penpot, figma, moqups...)
 
+https://design.penpot.app/#/view?file-id=29a60c49-971d-80dc-8007-e7079f4cf328&page-id=6778173c-fbf4-8077-8004-a37f50a5020f&section=interactions&index=0&share-id=8c927302-d076-8020-8008-00b641c8da1f
 
- 
  * URL de producció (quan la tingueu)
+
+http://g4.dam.inspedralbes.cat/index.php
+
  * Estat: (explicació d'en quin punt està)
+
+
+
+
+Funcionalitats mínimes

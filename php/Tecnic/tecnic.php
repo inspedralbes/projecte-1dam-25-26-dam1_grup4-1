@@ -39,14 +39,6 @@ function countResoltes($pdo, $idTecnic)
         .bg-custom-dark {
             background-color: #1e3a5f;
         }
-
-        .card {
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
     </style>
 </head>
 
@@ -73,12 +65,7 @@ function countResoltes($pdo, $idTecnic)
                             <i class="bi bi-person-circle fs-1 text-primary"></i>
                             <h5 class="fw-bold mb-0">Pere Portas</h5>
                         </div>
-                        <p class="text-success mb-1 fw-bold">
-                            <i class="bi bi-check-circle-fill me-2"></i>Resoltes: <?php echo countResoltes($pdo, 1); ?>
-                        </p>
-                        <p class="mb-0 text-muted">
-                            <i class="bi bi-exclamation-circle me-2 text-warning"></i>Pendents: <?php echo countIncidencies($pdo, 1); ?>
-                        </p>
+
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_pere.php" class="btn btn-primary btn-sm px-3">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>
@@ -93,14 +80,8 @@ function countResoltes($pdo, $idTecnic)
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-3 mb-3">
                             <i class="bi bi-person-circle fs-1 text-primary"></i>
-                            <h5 class="fw-bold mb-0">Joan Garcia</h5>
+                            <h5 class="fw-bold mb-0">Joan García</h5>
                         </div>
-                        <p class="text-success mb-1 fw-bold">
-                            <i class="bi bi-check-circle-fill me-2"></i>Resoltes: <?php echo countResoltes($pdo, 2); ?>
-                        </p>
-                        <p class="mb-0 text-muted">
-                            <i class="bi bi-exclamation-circle me-2 text-warning"></i>Pendents: <?php echo countIncidencies($pdo, 2); ?>
-                        </p>
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_joan.php" class="btn btn-primary btn-sm px-3">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>
@@ -115,14 +96,8 @@ function countResoltes($pdo, $idTecnic)
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-3 mb-3">
                             <i class="bi bi-person-circle fs-1 text-primary"></i>
-                            <h5 class="fw-bold mb-0">Maria Lopez</h5>
+                            <h5 class="fw-bold mb-0">María López</h5>
                         </div>
-                        <p class="text-success mb-1 fw-bold">
-                            <i class="bi bi-check-circle-fill me-2"></i>Resoltes: <?php echo countResoltes($pdo, 3); ?>
-                        </p>
-                        <p class="mb-0 text-muted">
-                            <i class="bi bi-exclamation-circle me-2 text-warning"></i>Pendents: <?php echo countIncidencies($pdo, 3); ?>
-                        </p>
                         <div class="d-flex justify-content-end mt-3">
                             <a href="llistar_maria.php" class="btn btn-primary btn-sm px-3">
                                 Veure incidències <i class="bi bi-arrow-right ms-1"></i>
