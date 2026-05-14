@@ -10,7 +10,7 @@ Aquest projecte és una aplicació web completa per a la gestió d'incidències 
 
 ---
 
-## 🛠️ Documentació Bàsica Mínima
+## Documentació Bàsica Mínima
 
 ### 1. Objectius
 * Facilitar la comunicació d'avaries per part del personal docent.
