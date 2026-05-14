@@ -1,0 +1,10 @@
+db_dataa/
+db_data/
+db_datas/
+.env
+Docker/.env 
+vendor/
+php/vendor/
+composer.lock
+php/composer.lock
+logs/
