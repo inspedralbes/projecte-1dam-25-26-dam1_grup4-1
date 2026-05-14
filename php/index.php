@@ -144,23 +144,7 @@ require_once __DIR__ . '/logger.php';
 
    <!-- Scripts -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-   <script>
-      function toggleSidebar() {
-         document.getElementById('sidebar').classList.toggle('open');
-      }
 
-      // Tancar la sidebar si es clica fora d'ella 
-      document.addEventListener('click', function(e) {
-         const sidebar = document.getElementById('sidebar');
-         const toggle = document.getElementById('sidebar-toggle');
-
-         if (sidebar.classList.contains('open')) {
-            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-               sidebar.classList.remove('open');
-            }
-         }
-      });
-   </script>
 </body>
 
 </html>
