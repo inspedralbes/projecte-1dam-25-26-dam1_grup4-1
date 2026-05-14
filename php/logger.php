@@ -19,13 +19,39 @@ if (str_contains($ip, ',')) {
     $ip = trim(explode(',', $ip)[0]);
 }
 
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+
+$navegador = 'Desconegut';
+
+if (strpos($userAgent, 'Firefox') !== false) {
+    $navegador = 'Firefox';
+} elseif (strpos($userAgent, 'Edg') !== false) {
+    $navegador = 'Edge';
+} elseif (strpos($userAgent, 'Chrome') !== false) {
+    $navegador = 'Chrome';
+} elseif (strpos($userAgent, 'Safari') !== false) {
+    $navegador = 'Safari';
+} elseif (strpos($userAgent, 'Opera') !== false || strpos($userAgent, 'OPR') !== false) {
+    $navegador = 'Opera';
+}
+
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    ? 'https://'
+    : 'http://';
+
 $log = [
-    'url'       => 'http://' . ($_SERVER['HTTP_HOST'] ?? 'unknown') . ($_SERVER['REQUEST_URI'] ?? '/'),
-    'metode'    => $_SERVER['REQUEST_METHOD'] ?? 'unknown',
-    'usuari'    => null,
-    'timestamp' => new MongoDB\BSON\UTCDateTime(),
-    'navegador' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
-    'ip'        => $ip,
+    'url'        => $protocol .
+                    ($_SERVER['HTTP_HOST'] ?? 'unknown') .
+                    ($_SERVER['REQUEST_URI'] ?? '/'),
+
+    'metode'     => $_SERVER['REQUEST_METHOD'] ?? 'unknown',
+    'usuari'     => null,
+    'timestamp'  => new MongoDB\BSON\UTCDateTime(),
+
+    'navegador'  => $navegador,
+    'user_agent' => $userAgent,
+
+    'ip'         => $ip,
 ];
 
 $collection->insertOne($log);

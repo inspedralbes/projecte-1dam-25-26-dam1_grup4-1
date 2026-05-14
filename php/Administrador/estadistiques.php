@@ -40,9 +40,18 @@ $totalAccessos = $collection->countDocuments($match ?: []);
 // Agrupa els logs per URL i compta quantes vegades s'ha visitat cada pàgina, mostra les 20 més visitades
 $paginesMesVisitades = $collection->aggregate([
     $matchStage,
-    ['$group'  => ['_id' => '$url', 'total' => ['$sum' => 1]]],
-    ['$sort'   => ['total' => -1]],
-    ['$limit'  => 20],
+    [
+        '$group' => [
+            '_id' => [
+                'url' => '$url',
+                'ip'  => '$ip',
+                'navegador' => '$navegador'
+            ],
+            'total' => ['$sum' => 1]
+        ]
+    ],
+    ['$sort' => ['total' => -1]],
+    ['$limit' => 20],
 ])->toArray();
 
 // Agrupa els logs per usuari i compta els seus accessos, mostra els 10 més actius
@@ -231,17 +240,32 @@ $tecnicsTotalTemps = $resTecnics->fetch_all(MYSQLI_ASSOC);
                             <thead class="table-light">
                                 <tr>
                                     <th>URL</th>
+                                    <th>IP</th>
+                                    <th>NAVEGADOR</th>
                                     <th class="text-end">Visites</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Recorre i mostra cada pàgina amb el seu nombre de visites -->
-                                <?php foreach ($paginesMesVisitades as $fila): ?>
-                                    <tr>
-                                        <td class="small"><?= htmlspecialchars($fila['_id']) ?></td>
-                                        <td class="text-end fw-bold"><?= $fila['total'] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
+<?php foreach ($paginesMesVisitades as $fila): ?>
+<tr>
+    <td class="small" style="max-width:300px; word-break:break-word;">
+        <?= htmlspecialchars($fila['_id']['url']) ?>
+    </td>
+
+    <td class="small" style="max-width:300px; word-break:break-word;">
+        <?= htmlspecialchars($fila['_id']['ip']) ?>
+    </td>
+
+    <td class="small text-truncate" style="max-width:250px;">
+        <?= htmlspecialchars($fila['_id']['navegador']) ?>
+    </td>
+
+    <td class="text-end fw-bold">
+        <?= $fila['total'] ?>
+    </td>
+</tr>
+<?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
