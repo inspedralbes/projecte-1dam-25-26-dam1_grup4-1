@@ -1,6 +1,6 @@
 # Documentació de Base de Dades (BBDD)
 
-## 🔍 Documentació de les Consultes Principals en Pipeline 
+## Documentació de les Consultes Principals en Pipeline 
 
 Documentació de pipelines i consulta a bbdd
 

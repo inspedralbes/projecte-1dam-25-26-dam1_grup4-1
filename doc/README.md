@@ -21,7 +21,7 @@ Aquest projecte és una aplicació web completa per a la gestió d'incidències 
 ### 2. Arquitectura bàsica
 L'aplicació utilitza una arquitectura **LAMP/M** en contenidors:
 * **Tecnologies utilitzades**: 
-    * **Backend**: PHP 8.x.
+    * **Backend**: PHP 
     * **Frontend**: HTML5, CSS3 (Bootstrap 5.3), JavaScript.
     * **BBDD Relacional**: MySQL 9.3 (Dades d'incidències, tècnics i departaments).
     * **BBDD NoSQL**: MongoDB (Registre de logs de sistema).
@@ -42,7 +42,7 @@ El desplegament es realitza mitjançant la imatge de Docker configurada. Cal con
 ### 5. API Backend (Endpoints)
 L'aplicació no és una API REST pura, però gestiona les següents rutes principals de dades:
 
-* **GET /Administrador/gestionar.php?id={id}**: Obté detalls d'una incidència.
+* **GET /Administrador/gestionar.php**: Obté detalls d'una incidència.
     * *Resposta (200 OK)*: JSON/HTML amb dades de la incidència.
 * **POST /Administrador/gestionar.php**: Actualitza tècnic i prioritat.
     * *Peticio JSON*: `{"tecnic": 1, "prioritat": "ALTA", "tipu": 2}`.
