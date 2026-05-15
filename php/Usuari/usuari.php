@@ -1,0 +1,124 @@
+<?php
+require_once __DIR__ . '/../logger.php';
+?>
+<!DOCTYPE html>
+<html lang="ca">
+
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Usuaris</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+      body {
+         font-family: 'Montserrat', sans-serif;
+         background-image: url('../Imatges/fons.jpg');
+         background-size: cover;
+         background-position: center;
+      }
+
+
+      .btn-gris {
+         background-color: #475569;
+      }
+
+
+      .btn-square {
+         border-radius: 0;
+      }
+
+
+      .btn-hover:hover {
+         transform: translateY(-4px);
+         box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+      }
+
+
+      .logo {
+         position: absolute;
+         top: 20px;
+         left: 20px;
+         width: 150px;
+         height: auto;
+      }
+
+
+      .btn-orn {
+         background-color: #ea580c;
+      }
+
+
+      .btn-orn:hover {
+         background-color: #c2410c;
+         color: white;
+      }
+
+      .bg-custom-dark {
+         background-color: #1e3a5f;
+      }
+   </style>
+</head>
+
+
+<body class="min-vh-100 d-flex flex-column bg-secondary bg-opacity-10">
+   <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3" style="width: 150px;"> <?php
+                                                                                                                        $mysqli = include_once "../connexio.php";
+                                                                                                                        $stats = $mysqli->query("
+   SELECT ESTAT, COUNT(*) AS TOTAL
+   FROM INCIDENCIA
+   GROUP BY ESTAT
+")->fetch_all(MYSQLI_ASSOC);
+                                                                                                                        $comptadors = ["OBERTA" => 0, "EN_PROCES" => 0, "TANCADA" => 0];
+                                                                                                                        foreach ($stats as $stat) {
+                                                                                                                           $comptadors[$stat['ESTAT']] = $stat['TOTAL'];
+                                                                                                                        }
+                                                                                                                        ?>
+
+
+   <!-- Header -->
+   <header class="w-100 text-center py-4 shadow-sm mb-5 bg-custom-dark position-relative">
+      <img src="../Imatges/logo.png" alt="Logo" class="position-absolute top-0 start-0 mt-3 ms-3 d-none d-md-block" style="width: 120px;">
+      <h1 class="fs-3 fw-bold mb-1 text-white">USUARI</h1>
+      <p class="text-white-50 mb-0">Pàgina principal de l'usuari</p>
+      <link rel="icon" href="../Imatges/favicon.jpg" type="image/jpeg">
+
+   </header>
+
+   <!-- Botons -->
+   <div class="container pb-5" style="max-width: 900px;">
+      <div class="row g-4 px-2">
+         <p class="text-muted mb-4">Crea una nova incidència o consulta les ja existents</p>
+
+         <div class="col-6">
+            <a href="formulari.php" class="btn btn-primary btn-square btn-hover d-block text-white text-decoration-none py-5 px-4 text-center w-100">
+               <span class="d-block fs-4 mb-2">+</span>
+               <span class="d-block fw-bold fs-6">CREAR INCIDÈNCIA</span>
+               <span class="d-block mt-2 fw-normal" style="font-size: 0.75rem; opacity: 0.8;">Reporta un nou problema</span>
+            </a>
+         </div>
+
+
+         <div class="col-6">
+            <a href="consultar_incidencia_usuari.php" class="btn btn-orn btn-square btn-hover d-block text-white text-decoration-none py-5 px-4 text-center w-100">
+               <span class="d-block fs-4 mb-2">?</span>
+               <span class="d-block fw-bold fs-6">CONSULTAR INCIDÈNCIA</span>
+               <span class="d-block mt-2 fw-normal" style="font-size: 0.75rem; opacity: 0.8;">Revisa les teves incidències</span>
+            </a>
+         </div>
+
+      </div>
+
+   </div>
+   <footer class="bg-white bg-opacity-75 border-top mt-auto py-3">
+      <p class="text-center text-muted mb-1">&copy; <?php echo date('Y'); ?> INS PEDRALBES</p>
+      <p class="text-center text-muted mb-0 small">Jawad Mohdith and Sergi Martinez</p>
+   </footer>
+   <div class="fixed-bottom p-4">
+      <a href="../index.php" class="btn btn-secondary px-4 shadow-sm">← Tornar</a>
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
